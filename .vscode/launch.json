@@ -1,0 +1,38 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Desktop Preferences (bluetooth-popup)",
+			"type": "dart",
+			"request": "launch",
+			"program": "lib/main.dart",
+			"args": [
+				"--dart-entrypoint-args",
+				"--tool=bluetooth-popup"
+			]
+		},
+		{
+			"name": "Desktop Preferences (display-popup)",
+			"type": "dart",
+			"request": "launch",
+			"program": "lib/main.dart",
+			"args": [
+				"--dart-entrypoint-args",
+				"--tool=display-popup"
+			]
+		},
+		{
+			"name": "Desktop Preferences (wireless-popup)",
+			"type": "dart",
+			"request": "launch",
+			"program": "lib/main.dart",
+			"args": [
+				"--dart-entrypoint-args",
+				"--tool=wireless-popup"
+			]
+		},
+	]
+}

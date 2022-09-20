@@ -1,0 +1,48 @@
+{
+	"editor.detectIndentation": false,
+	"editor.insertSpaces": false,
+	"editor.tabSize": 4,
+	"editor.lineNumbers": "on",
+	"editor.renderControlCharacters": true,
+	"editor.renderWhitespace": "all",
+	"editor.rulers": [
+		80,
+		160,
+		240,
+		320
+	],
+	"editor.trimAutoWhitespace": true,
+	"editor.useTabStops": true,
+	"editor.wordWrapColumn": 1024,
+	"diffEditor.ignoreTrimWhitespace": false,
+	"files.autoSave": "afterDelay",
+	"files.autoSaveDelay": 30000,
+	"files.encoding": "utf8",
+	"files.eol": "\n",
+	"files.exclude": {
+		"**/.git": true,
+		"**/.DS_Store": true,
+		".dart_tool": true,
+		"build": true,
+		".packages": true,
+	},
+	"files.insertFinalNewline": false,
+	"breadcrumbs.enabled": true,
+	"git.confirmSync": true,
+	"git.rebaseWhenSync": true,
+	"[dart]": {
+		// https://dartcode.org/docs/recommended-settings/
+		"editor.formatOnSave": true,
+		"editor.formatOnType": true,
+		"editor.rulers": [
+			80
+		],
+		"editor.selectionHighlight": false,
+		"editor.suggest.snippetsPreventQuickSuggestions": false,
+		"editor.suggestSelection": "first",
+		"editor.tabCompletion": "onlySnippets",
+		"editor.wordBasedSuggestions": false,
+	},
+	"html.format.endWithNewline": false,
+	"html.format.wrapLineLength": 0
+}

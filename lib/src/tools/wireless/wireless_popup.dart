@@ -23,6 +23,7 @@ class WirelessPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
+    bool isSelected = false;
     return TextButton(
       onPressed: () {
         if (controller.isEnabled) {
@@ -31,7 +32,16 @@ class WirelessPopup extends StatelessWidget {
           controller.enable();
         }
       },
-      child: const Text("WirelessPopup"),
-    );
+      child: SwitchListTile(
+            value: isSelected,
+            onChanged: (bool value) {
+              setState(() {
+                isSelected = value;
+              });
+            },
+            title: const Text("Wi-fi"),
+            secondary: const Icon(Icons.wifi, size: 36, color: Colors.black)
+            )
+            );
   }
 }

@@ -24,7 +24,7 @@ class WirelessPopup extends StatelessWidget {
     // TO DO something with controller
     //
     // const Icon(Icons.wifi, size: 36, color: Colors.black);
-    final List<String> users = [
+    final List<String> wirelessNetworks = [
       "wi-fi",
       "wi-fi 2",
       "wi-fi 3",
@@ -33,7 +33,7 @@ class WirelessPopup extends StatelessWidget {
     ];
     return ListView.separated(
         padding: const EdgeInsets.all(8),
-        itemCount: users.length,
+        itemCount: wirelessNetworks.length,
         separatorBuilder: (BuildContext context, int index) => Divider(
               height: 20,
               color: Color.fromARGB(255, 154, 151, 151),
@@ -42,7 +42,7 @@ class WirelessPopup extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(users[index],
+            child: Text(wirelessNetworks[index],
                 style: TextStyle(
                     fontSize: 12,
                     color: Colors.black.withOpacity(0.8),

@@ -107,7 +107,15 @@ class App extends StatelessWidget {
     }
 
     return MaterialApp(
-      home: homeWidget,
+      home: Container(
+        padding: const EdgeInsets.all(6),
+        margin: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Colors.grey,
+        ),
+        child: homeWidget,
+      ),
       // Provide the generated AppLocalizations to the MaterialApp. This
       // allows descendant Widgets to display the correct translations
       // depending on the user's locale.

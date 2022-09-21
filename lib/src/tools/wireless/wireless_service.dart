@@ -23,6 +23,17 @@ abstract class WirelessNetwork {
   /// Name of the Wireless network
   ///
   String get name;
+
+  ///
+  /// Get signal level
+  /// 0 - 0%-25%
+  /// 1 - 25%-50%
+  /// 2 - 50%-75%
+  /// 3 - 75%-100%
+  ///
+  int get level;
+
+  const WirelessNetwork._();
 }
 
 class WirelessServiceStub extends WirelessService {
@@ -52,5 +63,24 @@ class WirelessServiceStub extends WirelessService {
 
   WirelessServiceStub()
       : this.isEnabled = true,
-        this.networks = List<WirelessNetwork>.unmodifiable(<WirelessNetwork>[]);
+        this.networks = List<WirelessNetwork>.unmodifiable(
+          <WirelessNetwork>[
+            const WirelessNetworkStub("wi-fi 0", 2),
+            const WirelessNetworkStub("wi-fi 1", 0),
+            const WirelessNetworkStub("wi-fi 2", 1),
+            const WirelessNetworkStub("wi-fi 3", 3),
+            const WirelessNetworkStub("wi-fi 4", 3),
+            const WirelessNetworkStub("wi-fi 5", 2)
+          ],
+        );
+}
+
+class WirelessNetworkStub extends WirelessNetwork {
+  @override
+  final int level;
+
+  @override
+  final String name;
+
+  const WirelessNetworkStub(this.name, this.level) : super._();
 }

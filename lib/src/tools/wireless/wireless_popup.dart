@@ -1,7 +1,26 @@
-import "package:flutter/material.dart";
-import "package:provider/provider.dart";
+import "package:flutter/material.dart"
+    show
+        BuildContext,
+        Color,
+        Colors,
+        Container,
+        Divider,
+        EdgeInsets,
+        Icon,
+        IconData,
+        Icons,
+        Key,
+        ListView,
+        Row,
+        StatelessWidget,
+        Text,
+        TextDecoration,
+        TextStyle,
+        Widget;
+import "package:provider/provider.dart" show Consumer;
 
-import "wireless_controller.dart";
+import "wireless_controller.dart" show WirelessController;
+import "wireless_service.dart" show WirelessNetwork;
 
 class WirelessPopup extends StatelessWidget {
   const WirelessPopup({Key? key}) : super(key: key);
@@ -19,36 +38,54 @@ class WirelessPopup extends StatelessWidget {
   }
 
   Widget _buildContent(
-      final BuildContext context, final WirelessController controller) {
-    //
-    // TO DO something with controller
-    //
+    final BuildContext context,
+    final WirelessController controller,
+  ) {
     // const Icon(Icons.wifi, size: 36, color: Colors.black);
-    final List<String> wirelessNetworks = [
-      "wi-fi",
-      "wi-fi 2",
-      "wi-fi 3",
-      "wi-fi 4",
-      "wi-fi 5"
-    ];
+    final List<WirelessNetwork> wirelessNetworks = controller.networks;
     return ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: wirelessNetworks.length,
-        separatorBuilder: (BuildContext context, int index) => Divider(
-              height: 20,
-              color: Color.fromARGB(255, 154, 151, 151),
-              thickness: 1,
-            ),
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(wirelessNetworks[index],
-                style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black.withOpacity(0.8),
-                    decoration: TextDecoration.none)
-            ),
-          );
-        });
+      padding: const EdgeInsets.all(8),
+      itemCount: wirelessNetworks.length,
+      separatorBuilder: (
+        BuildContext context,
+        int index,
+      ) =>
+          const Divider(
+        height: 20,
+        color: Color.fromARGB(255, 154, 151, 151),
+        thickness: 1,
+      ),
+      itemBuilder: (BuildContext context, int index) {
+        final WirelessNetwork wirelessNetwork = wirelessNetworks[index];
+        // final List<String> dataColumns = data.split(":");
+        // final String level = wirelessNetwork.level;
+        // final String name = dataColumns[1];
+
+        final IconData icon =
+            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+
+        return Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            children: <Widget>[
+              Icon(icon, size: 36, color: Colors.black),
+              Text(wirelessNetwork.name,
+                  style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black.withOpacity(0.8),
+                      decoration: TextDecoration.none)),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  IconData resolveOtherNetworksIcon(int level) {
+    if (level == 0) {
+      return Icons.wifi_2_bar_rounded;
+    }
+
+    return Icons.wifi;
   }
 }

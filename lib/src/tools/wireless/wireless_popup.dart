@@ -23,30 +23,31 @@ class WirelessPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
-    const Icon(Icons.wifi, size: 36, color: Colors.black);
-    final List<String> users = ["wi-fi", "wi-fi 2", "wi-fi 3", "wi-fi 4", "wi-fi 5"];
-
-    return TextButton(
-      onPressed: () {
-        if (controller.isEnabled) {
-          controller.disable();
-        } else {
-          controller.enable();
-        }
-      },
-      child: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: users.length,
-          separatorBuilder: (BuildContext context, int index) => Divider(
-                height: 20,
-                color: Color.fromARGB(255, 154, 151, 151),
-                thickness: 1,
-              ),
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text(users[index], style: TextStyle(fontSize: 12)));
-          }),
-    );
+    // const Icon(Icons.wifi, size: 36, color: Colors.black);
+    final List<String> users = [
+      "wi-fi",
+      "wi-fi 2",
+      "wi-fi 3",
+      "wi-fi 4",
+      "wi-fi 5"
+    ];
+    return ListView.separated(
+        padding: const EdgeInsets.all(8),
+        itemCount: users.length,
+        separatorBuilder: (BuildContext context, int index) => Divider(
+              height: 20,
+              color: Color.fromARGB(255, 154, 151, 151),
+              thickness: 1,
+            ),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(users[index],
+                style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black.withOpacity(0.6),
+                    decoration: TextDecoration.none)),
+          );
+        });
   }
 }

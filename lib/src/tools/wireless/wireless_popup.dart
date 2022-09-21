@@ -23,7 +23,9 @@ class WirelessPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
-    bool isSelected = false;
+    const Icon(Icons.wifi, size: 36, color: Colors.black);
+    final List<String> users = ["wi-fi", "wi-fi 2", "wi-fi 3", "wi-fi 4", "wi-fi 5"];
+
     return TextButton(
       onPressed: () {
         if (controller.isEnabled) {
@@ -32,16 +34,19 @@ class WirelessPopup extends StatelessWidget {
           controller.enable();
         }
       },
-      child: SwitchListTile(
-            value: isSelected,
-            onChanged: (bool value) {
-              setState(() {
-                isSelected = value;
-              });
-            },
-            title: const Text("Wi-fi"),
-            secondary: const Icon(Icons.wifi, size: 36, color: Colors.black)
-            )
-            );
+      child: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: users.length,
+          separatorBuilder: (BuildContext context, int index) => Divider(
+                height: 20,
+                color: Color.fromARGB(255, 154, 151, 151),
+                thickness: 1,
+              ),
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Text(users[index], style: TextStyle(fontSize: 12)));
+          }),
+    );
   }
 }

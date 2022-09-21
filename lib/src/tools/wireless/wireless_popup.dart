@@ -45,8 +45,9 @@ class WirelessPopup extends StatelessWidget {
             child: Text(users[index],
                 style: TextStyle(
                     fontSize: 12,
-                    color: Colors.black.withOpacity(0.6),
-                    decoration: TextDecoration.none)),
+                    color: Colors.black.withOpacity(0.8),
+                    decoration: TextDecoration.none)
+            ),
           );
         });
   }

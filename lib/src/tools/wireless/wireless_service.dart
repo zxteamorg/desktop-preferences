@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 abstract class WirelessService {
   /// Gets whether Wireless adapter is turn ON.
   bool get isEnabled;
@@ -33,6 +35,11 @@ abstract class WirelessNetwork {
   ///
   int get level;
 
+  ///
+  ///Add icons isPublic and not isPublic
+  ///
+  Icon get isPublic;
+
   const WirelessNetwork._();
 }
 
@@ -65,12 +72,12 @@ class WirelessServiceStub extends WirelessService {
       : this.isEnabled = true,
         this.networks = List<WirelessNetwork>.unmodifiable(
           <WirelessNetwork>[
-            const WirelessNetworkStub("wi-fi 0", 2),
-            const WirelessNetworkStub("wi-fi 1", 0),
-            const WirelessNetworkStub("wi-fi 2", 1),
-            const WirelessNetworkStub("wi-fi 3", 3),
-            const WirelessNetworkStub("wi-fi 4", 3),
-            const WirelessNetworkStub("wi-fi 5", 2)
+            const WirelessNetworkStub("wi-fi 0", 2, isPublic),
+            const WirelessNetworkStub("wi-fi 1", 0, isPublic),
+            const WirelessNetworkStub("wi-fi 2", 1, isPublic),
+            const WirelessNetworkStub("wi-fi 3", 3, isPublic),
+            const WirelessNetworkStub("wi-fi 4", 3, isPublic),
+            const WirelessNetworkStub("wi-fi 5", 2, isPublic)
           ],
         );
 }
@@ -82,5 +89,8 @@ class WirelessNetworkStub extends WirelessNetwork {
   @override
   final String name;
 
-  const WirelessNetworkStub(this.name, this.level) : super._();
+  @override
+  final Icon isPublic;
+
+  const WirelessNetworkStub(this.name, this.level, this.isPublic) : super._();
 }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 abstract class WirelessService {
   /// Gets whether Wireless adapter is turn ON.
   bool get isEnabled;
@@ -38,7 +36,7 @@ abstract class WirelessNetwork {
   ///
   ///Add icons isPublic and not isPublic
   ///
-  Icon get isPublic;
+  bool get isPublic;
 
   const WirelessNetwork._();
 }
@@ -90,7 +88,7 @@ class WirelessNetworkStub extends WirelessNetwork {
   final String name;
 
   @override
-  final Icon isPublic;
+  final bool isPublic;
 
   const WirelessNetworkStub(this.name, this.level, this.isPublic) : super._();
 }

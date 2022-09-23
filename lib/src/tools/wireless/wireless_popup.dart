@@ -81,7 +81,7 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  IconData resolveOtherNetworksIcon(int level, Icon isPublic) {
+  IconData resolveOtherNetworksIcon(int level, bool isPublic) {
     if (level == 0) {
       return Icons.wifi_1_bar_rounded;
     }

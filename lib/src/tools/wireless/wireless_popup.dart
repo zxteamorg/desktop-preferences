@@ -98,8 +98,6 @@ class WirelessPopup extends StatelessWidget {
     if (isPublic == true) {
       return Icons.lock_open;
     }
-    if (isPublic == false) {
-      return Icons.lock;
-    }
+    return Icons.lock;
   }
 }

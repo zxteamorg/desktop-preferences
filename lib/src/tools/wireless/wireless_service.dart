@@ -65,17 +65,19 @@ class WirelessServiceStub extends WirelessService {
 
   @override
   bool isEnabled;
+  // bool isPublic;
 
   WirelessServiceStub()
       : this.isEnabled = true,
+        // this.isPublic = true,
         this.networks = List<WirelessNetwork>.unmodifiable(
           <WirelessNetwork>[
-            const WirelessNetworkStub("wi-fi 0", 2, isPublic),
-            const WirelessNetworkStub("wi-fi 1", 0, isPublic),
-            const WirelessNetworkStub("wi-fi 2", 1, isPublic),
-            const WirelessNetworkStub("wi-fi 3", 3, isPublic),
-            const WirelessNetworkStub("wi-fi 4", 3, isPublic),
-            const WirelessNetworkStub("wi-fi 5", 2, isPublic)
+            const WirelessNetworkStub("wi-fi 0", 2, true),
+            const WirelessNetworkStub("wi-fi 1", 0, true),
+            const WirelessNetworkStub("wi-fi 2", 1, false),
+            const WirelessNetworkStub("wi-fi 3", 3, false),
+            const WirelessNetworkStub("wi-fi 4", 3, true),
+            const WirelessNetworkStub("wi-fi 5", 2, false)
           ],
         );
 }

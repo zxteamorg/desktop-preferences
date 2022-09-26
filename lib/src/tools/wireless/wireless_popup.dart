@@ -44,23 +44,20 @@ class WirelessPopup extends StatelessWidget {
   ) {
     // const Icon(Icons.wifi, size: 36, color: Colors.black);
     final List<WirelessNetwork> wirelessNetworks = controller.networks;
-    return ListView.separated(
-      padding: const EdgeInsets.all(8),
+    return ListView.builder(
+      // padding: const EdgeInsets.all(8),
       itemCount: wirelessNetworks.length,
-      separatorBuilder: (
-        BuildContext context,
-        int index,
-      ) =>
-          const Divider(
-        height: 20,
-        color: Color.fromARGB(255, 154, 151, 151),
-        thickness: 1,
-      ),
+      // separatorBuilder: (
+      //   BuildContext context,
+      //   int index,
+      // ) =>
+      //     const Divider(
+      //   height: 20,
+      //   color: Color.fromARGB(255, 154, 151, 151),
+      //   thickness: 1,
+      // ),
       itemBuilder: (BuildContext context, int index) {
         final WirelessNetwork wirelessNetwork = wirelessNetworks[index];
-        // final List<String> dataColumns = data.split(":");
-        // final String level = wirelessNetwork.level;
-        // final String name = dataColumns[1];
 
         final IconData icon =
             this.resolveOtherNetworksIcon(wirelessNetwork.level);

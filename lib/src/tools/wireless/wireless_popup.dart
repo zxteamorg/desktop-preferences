@@ -61,13 +61,17 @@ class WirelessPopup extends StatelessWidget {
         // final String level = wirelessNetwork.level;
         // final String name = dataColumns[1];
 
-        final IconData icon = this.resolveOtherNetworksIcon(
-            wirelessNetwork.level, wirelessNetwork.isPublic);
+        final IconData icon =
+            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+
+        final IconData iconIsPublic =
+            this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
 
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: <Widget>[
+              Icon(iconIsPublic, size: 26, color: Colors.black),
               Icon(icon, size: 36, color: Colors.black),
               Text(wirelessNetwork.name,
                   style: TextStyle(
@@ -81,7 +85,7 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  IconData resolveOtherNetworksIcon(int level, bool isPublic) {
+  IconData resolveOtherNetworksIcon(int level) {
     if (level == 0) {
       return Icons.wifi_1_bar_rounded;
     }
@@ -91,10 +95,10 @@ class WirelessPopup extends StatelessWidget {
     if (level == 2) {
       return Icons.wifi_2_bar;
     }
-    if (level == 3) {
-      return Icons.wifi;
-    }
+    return Icons.wifi;
+  }
 
+  IconData resolveNetworksIsPublic(bool isPublic) {
     if (isPublic == true) {
       return Icons.lock_open;
     }

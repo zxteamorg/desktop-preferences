@@ -71,13 +71,13 @@ class WirelessPopup extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             children: <Widget>[
-              Icon(iconIsPublic, size: 26, color: Colors.black),
               Icon(icon, size: 36, color: Colors.black),
               Text(wirelessNetwork.name,
                   style: TextStyle(
                       fontSize: 12,
                       color: Colors.black.withOpacity(0.8),
                       decoration: TextDecoration.none)),
+              Icon(iconIsPublic, size: 26, color: Colors.black),
             ],
           ),
         );

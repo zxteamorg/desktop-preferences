@@ -42,8 +42,6 @@ class WirelessPopup extends StatelessWidget {
     final BuildContext context,
     final WirelessController controller,
   ) {
-    // final List<WirelessNetwork> wirelessNetworks = controller.networks;
-
     return Column(
       children: <Widget>[
         Container(
@@ -80,15 +78,31 @@ class WirelessPopup extends StatelessWidget {
           ),
         ),
         Container(
+          alignment: Alignment.topLeft,
           height: 20,
           color: Colors.green,
+          child: const Text(
+            "Personal Hotspot",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 10,
+                decoration: TextDecoration.none),
+          ),
         ),
         Container(
+          alignment: Alignment.topLeft,
           height: 20,
           color: Colors.blue,
+          child: const Text(
+            "Prfferrd Network",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 10,
+                decoration: TextDecoration.none),
+          ),
         ),
         Container(
-          height: 20,
+          height: 150,
           color: Colors.red,
           child: this._buildWirelessNetworks(controller),
         ),
@@ -164,9 +178,9 @@ class WirelessPopup extends StatelessWidget {
   }
 
   IconData resolveNetworksIsPublic(bool isPublic) {
-    if (isPublic == true) {
-      return Icons.lock_open;
+    if (isPublic == false) {
+      return Icons.lock;
     }
-    return Icons.lock;
+    return Icons.no_accounts;
   }
 }

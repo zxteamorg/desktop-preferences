@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import "package:flutter/material.dart"
     show
         Alignment,
@@ -5,6 +7,7 @@ import "package:flutter/material.dart"
         Colors,
         Column,
         Container,
+        Divider,
         EdgeInsets,
         Icon,
         IconData,
@@ -46,7 +49,7 @@ class WirelessPopup extends StatelessWidget {
       children: <Widget>[
         Container(
           // height: 20,
-          color: Colors.red,
+          color: Colors.grey,
           child: Column(
             children: <Widget>[
               Row(
@@ -58,6 +61,7 @@ class WirelessPopup extends StatelessWidget {
                           decoration: TextDecoration.none)),
                 ],
               ),
+              // ignore: prefer_const_literals_to_create_immutables
               Row(children: [
                 Text("wifi_2",
                     style: TextStyle(
@@ -66,6 +70,7 @@ class WirelessPopup extends StatelessWidget {
                         decoration: TextDecoration.none)),
               ]),
               Row(
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text("wifi_3",
                       style: TextStyle(
@@ -77,10 +82,11 @@ class WirelessPopup extends StatelessWidget {
             ],
           ),
         ),
+        Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
-          color: Colors.green,
+          color: Colors.grey,
           child: const Text(
             "Personal Hotspot",
             style: TextStyle(
@@ -89,10 +95,11 @@ class WirelessPopup extends StatelessWidget {
                 decoration: TextDecoration.none),
           ),
         ),
+        Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
-          color: Colors.blue,
+          color: Colors.grey,
           child: const Text(
             "Prfferred Network",
             style: TextStyle(
@@ -101,15 +108,17 @@ class WirelessPopup extends StatelessWidget {
                 decoration: TextDecoration.none),
           ),
         ),
+        Divider(),
         Container(
           height: 150,
-          color: Colors.red,
+          color: Colors.grey,
           child: this._buildWirelessNetworks(controller),
         ),
+        Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
-          color: Colors.green,
+          color: Colors.grey,
           child: const Text(
             "Network Preferences",
             style: TextStyle(

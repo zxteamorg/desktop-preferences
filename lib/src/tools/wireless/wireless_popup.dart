@@ -94,7 +94,7 @@ class WirelessPopup extends StatelessWidget {
           height: 20,
           color: Colors.blue,
           child: const Text(
-            "Prfferrd Network",
+            "Prfferred Network",
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 10,

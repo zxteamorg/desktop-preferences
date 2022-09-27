@@ -1,10 +1,10 @@
 import "package:flutter/material.dart"
     show
+        Alignment,
         BuildContext,
-        Color,
         Colors,
+        Column,
         Container,
-        Divider,
         EdgeInsets,
         Icon,
         IconData,
@@ -42,7 +42,73 @@ class WirelessPopup extends StatelessWidget {
     final BuildContext context,
     final WirelessController controller,
   ) {
-    // const Icon(Icons.wifi, size: 36, color: Colors.black);
+    // final List<WirelessNetwork> wirelessNetworks = controller.networks;
+
+    return Column(
+      children: <Widget>[
+        Container(
+          // height: 20,
+          color: Colors.red,
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: const <Widget>[
+                  Text("wifi",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          decoration: TextDecoration.none)),
+                ],
+              ),
+              Row(children: [
+                Text("wifi_2",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        decoration: TextDecoration.none)),
+              ]),
+              Row(
+                children: [
+                  Text("wifi_3",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          decoration: TextDecoration.none)),
+                ],
+              )
+            ],
+          ),
+        ),
+        Container(
+          height: 20,
+          color: Colors.green,
+        ),
+        Container(
+          height: 20,
+          color: Colors.blue,
+        ),
+        Container(
+          height: 20,
+          color: Colors.red,
+          child: this._buildWirelessNetworks(controller),
+        ),
+        Container(
+          alignment: Alignment.topLeft,
+          height: 20,
+          color: Colors.green,
+          child: const Text(
+            "Network Preferences",
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 10,
+                decoration: TextDecoration.none),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildWirelessNetworks(final WirelessController controller) {
     final List<WirelessNetwork> wirelessNetworks = controller.networks;
     return ListView.builder(
       // padding: const EdgeInsets.all(8),

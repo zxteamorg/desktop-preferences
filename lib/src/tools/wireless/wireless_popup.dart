@@ -142,7 +142,7 @@ class WirelessPopup extends StatelessWidget {
         final IconData icon =
             this.resolveOtherNetworksIcon(wirelessNetwork.level);
 
-        final IconData iconIsPublic =
+        final IconData? iconIsPublic =
             this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
 
         return Container(
@@ -177,10 +177,10 @@ class WirelessPopup extends StatelessWidget {
     return Icons.wifi;
   }
 
-  IconData resolveNetworksIsPublic(bool isPublic) {
+  IconData? resolveNetworksIsPublic(bool isPublic) {
     if (isPublic == false) {
       return Icons.lock;
     }
-    return Icons.no_accounts;
+    return null;
   }
 }

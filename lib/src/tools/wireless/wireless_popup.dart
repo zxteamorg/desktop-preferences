@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import "package:flutter/material.dart"
     show
         Alignment,
@@ -61,7 +59,6 @@ class WirelessPopup extends StatelessWidget {
                           decoration: TextDecoration.none)),
                 ],
               ),
-              // ignore: prefer_const_literals_to_create_immutables
               Row(children: [
                 Text("wifi_2",
                     style: TextStyle(
@@ -70,7 +67,6 @@ class WirelessPopup extends StatelessWidget {
                         decoration: TextDecoration.none)),
               ]),
               Row(
-                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text("wifi_3",
                       style: TextStyle(
@@ -82,7 +78,7 @@ class WirelessPopup extends StatelessWidget {
             ],
           ),
         ),
-        Divider(),
+        const Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
@@ -95,7 +91,7 @@ class WirelessPopup extends StatelessWidget {
                 decoration: TextDecoration.none),
           ),
         ),
-        Divider(),
+        const Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
@@ -108,13 +104,13 @@ class WirelessPopup extends StatelessWidget {
                 decoration: TextDecoration.none),
           ),
         ),
-        Divider(),
+        const Divider(),
         Container(
           height: 150,
           color: Colors.grey,
           child: this._buildWirelessNetworks(controller),
         ),
-        Divider(),
+        const Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
@@ -193,3 +189,4 @@ class WirelessPopup extends StatelessWidget {
     return null;
   }
 }
+

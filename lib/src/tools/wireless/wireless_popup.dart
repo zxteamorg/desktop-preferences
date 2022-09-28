@@ -102,7 +102,7 @@ class WirelessPopup extends StatelessWidget {
   }
 
   Widget _buildWirelessNetworks(final WirelessController controller) {
-    final List<WirelessNetwork> wirelessNetworks = controller.networks;
+    final List<WirelessNetwork> wirelessNetworks = controller.otherNetworks;
     return ListView.builder(
       itemCount: wirelessNetworks.length,
       itemBuilder: (BuildContext context, int index) {

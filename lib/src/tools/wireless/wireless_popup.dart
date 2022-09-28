@@ -124,7 +124,7 @@ class WirelessPopup extends StatelessWidget {
                       fontSize: 12,
                       color: Colors.black.withOpacity(0.8),
                       decoration: TextDecoration.none)),
-              Spacer(),
+             const Spacer(),
               Icon(iconIsPublic, size: 26, color: Colors.black),
             ],
           ),
@@ -152,4 +152,4 @@ class WirelessPopup extends StatelessWidget {
     }
     return null;
   }
-}
+} 

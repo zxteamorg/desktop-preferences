@@ -7,7 +7,8 @@ GUI tools written in Flutter to manage desktop preferences like WiFi, Bluetooth,
 ```shell
 git clone --single-branch --branch master git@github.com:zxteamorg/desktop-preferences.git
 cd desktop-preferences
-flutter run
+~/opt/flutter/3.0.5-x64/bin/flutter pub get
+~/opt/flutter/3.0.5-x64/bin/flutter run
 ```
 
 ## Development

@@ -12,6 +12,7 @@ import "package:flutter/material.dart"
         Icons,
         Key,
         ListView,
+        Material,
         Row,
         Spacer,
         StatelessWidget,
@@ -49,8 +50,8 @@ class WirelessPopup extends StatelessWidget {
         Container(
           // height: 20,
           color: Colors.grey,
-          child: const WirelessSwitchTile(),
         ),
+        const Material(child: WirelessSwitchTile()),
         const Divider(),
         Container(
           alignment: Alignment.topLeft,
@@ -103,17 +104,7 @@ class WirelessPopup extends StatelessWidget {
   Widget _buildWirelessNetworks(final WirelessController controller) {
     final List<WirelessNetwork> wirelessNetworks = controller.networks;
     return ListView.builder(
-      // padding: const EdgeInsets.all(8),
       itemCount: wirelessNetworks.length,
-      // separatorBuilder: (
-      //   BuildContext context,
-      //   int index,
-      // ) =>
-      //     const Divider(
-      //   height: 20,
-      //   color: Color.fromARGB(255, 154, 151, 151),
-      //   thickness: 1,
-      // ),
       itemBuilder: (BuildContext context, int index) {
         final WirelessNetwork wirelessNetwork = wirelessNetworks[index];
 

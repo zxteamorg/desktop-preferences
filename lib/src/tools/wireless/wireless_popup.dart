@@ -53,25 +53,25 @@ class WirelessPopup extends StatelessWidget {
         ),
         const Material(child: WirelessSwitchTile()),
         const Divider(),
+        // Container(
+        //   alignment: Alignment.topLeft,
+        //   height: 20,
+        //   color: Colors.grey,
+        //   child: const Text(
+        //     "Personal Hotspot",
+        //     style: TextStyle(
+        //         color: Colors.black,
+        //         fontSize: 10,
+        //         decoration: TextDecoration.none),
+        //   ),
+        // ),
+        // const Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
           color: Colors.grey,
           child: const Text(
-            "Personal Hotspot",
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 10,
-                decoration: TextDecoration.none),
-          ),
-        ),
-        const Divider(),
-        Container(
-          alignment: Alignment.topLeft,
-          height: 20,
-          color: Colors.grey,
-          child: const Text(
-            "Prfferred Network",
+            "Prefferred Network",
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 10,
@@ -124,7 +124,7 @@ class WirelessPopup extends StatelessWidget {
                       fontSize: 12,
                       color: Colors.black.withOpacity(0.8),
                       decoration: TextDecoration.none)),
-             const Spacer(),
+              const Spacer(),
               Icon(iconIsPublic, size: 26, color: Colors.black),
             ],
           ),
@@ -152,4 +152,4 @@ class WirelessPopup extends StatelessWidget {
     }
     return null;
   }
-} 
+}

@@ -44,7 +44,7 @@ abstract class WirelessNetwork {
   int get level;
 
   ///
-  ///Add isPublic and not isPublic
+  ///Add isPublic or not isPublic
   ///
   bool get isPublic;
 

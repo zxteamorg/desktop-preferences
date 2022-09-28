@@ -21,8 +21,11 @@ class _WirelessSwitchTileState extends State<WirelessSwitchTile> {
               _wireless = value;
             });
           },
-          title: const Text("Wi-Fi"),
-        )
-        );
+          title: const Text("Wi-Fi",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800)),
+        ));
   }
 }

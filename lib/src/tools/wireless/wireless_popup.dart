@@ -23,6 +23,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
 import "wireless_service.dart" show WirelessNetwork;
+import "wireless_switchtile.dart" show WirelessSwitchTile;
 
 class WirelessPopup extends StatelessWidget {
   const WirelessPopup({Key? key}) : super(key: key);
@@ -48,35 +49,7 @@ class WirelessPopup extends StatelessWidget {
         Container(
           // height: 20,
           color: Colors.grey,
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: const <Widget>[
-                  Text("wifi",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          decoration: TextDecoration.none)),
-                ],
-              ),
-              Row(children: [
-                Text("wifi_2",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        decoration: TextDecoration.none)),
-              ]),
-              Row(
-                children: [
-                  Text("wifi_3",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          decoration: TextDecoration.none)),
-                ],
-              )
-            ],
-          ),
+          child: const WirelessSwitchTile(),
         ),
         const Divider(),
         Container(
@@ -189,4 +162,3 @@ class WirelessPopup extends StatelessWidget {
     return null;
   }
 }
-

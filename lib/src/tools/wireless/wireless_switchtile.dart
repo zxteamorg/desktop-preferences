@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-//           child: WirelessSwitchTile(),
+import "package:flutter/material.dart";
 
 class WirelessSwitchTile extends StatefulWidget {
   const WirelessSwitchTile({super.key});
@@ -14,14 +12,16 @@ class _WirelessSwitchTileState extends State<WirelessSwitchTile> {
 
   @override
   Widget build(BuildContext context) {
-    return SwitchListTile(
-        value: _wireless,
-        onChanged: (bool value) {
-          setState(() {
-            _wireless = value;
-          });
-        },
-        title: const Text("Wi-fi"),
-        secondary: const Icon(Icons.wifi, size: 36, color: Colors.black));
+    return Ink(
+        color: Colors.grey,
+        child: SwitchListTile(
+          value: _wireless,
+          onChanged: (bool value) {
+            setState(() {
+              _wireless = value;
+            });
+          },
+          title: const Text("Wi-Fi"),
+        ));
   }
 }

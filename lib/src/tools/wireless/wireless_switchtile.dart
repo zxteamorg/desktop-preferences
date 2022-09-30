@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "wireless_controller.dart" show WirelessController;
+
 class WirelessSwitchTile extends StatefulWidget {
   const WirelessSwitchTile({super.key});
 
@@ -11,7 +13,10 @@ class _WirelessSwitchTileState extends State<WirelessSwitchTile> {
   bool _wireless = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    final BuildContext context, 
+    final WirelessController controller,
+    ) {
     return Ink(
         color: Colors.grey,
         child: SwitchListTile(
@@ -19,6 +24,11 @@ class _WirelessSwitchTileState extends State<WirelessSwitchTile> {
           onChanged: (bool value) {
             setState(() {
               _wireless = value;
+            if (controller.isEnabled) {
+                controller.disable();
+              } else {
+                controller.enable();
+              }
             });
           },
           title: const Text("Wi-Fi",

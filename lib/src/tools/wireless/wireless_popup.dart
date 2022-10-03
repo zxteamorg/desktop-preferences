@@ -1,5 +1,25 @@
 import "package:flutter/material.dart"
-    show Alignment, BuildContext, Colors, Column, Container, Divider, EdgeInsets, Icon, IconData, Icons, Key, ListView, Material, Row, Spacer, StatelessWidget, Text, TextButton, TextDecoration, TextStyle, Widget;
+    show
+        Alignment,
+        BuildContext,
+        Colors,
+        Column,
+        Container,
+        Divider,
+        EdgeInsets,
+        Icon,
+        IconData,
+        Icons,
+        Key,
+        ListView,
+        Material,
+        Row,
+        Spacer,
+        StatelessWidget,
+        Text,
+        TextDecoration,
+        TextStyle,
+        Widget;
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
@@ -28,24 +48,10 @@ class WirelessPopup extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          // height: 20,
           color: Colors.grey,
         ),
-        const Material(child: WirelessSwitchTile()),
+        Material(child: WirelessSwitchTile(controller)),
         const Divider(),
-        // Container(
-        //   alignment: Alignment.topLeft,
-        //   height: 20,
-        //   color: Colors.grey,
-        //   child: const Text(
-        //     "Personal Hotspot",
-        //     style: TextStyle(
-        //         color: Colors.black,
-        //         fontSize: 10,
-        //         decoration: TextDecoration.none),
-        //   ),
-        // ),
-        // const Divider(),
         Container(
           alignment: Alignment.topLeft,
           height: 20,
@@ -133,6 +139,3 @@ class WirelessPopup extends StatelessWidget {
     return null;
   }
 }
-
-
-

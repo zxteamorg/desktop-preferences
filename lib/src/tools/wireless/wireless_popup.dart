@@ -7,7 +7,6 @@ import "package:flutter/material.dart"
         Column,
         Container,
         Divider,
-        EdgeInsets,
         Expanded,
         ExpansionPanel,
         ExpansionPanelList,
@@ -23,14 +22,14 @@ import "package:flutter/material.dart"
         SingleChildScrollView,
         Spacer,
         StatelessWidget,
-        Text,
         TextDecoration,
         TextStyle,
         Widget;
+import "package:flutter/widgets.dart"
+    show BoxConstraints, ConstrainedBox, LayoutBuilder, SizedBox, Text;
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
-import "wireless_service.dart" show WirelessNetwork;
 import "wireless_switchtile.dart" show WirelessSwitchTile;
 
 class WirelessPopup extends StatelessWidget {
@@ -56,37 +55,64 @@ class WirelessPopup extends StatelessWidget {
       children: <Widget>[
         this._buildSection1(controller),
         const Divider(),
-        ListView(
-            scrollDirection: Axis.vertical,
-            shrinkWrap: true,
-            children: <Widget>[
-              Container(
-                height: 50,
-                // color: Colors.red,
-                child: this._buildSection2(),
-              ),
-              const Divider(),
-              Container(
-                height: 250,
-                // color: Colors.yellow,
-                child: this._buildSection3(),
-              ),
-            ]),
+        this._buildSection2(controller),
         const Divider(),
-        this._buildSection4(),
+        this._buildSection3(controller),
+        // const Divider(),
+        // ListView(
+        //     scrollDirection: Axis.vertical,
+        //     shrinkWrap: true,
+        //     children: <Widget>[
+        //       Container(
+        //         height: 50,
+        //         // color: Colors.red,
+        //         child: this._buildSection2(),
+        //       ),
+        //       const Divider(),
+        //       Container(
+        //         height: 250,
+        //         // color: Colors.yellow,
+        //         child: this._buildSection3(),
+        //       ),
+        //     ]),
+        // const Divider(),
+        // this._buildSection4(),
       ],
     );
   }
 
   Widget _buildSection1(
-    dynamic controller,
+    WirelessController controller,
   ) {
     return Container(
         color: Colors.grey,
         child: Material(child: WirelessSwitchTile(controller)));
   }
 
-  Widget _buildSection2() {
+  Widget _buildSection2(
+    WirelessController controller,
+  ) {
+    return SizedBox(
+      height: 400,
+      child: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: viewportConstraints.maxHeight,
+              ),
+              child: Column(
+                children: [
+                  this._buildSection2_1(),
+                  this._buildSection2_2(),
+                ],
+              )),
+        );
+      }),
+    );
+  }
+
+  Widget _buildSection2_1() {
     return Column(
       children: const <Widget>[
         Text(
@@ -142,19 +168,19 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  Widget _buildSection3() {
-    return SingleChildScrollView(
-        child: ExpansionPanelList(
-            expansionCallback: (int index, bool isExpanded) {},
-            children: [
-          ExpansionPanel(
-            backgroundColor: Colors.grey,
-            headerBuilder: (BuildContext context, bool isExpanded) {
-              return const ListTile(
-                title: Text("Other Networks"),
-              );
-            },
-            body: Column(children: const <Widget>[
+  Widget _buildSection2_2() {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {},
+      children: <ExpansionPanel>[
+        ExpansionPanel(
+          backgroundColor: Colors.grey,
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            return const Text("Other Networks");
+          },
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const <Widget>[
               Text("Wi-Fi"),
               Text("Wi-Fi"),
               Text("Wi-Fi"),
@@ -164,11 +190,36 @@ class WirelessPopup extends StatelessWidget {
               Text("Wi-Fi"),
               Text("Wi-Fi"),
               Text("Wi-Fi"),
-            ]),
-            isExpanded: true,
-          )
-        ]));
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+              Text("Wi-Fi"),
+            ],
+          ),
+          isExpanded: true,
+        )
+      ],
+    );
   }
+
   // return Column(
   //   children: const <Widget>[
   //     // Text(
@@ -252,7 +303,9 @@ class WirelessPopup extends StatelessWidget {
   // );
   // }
 
-  Widget _buildSection4() {
+  Widget _buildSection3(
+    WirelessController controller,
+  ) {
     return Column(
       children: const <Widget>[
         Text(

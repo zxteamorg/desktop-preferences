@@ -26,11 +26,19 @@ import "package:flutter/material.dart"
         TextStyle,
         Widget;
 import "package:flutter/widgets.dart"
-    show BoxConstraints, ConstrainedBox, LayoutBuilder, SizedBox, Text;
+    show
+        BoxConstraints,
+        ConstrainedBox,
+        LayoutBuilder,
+        MainAxisAlignment,
+        MainAxisSize,
+        SizedBox,
+        Text;
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
 import "wireless_switchtile.dart" show WirelessSwitchTile;
+import "my_expansion_widget.dart" show MyExpansionWidget;
 
 class WirelessPopup extends StatelessWidget {
   const WirelessPopup({Key? key}) : super(key: key);
@@ -58,25 +66,6 @@ class WirelessPopup extends StatelessWidget {
         this._buildSection2(controller),
         const Divider(),
         this._buildSection3(controller),
-        // const Divider(),
-        // ListView(
-        //     scrollDirection: Axis.vertical,
-        //     shrinkWrap: true,
-        //     children: <Widget>[
-        //       Container(
-        //         height: 50,
-        //         // color: Colors.red,
-        //         child: this._buildSection2(),
-        //       ),
-        //       const Divider(),
-        //       Container(
-        //         height: 250,
-        //         // color: Colors.yellow,
-        //         child: this._buildSection3(),
-        //       ),
-        //     ]),
-        // const Divider(),
-        // this._buildSection4(),
       ],
     );
   }
@@ -169,56 +158,97 @@ class WirelessPopup extends StatelessWidget {
   }
 
   Widget _buildSection2_2() {
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {},
-      children: <ExpansionPanel>[
-        ExpansionPanel(
-          backgroundColor: Colors.grey,
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return const Text("Other Networks");
-          },
-          body: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const <Widget>[
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-              Text("Wi-Fi"),
-            ],
-          ),
-          isExpanded: true,
-        )
-      ],
+    return MyExpansionWidget(
+      header: const Text("Other Networks"),
+      body: Column(
+        children: const <Widget>[
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+          Text("Wi-Fi"),
+        ],
+      ),
     );
   }
+
+  // Widget _buildSection2_2() {
+  //   return ExpansionPanelList(
+  //     expansionCallback: (int index, bool isExpanded) {},
+  //     children: <ExpansionPanel>[
+  //       ExpansionPanel(
+  //         backgroundColor: Colors.grey,
+  //         headerBuilder: (BuildContext context, bool isExpanded) {
+  //           return const Text("Other Networks");
+  //         },
+  //         body: Column(
+  //           mainAxisSize: MainAxisSize.min,
+  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //           children: const <Widget>[
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //             Text("Wi-Fi"),
+  //           ],
+  //         ),
+  //         isExpanded: true,
+  //       )
+  //     ],
+  //   );
+  // }
 
   // return Column(
   //   children: const <Widget>[

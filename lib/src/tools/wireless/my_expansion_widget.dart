@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 
 class MyExpansionWidget extends StatefulWidget {
-  const MyExpansionWidget({Key? key}) : super(key: key);
+  const MyExpansionWidget(
+      {Key? key, required Text header, required Column body})
+      : super(key: key);
 
   @override
   State<MyExpansionWidget> createState() => _MyExpansionWidget();
@@ -12,6 +14,6 @@ class _MyExpansionWidget extends State<MyExpansionWidget> {
   Widget build(
     final BuildContext context,
   ) {
-     return const Text("Test");
+    return const Text("Test");
   }
 }

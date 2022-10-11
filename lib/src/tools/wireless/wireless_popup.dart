@@ -158,43 +158,47 @@ class WirelessPopup extends StatelessWidget {
   }
 
   Widget _buildSection2_2() {
+    // ignore: prefer_const_constructors
+    final Widget section2Header = Text("Other Networks");
+    final Widget section2Body = Column(
+      children: const <Widget>[
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+        Text("Wi-Fi"),
+      ],
+    );
+
     return MyExpansionWidget(
-      header: const Text("Other Networks"),
-      body: Column(
-        children: const <Widget>[
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-        ],
-      ),
+      header: section2Header,
+      body: section2Body,
     );
   }
 

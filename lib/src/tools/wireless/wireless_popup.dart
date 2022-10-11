@@ -93,7 +93,7 @@ class WirelessPopup extends StatelessWidget {
               child: Column(
                 children: [
                   this._buildSection2_1(),
-                  this._buildSection2_2(),
+                  this._buildSection2_2(controller),
                 ],
               )),
         );
@@ -105,7 +105,7 @@ class WirelessPopup extends StatelessWidget {
     return Column(
       children: const <Widget>[
         Text(
-          "Prefred Network",
+          "Preferred Network",
           style: TextStyle(
               color: Colors.black,
               fontSize: 20,
@@ -157,46 +157,51 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  Widget _buildSection2_2() {
+  Widget _buildSection2_2(
+    controller,
+  ) {
     return MyExpansionWidget(
-      header: const Text("Other Networks"),
-      body: Column(
-        children: const <Widget>[
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-          Text("Wi-Fi"),
-        ],
-      ),
+      controller,
     );
   }
+
+  //       // header: const Text("Other Networks"),
+  //       // body: Column(
+  //       //   children: const <Widget>[
+  //       //     Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // Text("Wi-Fi"),
+  //       // ],
+  //       );
+  // }
 
   // Widget _buildSection2_2() {
   //   return ExpansionPanelList(
@@ -345,34 +350,7 @@ class WirelessPopup extends StatelessWidget {
               fontSize: 10,
               decoration: TextDecoration.none),
         ),
-        // Text(
-        //   "Network Preferences",
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 10,
-        //       decoration: TextDecoration.none),
-        // ),
-        // Text(
-        //   "Network Preferences",
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 10,
-        //       decoration: TextDecoration.none),
-        // ),
-        // Text(
-        //   "Network Preferences",
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 10,
-        //       decoration: TextDecoration.none),
-        // ),
-        // Text(
-        //   "Network Preferences",
-        //   style: TextStyle(
-        //       color: Colors.black,
-        //       fontSize: 10,
-        //       decoration: TextDecoration.none),
-        // ),
+
       ],
     );
   }

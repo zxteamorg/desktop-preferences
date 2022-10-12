@@ -10,10 +10,10 @@ class MyExpansionWidget extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<MyExpansionWidget> createState() => _MyExpansionWidget();
+  State<MyExpansionWidget> createState() => _MyExpansionState();
 }
 
-class _MyExpansionWidget extends State<MyExpansionWidget> {
+class _MyExpansionState extends State<MyExpansionWidget> {
   @override
   Widget build(
     final BuildContext context,

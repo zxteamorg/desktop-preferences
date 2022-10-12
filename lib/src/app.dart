@@ -99,10 +99,13 @@ class App extends StatelessWidget {
         );
         break;
       case AppTool.WIRELESS_POPUP:
-        homeWidget = SizedBox(
-          width: 260,
-          height: 520,
-          child: InheritedProvider<WirelessController>(
+        homeWidget = ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 260,
+            maxWidth: 260,
+            maxHeight: 460,
+          ),
+          child: ChangeNotifierProvider<WirelessController>(
             create: (_) => WirelessController(WirelessServiceStub()),
             child: const WirelessPopup(),
           ),

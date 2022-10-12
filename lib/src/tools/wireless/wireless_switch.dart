@@ -2,19 +2,12 @@ import "package:flutter/material.dart";
 
 import "wireless_controller.dart" show WirelessController;
 
-class WirelessSwitch extends StatefulWidget {
+class WirelessSwitch extends StatelessWidget {
   final WirelessController controller;
   const WirelessSwitch(this.controller, {Key? key}) : super(key: key);
 
   @override
-  State<WirelessSwitch> createState() => _WirelessSwitchState();
-}
-
-class _WirelessSwitchState extends State<WirelessSwitch> {
-  @override
-  Widget build(
-    final BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
@@ -26,15 +19,13 @@ class _WirelessSwitchState extends State<WirelessSwitch> {
                   fontWeight: FontWeight.w800)),
           const Spacer(),
           Switch(
-            value: widget.controller.isEnabled,
+            value: this.controller.isEnabled,
             onChanged: (bool value) {
-              setState(() {
-                if (widget.controller.isEnabled) {
-                  widget.controller.disable();
-                } else {
-                  widget.controller.enable();
-                }
-              });
+              if (this.controller.isEnabled) {
+                this.controller.disable();
+              } else {
+                this.controller.enable();
+              }
             },
           )
         ],

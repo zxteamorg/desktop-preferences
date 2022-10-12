@@ -16,6 +16,11 @@ class _MyExpansionWidget extends State<MyExpansionWidget> {
   Widget build(
     final BuildContext context,
   ) {
-    return const Text("Test");
+    return Column(
+      children: <Widget>[
+        this.widget.header,
+        this.widget.body,
+      ],
+    );
   }
 }

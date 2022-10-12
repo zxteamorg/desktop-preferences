@@ -4,7 +4,7 @@ import "wireless_controller.dart" show WirelessController;
 
 class WirelessSwitchTile extends StatefulWidget {
   final WirelessController controller;
-  const WirelessSwitchTile(this.controller);
+  const WirelessSwitchTile(this.controller, {Key? key}) : super(key: key);
 
   @override
   State<WirelessSwitchTile> createState() => _WirelessSwitchTileState();

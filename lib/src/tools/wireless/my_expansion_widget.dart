@@ -1,4 +1,7 @@
-import "package:flutter/material.dart";
+import "package:flutter/material.dart"
+    show Colors, ExpansionPanel, ExpansionPanelList;
+import "package:flutter/widgets.dart"
+    show BuildContext, Key, State, StatefulWidget, Widget;
 
 class MyExpansionWidget extends StatefulWidget {
   final Widget header;
@@ -14,14 +17,27 @@ class MyExpansionWidget extends StatefulWidget {
 }
 
 class _MyExpansionState extends State<MyExpansionWidget> {
+  bool _isExpanded;
+
+  _MyExpansionState() : this._isExpanded = false;
+
   @override
   Widget build(
     final BuildContext context,
   ) {
-    return Column(
-      children: <Widget>[
-        this.widget.header,
-        this.widget.body,
+    return ExpansionPanelList(
+      expansionCallback: (_, __) {
+        this.setState(() {
+          this._isExpanded = !this._isExpanded;
+        });
+      },
+      children: <ExpansionPanel>[
+        ExpansionPanel(
+          backgroundColor: Colors.grey,
+          headerBuilder: (BuildContext context, bool b) => this.widget.header,
+          body: this.widget.body,
+          isExpanded: this._isExpanded,
+        )
       ],
     );
   }

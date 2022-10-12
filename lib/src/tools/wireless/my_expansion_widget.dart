@@ -1,10 +1,12 @@
 import "package:flutter/material.dart";
 
 class MyExpansionWidget extends StatefulWidget {
+  final Widget header;
+  final Widget body;
   const MyExpansionWidget({
     Key? key,
-    required Widget header,
-    required Widget body,
+    required this.header,
+    required this.body,
   }) : super(key: key);
 
   @override

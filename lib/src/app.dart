@@ -112,15 +112,11 @@ class App extends StatelessWidget {
 
     return MaterialApp(
       home: Center(
-        child: Container(
-          padding: const EdgeInsets.all(6),
-          margin: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.0),
-            color: Colors.grey,
-          ),
-          child: Material(
-            color: Colors.grey,
+        child: Material(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Colors.grey,
+          child: Container(
+            padding: const EdgeInsets.all(8),
             child: homeWidget,
           ),
         ),

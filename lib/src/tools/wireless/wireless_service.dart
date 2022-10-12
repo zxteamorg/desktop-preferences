@@ -15,12 +15,12 @@ abstract class WirelessService {
   ///
   /// Get current connected network (or null if not connected)
   ///
-  PrefferedWirelessNetwork? get connectedNetwork;
+  PreferredWirelessNetwork? get connectedNetwork;
 
   ///
-  /// Gets list of Preffereed Wireless networks (available on air + connected in past)
+  /// Gets list of Preferred Wireless networks (available on air + connected in past)
   ///
-  List<PrefferedWirelessNetwork> get prefferedNetworks;
+  List<PreferredWirelessNetwork> get preferredNetworks;
 
   ///
   /// Gets list of Other Wireless networks (available on air)
@@ -51,16 +51,16 @@ abstract class WirelessNetwork {
   const WirelessNetwork._();
 }
 
-abstract class PrefferedWirelessNetwork extends WirelessNetwork {
-  const PrefferedWirelessNetwork._() : super._();
+abstract class PreferredWirelessNetwork extends WirelessNetwork {
+  const PreferredWirelessNetwork._() : super._();
 }
 
 class WirelessServiceStub extends WirelessService {
   @override
-  final PrefferedWirelessNetwork? connectedNetwork;
+  final PreferredWirelessNetwork? connectedNetwork;
 
   @override
-  final List<PrefferedWirelessNetwork> prefferedNetworks;
+  final List<PreferredWirelessNetwork> preferredNetworks;
 
   @override
   final List<WirelessNetwork> otherNetworks;
@@ -100,20 +100,20 @@ class WirelessServiceStub extends WirelessService {
       ],
     );
 
-    final List<PrefferedWirelessNetworkStub> prefferedNetworks =
-        List<PrefferedWirelessNetworkStub>.unmodifiable(const <
-            PrefferedWirelessNetwork>[
-      PrefferedWirelessNetworkStub("The beauty", 3, false),
-      PrefferedWirelessNetworkStub("Galaxy", 2, false),
+    final List<PreferredWirelessNetworkStub> preferredNetworks =
+        List<PreferredWirelessNetworkStub>.unmodifiable(const <
+            PreferredWirelessNetwork>[
+      PreferredWirelessNetworkStub("The beauty", 3, false),
+      PreferredWirelessNetworkStub("Galaxy", 2, false),
     ]);
 
-    final PrefferedWirelessNetwork connectedNetwork = prefferedNetworks[1];
+    final PreferredWirelessNetwork connectedNetwork = preferredNetworks[1];
 
     const bool isEnabled = true;
 
     return WirelessServiceStub._(
       otherNetworks,
-      prefferedNetworks,
+      preferredNetworks,
       connectedNetwork,
       isEnabled,
     );
@@ -121,7 +121,7 @@ class WirelessServiceStub extends WirelessService {
 
   WirelessServiceStub._(
     this.otherNetworks,
-    this.prefferedNetworks,
+    this.preferredNetworks,
     this.connectedNetwork,
     this.isEnabled,
   );
@@ -144,9 +144,9 @@ class WirelessNetworkStub extends WirelessNetwork {
   ) : super._();
 }
 
-class PrefferedWirelessNetworkStub extends WirelessNetworkStub
-    implements PrefferedWirelessNetwork {
-  const PrefferedWirelessNetworkStub(
+class PreferredWirelessNetworkStub extends WirelessNetworkStub
+    implements PreferredWirelessNetwork {
+  const PreferredWirelessNetworkStub(
     super.name,
     super.level,
     super.isPublic,

@@ -17,13 +17,13 @@ class WirelessController extends ChangeNotifier {
     this.notifyListeners();
   }
 
-  PrefferedWirelessNetwork? get connectedNetwork =>
+  PreferredWirelessNetwork? get connectedNetwork =>
       this._service.connectedNetwork;
 
   List<WirelessNetwork> get otherNetworks => this._service.otherNetworks;
 
-  List<PrefferedWirelessNetwork> get prefferedNetworks =>
-      this._service.prefferedNetworks;
+  List<PreferredWirelessNetwork> get preferredNetworks =>
+      this._service.preferredNetworks;
 
   final WirelessService _service;
 }

@@ -44,5 +44,8 @@
 		"editor.wordBasedSuggestions": false,
 	},
 	"html.format.endWithNewline": false,
-	"html.format.wrapLineLength": 0
+	"html.format.wrapLineLength": 0,
+	"cSpell.words": [
+		"switchtile"
+	]
 }

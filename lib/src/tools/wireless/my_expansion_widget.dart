@@ -1,7 +1,7 @@
 import "package:flutter/material.dart"
     show Colors, ExpansionPanel, ExpansionPanelList;
 import "package:flutter/widgets.dart"
-    show BuildContext, EdgeInsets, Key, State, StatefulWidget, Widget;
+    show BuildContext, EdgeInsets, Key, Row, State, StatefulWidget, Widget;
 
 class MyExpansionWidget extends StatefulWidget {
   final Widget header;
@@ -36,7 +36,11 @@ class _MyExpansionState extends State<MyExpansionWidget> {
       children: <ExpansionPanel>[
         ExpansionPanel(
           backgroundColor: Colors.grey,
-          headerBuilder: (BuildContext context, bool b) => this.widget.header,
+          headerBuilder: (BuildContext context, bool b) => Row(
+            children: <Widget>[
+              this.widget.header,
+            ],
+          ),
           body: this.widget.body,
           isExpanded: this._isExpanded,
         )

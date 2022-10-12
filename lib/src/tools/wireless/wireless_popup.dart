@@ -1,42 +1,27 @@
-import "package:flutter/material.dart"
+import "package:flutter/material.dart" show Colors, Divider, Icons;
+import "package:flutter/widgets.dart"
     show
-        Alignment,
-        Axis,
         BuildContext,
-        Colors,
         Column,
-        Container,
-        Divider,
+        CrossAxisAlignment,
         EdgeInsets,
-        Expanded,
-        FontWeight,
+        Flexible,
         Icon,
         IconData,
-        Icons,
         Key,
-        ListTile,
-        ListView,
+        MainAxisSize,
+        Padding,
         Row,
-        ScrollPhysics,
         SingleChildScrollView,
         Spacer,
         StatelessWidget,
-        TextDecoration,
-        TextStyle,
+        Text,
         Widget;
-import "package:flutter/widgets.dart"
-    show
-        BoxConstraints,
-        ConstrainedBox,
-        LayoutBuilder,
-        MainAxisAlignment,
-        MainAxisSize,
-        SizedBox,
-        Text;
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
-import "wireless_service_contract.dart" show WirelessNetwork;
+import "wireless_service_contract.dart"
+    show PreferredWirelessNetwork, WirelessNetwork;
 import "wireless_switch.dart" show WirelessSwitch;
 import "my_expansion_widget.dart" show MyExpansionWidget;
 
@@ -60,11 +45,13 @@ class WirelessPopup extends StatelessWidget {
     final WirelessController controller,
   ) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         this._buildSection1(controller),
         const Divider(),
-        this._buildSection2(controller),
-        const Divider(),
+        if (controller.isEnabled) this._buildSection2(controller),
+        if (controller.isEnabled) const Divider(),
         this._buildSection3(controller),
       ],
     );
@@ -79,37 +66,53 @@ class WirelessPopup extends StatelessWidget {
   Widget _buildSection2(
     WirelessController controller,
   ) {
-    return SizedBox(
-      height: 400,
-      child: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints viewportConstraints) {
-        return SingleChildScrollView(
-          child: ConstrainedBox(
-              constraints: BoxConstraints(
-                minHeight: viewportConstraints.maxHeight,
-              ),
-              child: Column(
-                children: [
-                  this._buildSection2_1(),
-                  this._buildSection2_2(controller),
-                ],
-              ),
-              ),
-        );
-      }),
+    return Flexible(
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            this._buildSection2_1(controller),
+            this._buildSection2_2(controller),
+          ],
+        ),
+      ),
     );
   }
 
-  Widget _buildSection2_1() {
+  Widget _buildSection2_1(
+    WirelessController controller,
+  ) {
+    final List<Widget> preferredNetworkRows = controller.preferredNetworks.map(
+      (PreferredWirelessNetwork wirelessNetwork) {
+        final bool isConnected = wirelessNetwork == controller.connectedNetwork;
+
+        return Row(
+          children: <Widget>[
+            Icon(
+              this.resolveOtherNetworksIcon(wirelessNetwork.level),
+              color: isConnected ? Colors.blue : null,
+            ),
+            Text(
+              wirelessNetwork.name,
+            ),
+            const Spacer(),
+            Icon(
+              this.resolveNetworksIsPublic(wirelessNetwork.isPublic),
+            ),
+          ],
+        );
+      },
+    ).toList(growable: false);
+
     return Column(
-      children: const <Widget>[
-        Text(
-          "Preferred Network",
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              decoration: TextDecoration.none),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 16.0),
+          child: Text("Preferred Network"),
         ),
+        Column(
+          children: preferredNetworkRows,
+        )
       ],
     );
   }
@@ -117,31 +120,42 @@ class WirelessPopup extends StatelessWidget {
   Widget _buildSection2_2(
     WirelessController controller,
   ) {
-    final Widget section2Body = Column(
-      children: controller.otherNetworks
-          .map((WirelessNetwork wn) => Text(wn.name))
-          .toList(growable: false),
-    );
+    final List<Widget> otherNetworkRows = controller.otherNetworks
+        .map((WirelessNetwork wirelessNetwork) => Row(
+              children: <Widget>[
+                Icon(
+                  this.resolveOtherNetworksIcon(wirelessNetwork.level),
+                ),
+                Text(
+                  wirelessNetwork.name,
+                ),
+                const Spacer(),
+                Icon(
+                  this.resolveNetworksIsPublic(wirelessNetwork.isPublic),
+                ),
+              ],
+            ))
+        .toList(growable: false);
 
     return MyExpansionWidget(
-      header: const Text("Other Networks"),
-      body: section2Body,
+      header: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Text("Other Networks"),
+      ),
+      body: Column(
+        children: otherNetworkRows,
+      ),
     );
   }
 
   Widget _buildSection3(
     WirelessController controller,
   ) {
-    return Column(
-      children: const <Widget>[
-        Text(
-          "Network Preferences",
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 10,
-              decoration: TextDecoration.none),
-        ),
-      ],
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Text(
+        "Network Preferences",
+      ),
     );
   }
 

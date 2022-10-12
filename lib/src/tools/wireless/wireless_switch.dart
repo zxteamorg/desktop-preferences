@@ -15,17 +15,30 @@ class _WirelessSwitchState extends State<WirelessSwitch> {
   Widget build(
     final BuildContext context,
   ) {
-    return Switch(
-      value: widget.controller.isEnabled,
-      onChanged: (bool value) {
-        setState(() {
-          if (widget.controller.isEnabled) {
-            widget.controller.disable();
-          } else {
-            widget.controller.enable();
-          }
-        });
-      },
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: <Widget>[
+          const Text("Wi-Fi",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800)),
+          const Spacer(),
+          Switch(
+            value: widget.controller.isEnabled,
+            onChanged: (bool value) {
+              setState(() {
+                if (widget.controller.isEnabled) {
+                  widget.controller.disable();
+                } else {
+                  widget.controller.enable();
+                }
+              });
+            },
+          )
+        ],
+      ),
     );
   }
 }

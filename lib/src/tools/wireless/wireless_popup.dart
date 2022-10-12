@@ -73,17 +73,7 @@ class WirelessPopup extends StatelessWidget {
   Widget _buildSection1(
     WirelessController controller,
   ) {
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: Row(children: <Widget>[
-          const Text("Wi-Fi",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800)),
-          const Spacer(),
-          WirelessSwitch(controller),
-        ]));
+    return WirelessSwitch(controller);
   }
 
   Widget _buildSection2(
@@ -103,7 +93,8 @@ class WirelessPopup extends StatelessWidget {
                   this._buildSection2_1(),
                   this._buildSection2_2(controller),
                 ],
-              )),
+              ),
+              ),
         );
       }),
     );

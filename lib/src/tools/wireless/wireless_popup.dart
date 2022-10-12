@@ -1,5 +1,29 @@
 import "package:flutter/material.dart"
-    show Alignment, Axis, BuildContext, Colors, Column, Container, Divider, EdgeInsets, Expanded, FontWeight, Icon, IconData, Icons, Key, ListTile, ListView, Row, ScrollPhysics, SingleChildScrollView, Spacer, StatelessWidget, TextDecoration, TextStyle, Widget;
+    show
+        Alignment,
+        Axis,
+        BuildContext,
+        Colors,
+        Column,
+        Container,
+        Divider,
+        EdgeInsets,
+        Expanded,
+        FontWeight,
+        Icon,
+        IconData,
+        Icons,
+        Key,
+        ListTile,
+        ListView,
+        Row,
+        ScrollPhysics,
+        SingleChildScrollView,
+        Spacer,
+        StatelessWidget,
+        TextDecoration,
+        TextStyle,
+        Widget;
 import "package:flutter/widgets.dart"
     show
         BoxConstraints,
@@ -13,7 +37,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
 import "wireless_service_contract.dart" show WirelessNetwork;
-import "wireless_switchtile.dart" show WirelessSwitch;
+import "wireless_switch.dart" show WirelessSwitch;
 import "my_expansion_widget.dart" show MyExpansionWidget;
 
 class WirelessPopup extends StatelessWidget {
@@ -57,7 +81,7 @@ class WirelessPopup extends StatelessWidget {
                   fontSize: 16,
                   color: Colors.black,
                   fontWeight: FontWeight.w800)),
-                  const Spacer(),
+          const Spacer(),
           WirelessSwitch(controller),
         ]));
   }

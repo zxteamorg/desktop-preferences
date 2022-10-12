@@ -1,59 +1,4 @@
-abstract class WirelessService {
-  /// Gets whether Wireless adapter is turn ON.
-  bool get isEnabled;
-
-  ///
-  /// Call this method to disable Wireless adapter
-  ///
-  void disable();
-
-  ///
-  /// Call this method to enable Wireless adapter
-  ///
-  void enable();
-
-  ///
-  /// Get current connected network (or null if not connected)
-  ///
-  PreferredWirelessNetwork? get connectedNetwork;
-
-  ///
-  /// Gets list of Preferred Wireless networks (available on air + connected in past)
-  ///
-  List<PreferredWirelessNetwork> get preferredNetworks;
-
-  ///
-  /// Gets list of Other Wireless networks (available on air)
-  ///
-  List<WirelessNetwork> get otherNetworks;
-}
-
-abstract class WirelessNetwork {
-  ///
-  /// Name of the Wireless network
-  ///
-  String get name;
-
-  ///
-  /// Get signal level:
-  /// * 0 - 0%-25%
-  /// * 1 - 25%-50%
-  /// * 2 - 50%-75%
-  /// * 3 - 75%-100%
-  ///
-  int get level;
-
-  ///
-  ///Add isPublic or not isPublic
-  ///
-  bool get isPublic;
-
-  const WirelessNetwork._();
-}
-
-abstract class PreferredWirelessNetwork extends WirelessNetwork {
-  const PreferredWirelessNetwork._() : super._();
-}
+import "wireless_service_contract.dart";
 
 class WirelessServiceStub extends WirelessService {
   @override
@@ -96,7 +41,29 @@ class WirelessServiceStub extends WirelessService {
         WirelessNetworkStub("wi-fi 2", 1, false),
         WirelessNetworkStub("wi-fi 3", 3, false),
         WirelessNetworkStub("wi-fi 4", 3, true),
-        WirelessNetworkStub("wi-fi 5", 2, false)
+        WirelessNetworkStub("wi-fi 5", 2, false),
+        WirelessNetworkStub("wi-fi 6", 2, false),
+        WirelessNetworkStub("wi-fi 7", 2, false),
+        WirelessNetworkStub("wi-fi 8", 2, false),
+        WirelessNetworkStub("wi-fi 9", 2, false),
+        WirelessNetworkStub("wi-fi 10", 2, false),
+        WirelessNetworkStub("wi-fi 11", 2, false),
+        WirelessNetworkStub("wi-fi 12", 2, false),
+        WirelessNetworkStub("wi-fi 13", 2, false),
+        WirelessNetworkStub("wi-fi 14", 2, false),
+        WirelessNetworkStub("wi-fi 15", 2, false),
+        WirelessNetworkStub("wi-fi 16", 2, false),
+        WirelessNetworkStub("wi-fi 17", 2, false),
+        WirelessNetworkStub("wi-fi 18", 2, false),
+        WirelessNetworkStub("wi-fi 19", 2, false),
+        WirelessNetworkStub("wi-fi 20", 2, false),
+        WirelessNetworkStub("wi-fi 21", 2, false),
+        WirelessNetworkStub("wi-fi 22", 2, false),
+        WirelessNetworkStub("wi-fi 23", 2, false),
+        WirelessNetworkStub("wi-fi 24", 2, false),
+        WirelessNetworkStub("wi-fi 25", 2, false),
+        WirelessNetworkStub("wi-fi 26", 2, false),
+        WirelessNetworkStub("wi-fi 27", 2, false)
       ],
     );
 
@@ -127,7 +94,7 @@ class WirelessServiceStub extends WirelessService {
   );
 }
 
-class WirelessNetworkStub extends WirelessNetwork {
+class WirelessNetworkStub implements WirelessNetwork {
   @override
   final int level;
 
@@ -141,7 +108,7 @@ class WirelessNetworkStub extends WirelessNetwork {
     this.name,
     this.level,
     this.isPublic,
-  ) : super._();
+  );
 }
 
 class PreferredWirelessNetworkStub extends WirelessNetworkStub

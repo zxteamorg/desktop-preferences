@@ -15,24 +15,20 @@ class _WirelessSwitchTileState extends State<WirelessSwitchTile> {
   Widget build(
     final BuildContext context,
   ) {
-    return Ink(
-        color: Colors.grey,
-        child: SwitchListTile(
-          value: widget.controller.isEnabled,
-          onChanged: (bool value) {
-            setState(() {
-              if (widget.controller.isEnabled) {
-                widget.controller.disable();
-              } else {
-                widget.controller.enable();
-              }
-            });
-          },
-          title: const Text("Wi-Fi",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800)),
-        ));
+    return SwitchListTile(
+      value: widget.controller.isEnabled,
+      onChanged: (bool value) {
+        setState(() {
+          if (widget.controller.isEnabled) {
+            widget.controller.disable();
+          } else {
+            widget.controller.enable();
+          }
+        });
+      },
+      title: const Text("Wi-Fi",
+          style: TextStyle(
+              fontSize: 16, color: Colors.black, fontWeight: FontWeight.w800)),
+    );
   }
 }

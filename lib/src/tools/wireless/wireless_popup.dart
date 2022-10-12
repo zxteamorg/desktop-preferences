@@ -16,7 +16,6 @@ import "package:flutter/material.dart"
         Key,
         ListTile,
         ListView,
-        Material,
         Row,
         ScrollPhysics,
         SingleChildScrollView,
@@ -37,6 +36,7 @@ import "package:flutter/widgets.dart"
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
+import "wireless_service_contract.dart" show WirelessNetwork;
 import "wireless_switchtile.dart" show WirelessSwitchTile;
 import "my_expansion_widget.dart" show MyExpansionWidget;
 
@@ -73,9 +73,7 @@ class WirelessPopup extends StatelessWidget {
   Widget _buildSection1(
     WirelessController controller,
   ) {
-    return Container(
-        color: Colors.grey,
-        child: Material(child: WirelessSwitchTile(controller)));
+    return WirelessSwitchTile(controller);
   }
 
   Widget _buildSection2(
@@ -93,7 +91,7 @@ class WirelessPopup extends StatelessWidget {
               child: Column(
                 children: [
                   this._buildSection2_1(),
-                  this._buildSection2_2(),
+                  this._buildSection2_2(controller),
                 ],
               )),
         );
@@ -157,47 +155,17 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  Widget _buildSection2_2() {
-    // ignore: prefer_const_constructors
-    final Widget section2Header = Text("Other Networks");
+  Widget _buildSection2_2(
+    WirelessController controller,
+  ) {
     final Widget section2Body = Column(
-      children: const <Widget>[
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-        Text("Wi-Fi"),
-      ],
+      children: controller.otherNetworks
+          .map((WirelessNetwork wn) => Text(wn.name))
+          .toList(growable: false),
     );
 
     return MyExpansionWidget(
-      header: section2Header,
+      header: const Text("Other Networks"),
       body: section2Body,
     );
   }

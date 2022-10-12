@@ -119,7 +119,10 @@ class App extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.0),
             color: Colors.grey,
           ),
-          child: homeWidget,
+          child: Material(
+            color: Colors.grey,
+            child: homeWidget,
+          ),
         ),
       ),
       // Provide the generated AppLocalizations to the MaterialApp. This

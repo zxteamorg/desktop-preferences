@@ -20,6 +20,7 @@ import "package:flutter/widgets.dart"
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
+import "wireless_level_icon.dart" show WirelessLevelIcon;
 import "wireless_service_contract.dart"
     show PreferredWirelessNetwork, WirelessNetwork;
 import "wireless_switch.dart" show WirelessSwitch;
@@ -70,34 +71,44 @@ class WirelessPopup extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            this._buildSection2_1(controller),
-            this._buildSection2_2(controller),
+            this._buildPreferredNetworksSection(controller),
+            this._buildOtherNetworksSection(controller),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSection2_1(
+  Widget _buildPreferredNetworksSection(
     WirelessController controller,
   ) {
     final List<Widget> preferredNetworkRows = controller.preferredNetworks.map(
       (PreferredWirelessNetwork wirelessNetwork) {
         final bool isConnected = wirelessNetwork == controller.connectedNetwork;
 
+        final IconData wirelessLevelIconData =
+            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+        final IconData? isPublicIconData =
+            this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
+
+        final StatelessWidget wirelessLevelIcon = WirelessLevelIcon(
+          iconData: wirelessLevelIconData,
+          color: isConnected ? Colors.blue : null,
+        );
+        final StatelessWidget? isPublicIcon = isPublicIconData != null
+            ? WirelessLevelIcon(
+                iconData: isPublicIconData,
+              )
+            : null;
+
         return Row(
           children: <Widget>[
-            Icon(
-              this.resolveOtherNetworksIcon(wirelessNetwork.level),
-              color: isConnected ? Colors.blue : null,
-            ),
+            wirelessLevelIcon,
             Text(
               wirelessNetwork.name,
             ),
-            const Spacer(),
-            Icon(
-              this.resolveNetworksIsPublic(wirelessNetwork.isPublic),
-            ),
+            if (isPublicIcon != null) const Spacer(),
+            if (isPublicIcon != null) isPublicIcon,
           ],
         );
       },
@@ -117,25 +128,36 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  Widget _buildSection2_2(
+  Widget _buildOtherNetworksSection(
     WirelessController controller,
   ) {
-    final List<Widget> otherNetworkRows = controller.otherNetworks
-        .map((WirelessNetwork wirelessNetwork) => Row(
-              children: <Widget>[
-                Icon(
-                  this.resolveOtherNetworksIcon(wirelessNetwork.level),
-                ),
-                Text(
-                  wirelessNetwork.name,
-                ),
-                const Spacer(),
-                Icon(
-                  this.resolveNetworksIsPublic(wirelessNetwork.isPublic),
-                ),
-              ],
-            ))
-        .toList(growable: false);
+    final List<Widget> otherNetworkRows = controller.otherNetworks.map(
+      (WirelessNetwork wirelessNetwork) {
+        final IconData wirelessLevelIconData =
+            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+        final IconData? isPublicIconData =
+            this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
+
+        final StatelessWidget wirelessLevelIcon = WirelessLevelIcon(
+          iconData: wirelessLevelIconData,
+        );
+        final StatelessWidget? isPublicIcon = isPublicIconData != null
+            ? WirelessLevelIcon(
+                iconData: isPublicIconData,
+              )
+            : null;
+        return Row(
+          children: <Widget>[
+            wirelessLevelIcon,
+            Text(
+              wirelessNetwork.name,
+            ),
+            if (isPublicIcon != null) const Spacer(),
+            if (isPublicIcon != null) isPublicIcon,
+          ],
+        );
+      },
+    ).toList(growable: false);
 
     return MyExpansionWidget(
       header: const Padding(

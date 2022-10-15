@@ -28,6 +28,31 @@ abstract class WirelessService {
   List<WirelessNetwork> get otherNetworks;
 }
 
+///
+/// Define Wireless signal level
+///
+enum WirelessLevel {
+  ///
+  /// Poor signal level 0% - 25%
+  ///
+  poor,
+
+  ///
+  /// Good signal level 25% - 50%
+  ///
+  good,
+
+  ///
+  /// Nice signal 50% - 75%
+  ///
+  nice,
+
+  ///
+  /// Excellent signal level 75% - 100%
+  ///
+  excellent,
+}
+
 abstract class WirelessNetwork {
   ///
   /// Name of the Wireless network
@@ -35,13 +60,9 @@ abstract class WirelessNetwork {
   String get name;
 
   ///
-  /// Get signal level:
-  /// * 0 - 0%-25%
-  /// * 1 - 25%-50%
-  /// * 2 - 50%-75%
-  /// * 3 - 75%-100%
+  /// Get signal level
   ///
-  int get level;
+  WirelessLevel get level;
 
   ///
   ///Add isPublic or not isPublic

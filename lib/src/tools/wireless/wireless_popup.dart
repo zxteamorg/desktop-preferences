@@ -214,13 +214,13 @@ class WirelessPopup extends StatelessWidget {
 // }
 
   IconData resolveOtherNetworksIcon(WirelessLevel level) {
-    if (WirelessLevel == WirelessLevel.poor) {
+    if (level == WirelessLevel.poor) {
       return Icons.wifi_1_bar_rounded;
     }
-    if (WirelessLevel == WirelessLevel.good) {
+    if (level == WirelessLevel.good) {
       return Icons.wifi_1_bar;
     }
-    if (WirelessLevel == WirelessLevel.nice) {
+    if (level == WirelessLevel.nice) {
       return Icons.wifi_2_bar;
     }
     return Icons.wifi;

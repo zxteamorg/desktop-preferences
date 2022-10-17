@@ -86,24 +86,23 @@ class WirelessPopup extends StatelessWidget {
       (PreferredWirelessNetwork wirelessNetwork) {
         final bool isConnected = wirelessNetwork == controller.connectedNetwork;
 
-        final IconData wirelessLevelIconData =
-            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+        // final IconData wirelessLevelIconData =
+        //     this.resolveOtherNetworksIcon(wirelessNetwork.level);
         final IconData? isPublicIconData =
             this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
 
-        final StatelessWidget wirelessLevelIcon = WirelessLevelIcon(
-          iconData: wirelessLevelIconData,
-          color: isConnected ? Colors.blue : null,
-        );
         final StatelessWidget? isPublicIcon = isPublicIconData != null
-            ? WirelessLevelIcon(
-                iconData: isPublicIconData,
+            ? Icon(
+                isPublicIconData,
               )
             : null;
 
         return Row(
           children: <Widget>[
-            wirelessLevelIcon,
+            WirelessLevelIcon(
+              level: wirelessNetwork.level,
+              color: isConnected ? Colors.blue : null,
+            ),
             Text(
               wirelessNetwork.name,
             ),
@@ -133,22 +132,22 @@ class WirelessPopup extends StatelessWidget {
   ) {
     final List<Widget> otherNetworkRows = controller.otherNetworks.map(
       (WirelessNetwork wirelessNetwork) {
-        final IconData wirelessLevelIconData =
-            this.resolveOtherNetworksIcon(wirelessNetwork.level);
+        // final IconData wirelessLevelIconData =
+        //     this.resolveOtherNetworksIcon(wirelessNetwork.level);
         final IconData? isPublicIconData =
             this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
 
-        final StatelessWidget wirelessLevelIcon = WirelessLevelIcon(
-          iconData: wirelessLevelIconData,
-        );
         final StatelessWidget? isPublicIcon = isPublicIconData != null
             ? WirelessLevelIcon(
-                iconData: isPublicIconData,
+                level: wirelessNetwork.level,
               )
             : null;
+
         return Row(
           children: <Widget>[
-            wirelessLevelIcon,
+            WirelessLevelIcon(
+              level: wirelessNetwork.level,
+            ),
             Text(
               wirelessNetwork.name,
             ),

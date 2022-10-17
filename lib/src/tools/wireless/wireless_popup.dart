@@ -22,7 +22,7 @@ import "package:provider/provider.dart" show Consumer;
 import "wireless_controller.dart" show WirelessController;
 import "wireless_level_icon.dart" show WirelessLevelIcon;
 import "wireless_service_contract.dart"
-    show PreferredWirelessNetwork, WirelessNetwork;
+    show PreferredWirelessNetwork, WirelessNetwork, WirelessLevel;
 import "wireless_switch.dart" show WirelessSwitch;
 import "my_expansion_widget.dart" show MyExpansionWidget;
 
@@ -213,14 +213,14 @@ class WirelessPopup extends StatelessWidget {
 //   );
 // }
 
-  IconData resolveOtherNetworksIcon(int level) {
-    if (level == 0) {
+  IconData resolveOtherNetworksIcon(WirelessLevel level) {
+    if (WirelessLevel == WirelessLevel.poor) {
       return Icons.wifi_1_bar_rounded;
     }
-    if (level == 1) {
+    if (WirelessLevel == WirelessLevel.good) {
       return Icons.wifi_1_bar;
     }
-    if (level == 2) {
+    if (WirelessLevel == WirelessLevel.nice) {
       return Icons.wifi_2_bar;
     }
     return Icons.wifi;

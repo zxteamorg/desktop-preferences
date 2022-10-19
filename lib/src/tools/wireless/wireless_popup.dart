@@ -101,7 +101,8 @@ class WirelessPopup extends StatelessWidget {
           children: <Widget>[
             WirelessLevelIcon(
               level: wirelessNetwork.level,
-              color: isConnected ? Colors.blue : null,
+              isConnected: isConnected,
+              // color: isConnected ? Colors.blue : null,
             ),
             Text(
               wirelessNetwork.name,

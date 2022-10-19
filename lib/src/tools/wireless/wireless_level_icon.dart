@@ -14,16 +14,16 @@ class WirelessLevelIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    resolveOtherNetworksIcon(level);
-    this.color;
+    final IconData wirelessLevelIconData =
+        this._resolveOtherNetworksIcon(this.level);
 
     return Icon(
-      resolveOtherNetworksIcon(level),
+      wirelessLevelIconData,
       color: this.color,
     );
   }
 
-  IconData resolveOtherNetworksIcon(WirelessLevel level) {
+  IconData _resolveOtherNetworksIcon(WirelessLevel level) {
     if (level == WirelessLevel.poor) {
       return Icons.wifi_1_bar_rounded;
     }

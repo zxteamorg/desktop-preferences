@@ -5,11 +5,13 @@ import "wireless_service_contract.dart" show WirelessLevel;
 class WirelessLevelIcon extends StatelessWidget {
   final WirelessLevel level;
   final Color? color;
+  final isConnected;
 
   const WirelessLevelIcon({
     Key? key,
     required this.level,
     this.color,
+    this.isConnected,
   }) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class WirelessLevelIcon extends StatelessWidget {
     return Icon(
       wirelessLevelIconData,
       color: this.color,
+      //color: isConnected ? Colors.blue : null,
     );
   }
 

@@ -18,20 +18,24 @@ class WirelessLevelIcon extends StatelessWidget {
         WirelessLevelIcon._resolveIconData(this.level);
     if (isConnected == true) {
       return Container(
-        decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.blue,
+        ),
         child: Icon(
           wirelessLevelIconData,
-          color: this.isConnected ? Colors.white : null,
+          color: Colors.white,
         ),
       );
     }
     return Container(
-      decoration: const BoxDecoration(
-          shape: BoxShape.circle, color: Color.fromARGB(105, 45, 40, 41)),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.grey[400],
+      ),
       child: Icon(
         wirelessLevelIconData,
-        color: this.isConnected ? Colors.grey : null,
+        // color: this.isConnected ? Colors.grey : null,
       ),
     );
   }

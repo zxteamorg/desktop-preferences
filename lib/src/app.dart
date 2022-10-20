@@ -117,7 +117,7 @@ class App extends StatelessWidget {
       home: Center(
         child: Material(
           borderRadius: BorderRadius.circular(12.0),
-          color: Colors.grey,
+          color: Colors.grey[300],
           child: Container(
             padding: const EdgeInsets.all(8),
             child: homeWidget,

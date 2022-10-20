@@ -35,7 +35,7 @@ class _MyExpansionState extends State<MyExpansionWidget> {
       },
       children: <ExpansionPanel>[
         ExpansionPanel(
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey[300],
           headerBuilder: (BuildContext context, bool b) => Row(
             children: <Widget>[
               this.widget.header,

@@ -1,11 +1,13 @@
-import "package:flutter/material.dart" show Colors, Divider, Icons;
+import "package:flutter/material.dart" show Colors, Divider, Icons, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
         Column,
+        Container,
         CrossAxisAlignment,
         EdgeInsets,
         Flexible,
+        FontWeight,
         Icon,
         IconData,
         Key,
@@ -16,14 +18,14 @@ import "package:flutter/widgets.dart"
         Spacer,
         StatelessWidget,
         Text,
+        TextStyle,
         Widget;
 import "package:provider/provider.dart" show Consumer;
 
 import "wireless_controller.dart" show WirelessController;
 import "wireless_level_icon.dart" show WirelessLevelIcon;
 import "wireless_service_contract.dart"
-    show PreferredWirelessNetwork, WirelessNetwork, WirelessLevel;
-import "wireless_switch.dart" show WirelessSwitch;
+    show PreferredWirelessNetwork, WirelessNetwork;
 import "my_expansion_widget.dart" show MyExpansionWidget;
 
 class WirelessPopup extends StatelessWidget {
@@ -34,10 +36,10 @@ class WirelessPopup extends StatelessWidget {
     return Consumer<WirelessController>(
       builder: (
         BuildContext context,
-        WirelessController value,
+        WirelessController controller,
         Widget? child,
       ) =>
-          this._buildContent(context, value),
+          this._buildContent(context, controller),
     );
   }
 
@@ -49,22 +51,44 @@ class WirelessPopup extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        this._buildSection1(controller),
+        this._buildHeaderSection(controller),
         const Divider(),
-        if (controller.isEnabled) this._buildSection2(controller),
+        if (controller.isEnabled) this._buildMiddleScrollableSection(controller),
         if (controller.isEnabled) const Divider(),
-        this._buildSection3(controller),
+        this._buildFooterSection(controller),
       ],
     );
   }
 
-  Widget _buildSection1(
+  Widget _buildHeaderSection(
     WirelessController controller,
   ) {
-    return WirelessSwitch(controller);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Row(
+        children: <Widget>[
+          const Text("Wi-Fi",
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w800)),
+          const Spacer(),
+          Switch(
+            value: controller.isEnabled,
+            onChanged: (bool value) {
+              if (controller.isEnabled) {
+                controller.disable();
+              } else {
+                controller.enable();
+              }
+            },
+          )
+        ],
+      ),
+    );
   }
 
-  Widget _buildSection2(
+  Widget _buildMiddleScrollableSection(
     WirelessController controller,
   ) {
     return Flexible(
@@ -85,24 +109,17 @@ class WirelessPopup extends StatelessWidget {
     final List<Widget> preferredNetworkRows = controller.preferredNetworks.map(
       (PreferredWirelessNetwork wirelessNetwork) {
         final bool isConnected = wirelessNetwork == controller.connectedNetwork;
-
-        // final IconData wirelessLevelIconData =
-        //     this.resolveOtherNetworksIcon(wirelessNetwork.level);
-        final IconData? isPublicIconData =
-            this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
-
-        final StatelessWidget? isPublicIcon = isPublicIconData != null
-            ? Icon(
-                isPublicIconData,
-              )
-            : null;
+        final Widget? isPublicIcon =
+            WirelessPopup._buildIsPublicIcon(wirelessNetwork.isPublic);
 
         return Row(
           children: <Widget>[
-            WirelessLevelIcon(
-              level: wirelessNetwork.level,
-              isConnected: isConnected,
-              // color: isConnected ? Colors.blue : null,
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: WirelessLevelIcon(
+                level: wirelessNetwork.level,
+                isConnected: isConnected,
+              ),
             ),
             Text(
               wirelessNetwork.name,
@@ -133,21 +150,16 @@ class WirelessPopup extends StatelessWidget {
   ) {
     final List<Widget> otherNetworkRows = controller.otherNetworks.map(
       (WirelessNetwork wirelessNetwork) {
-        // final IconData wirelessLevelIconData =
-        //     this.resolveOtherNetworksIcon(wirelessNetwork.level);
-        final IconData? isPublicIconData =
-            this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
-
-        final StatelessWidget? isPublicIcon = isPublicIconData != null
-            ? WirelessLevelIcon(
-                level: wirelessNetwork.level,
-              )
-            : null;
+        final Widget? isPublicIcon =
+            WirelessPopup._buildIsPublicIcon(wirelessNetwork.isPublic);
 
         return Row(
           children: <Widget>[
-            WirelessLevelIcon(
-              level: wirelessNetwork.level,
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              child: WirelessLevelIcon(
+                level: wirelessNetwork.level,
+              ),
             ),
             Text(
               wirelessNetwork.name,
@@ -170,7 +182,7 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  Widget _buildSection3(
+  Widget _buildFooterSection(
     WirelessController controller,
   ) {
     return const Padding(
@@ -181,56 +193,18 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-// Widget _buildWirelessNetworks(final WirelessController controller) {
-//   final List<WirelessNetwork> wirelessNetworks = controller.otherNetworks;
-//   return ListView.builder(
-//     itemCount: wirelessNetworks.length,
-//     itemBuilder: (BuildContext context, int index) {
-//       final WirelessNetwork wirelessNetwork = wirelessNetworks[index];
+  static Widget? _buildIsPublicIcon(bool isPublic) {
+    final IconData? isPublicIconData = isPublic == false ? Icons.lock : null;
 
-//       final IconData icon =
-//           this.resolveOtherNetworksIcon(wirelessNetwork.level);
+    final Widget? isPublicIcon = isPublicIconData != null
+        ? Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Icon(
+              isPublicIconData,
+            ),
+          )
+        : null;
 
-//       final IconData? iconIsPublic =
-//           this.resolveNetworksIsPublic(wirelessNetwork.isPublic);
-
-//       return Container(
-//         padding: const EdgeInsets.symmetric(horizontal: 10),
-//         child: Row(
-//           children: <Widget>[
-//             Icon(icon, size: 36, color: Colors.black),
-//             Text(wirelessNetwork.name,
-//                 style: TextStyle(
-//                     fontSize: 12,
-//                     color: Colors.black.withOpacity(0.8),
-//                     decoration: TextDecoration.none)),
-//             const Spacer(),
-//             Icon(iconIsPublic, size: 26, color: Colors.black),
-//           ],
-//         ),
-//       );
-//     },
-//   );
-// }
-
-  IconData resolveOtherNetworksIcon(WirelessLevel level) {
-    if (level == WirelessLevel.poor) {
-      return Icons.wifi_1_bar_rounded;
-    }
-    if (level == WirelessLevel.good) {
-      return Icons.wifi_1_bar;
-    }
-    if (level == WirelessLevel.nice) {
-      return Icons.wifi_2_bar;
-    }
-    return Icons.wifi;
+    return isPublicIcon;
   }
-
-  IconData? resolveNetworksIsPublic(bool isPublic) {
-    if (isPublic == false) {
-      return Icons.lock;
-    }
-    return null;
-  }
-// }
 }

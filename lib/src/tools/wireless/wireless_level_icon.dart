@@ -16,10 +16,23 @@ class WirelessLevelIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData wirelessLevelIconData =
         WirelessLevelIcon._resolveIconData(this.level);
-
-    return Icon(
-      wirelessLevelIconData,
-      color: this.isConnected ? Colors.blue : null,
+    if (isConnected == true) {
+      return Container(
+        decoration:
+            const BoxDecoration(shape: BoxShape.circle, color: Colors.blue),
+        child: Icon(
+          wirelessLevelIconData,
+          color: this.isConnected ? Colors.white : null,
+        ),
+      );
+    }
+    return Container(
+      decoration: const BoxDecoration(
+          shape: BoxShape.circle, color: Color.fromARGB(105, 45, 40, 41)),
+      child: Icon(
+        wirelessLevelIconData,
+        color: this.isConnected ? Colors.grey : null,
+      ),
     );
   }
 

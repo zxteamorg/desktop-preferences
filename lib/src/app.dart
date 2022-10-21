@@ -99,15 +99,31 @@ class App extends StatelessWidget {
         );
         break;
       case AppTool.WIRELESS_POPUP:
-        homeWidget = InheritedProvider<WirelessController>(
-          create: (_) => WirelessController(WirelessServiceStub()),
-          child: const WirelessPopup(),
+        homeWidget = ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 260,
+            maxWidth: 260,
+            maxHeight: 460,
+          ),
+          child: ChangeNotifierProvider<WirelessController>(
+            create: (_) => WirelessController(WirelessServiceStub()),
+            child: const WirelessPopup(),
+          ),
         );
         break;
     }
 
     return MaterialApp(
-      home: homeWidget,
+      home: Center(
+        child: Material(
+          borderRadius: BorderRadius.circular(12.0),
+          color: Colors.grey[300],
+          child: Container(
+            padding: const EdgeInsets.all(8),
+            child: homeWidget,
+          ),
+        ),
+      ),
       // Provide the generated AppLocalizations to the MaterialApp. This
       // allows descendant Widgets to display the correct translations
       // depending on the user's locale.

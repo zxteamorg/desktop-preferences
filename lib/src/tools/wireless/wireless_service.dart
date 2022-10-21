@@ -1,5 +1,35 @@
 import "wireless_service_contract.dart";
 
+abstract class WirelessService {
+  /// Gets whether Wireless adapter is turn ON.
+  bool get isEnabled;
+
+  ///
+  /// Call this method to disable Wireless adapter
+  ///
+  void disable();
+
+  ///
+  /// Call this method to enable Wireless adapter
+  ///
+  void enable();
+
+  ///
+  /// Get current connected network (or null if not connected)
+  ///
+  PreferredWirelessNetwork? get connectedNetwork;
+
+  ///
+  /// Gets list of Preferred Wireless networks (available on air + connected in past)
+  ///
+  List<PreferredWirelessNetwork> get preferredNetworks;
+
+  ///
+  /// Gets list of Other Wireless networks (available on air)
+  ///
+  List<WirelessNetwork> get otherNetworks;
+}
+
 class WirelessServiceStub extends WirelessService {
   @override
   final PreferredWirelessNetwork? connectedNetwork;
@@ -36,11 +66,11 @@ class WirelessServiceStub extends WirelessService {
     final List<WirelessNetwork> otherNetworks =
         List<WirelessNetwork>.unmodifiable(
       const <WirelessNetwork>[
-        WirelessNetworkStub("wi-fi 0", WirelessLevel.nice, true),
+        WirelessNetworkStub("wi-fi 0", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 1", WirelessLevel.poor, true),
         WirelessNetworkStub("wi-fi 2", WirelessLevel.poor, false),
-        WirelessNetworkStub("wi-fi 3", WirelessLevel.nice, false),
-        WirelessNetworkStub("wi-fi 4", WirelessLevel.nice, true),
+        WirelessNetworkStub("wi-fi 3", WirelessLevel.excellent, false),
+        WirelessNetworkStub("wi-fi 4", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 5", WirelessLevel.good, false),
         WirelessNetworkStub("wi-fi 6", WirelessLevel.good, false),
         WirelessNetworkStub("wi-fi 7", WirelessLevel.good, false),
@@ -71,7 +101,7 @@ class WirelessServiceStub extends WirelessService {
         List<PreferredWirelessNetworkStub>.unmodifiable(const <
             PreferredWirelessNetwork>[
       PreferredWirelessNetworkStub("The beauty", WirelessLevel.good, false),
-      PreferredWirelessNetworkStub("Galaxy", WirelessLevel.nice, false),
+      PreferredWirelessNetworkStub("Galaxy", WirelessLevel.excellent, false),
     ]);
 
     final PreferredWirelessNetwork connectedNetwork = preferredNetworks[1];

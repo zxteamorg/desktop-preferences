@@ -47,7 +47,7 @@ class WirelessLevelIcon extends StatelessWidget {
         return Icons.wifi_1_bar_rounded;
       case WirelessLevel.good:
         return Icons.wifi_2_bar_rounded;
-      case WirelessLevel.nice:
+      case WirelessLevel.excellent:
         return Icons.wifi_rounded;
     }
   }

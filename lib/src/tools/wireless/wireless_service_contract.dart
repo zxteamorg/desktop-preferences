@@ -1,33 +1,3 @@
-abstract class WirelessService {
-  /// Gets whether Wireless adapter is turn ON.
-  bool get isEnabled;
-
-  ///
-  /// Call this method to disable Wireless adapter
-  ///
-  void disable();
-
-  ///
-  /// Call this method to enable Wireless adapter
-  ///
-  void enable();
-
-  ///
-  /// Get current connected network (or null if not connected)
-  ///
-  PreferredWirelessNetwork? get connectedNetwork;
-
-  ///
-  /// Gets list of Preferred Wireless networks (available on air + connected in past)
-  ///
-  List<PreferredWirelessNetwork> get preferredNetworks;
-
-  ///
-  /// Gets list of Other Wireless networks (available on air)
-  ///
-  List<WirelessNetwork> get otherNetworks;
-}
-
 ///
 /// Define Wireless signal level
 ///
@@ -45,8 +15,7 @@ enum WirelessLevel {
   ///
   /// Nice signal 66% - 100%
   ///
-  nice,
-
+  excellent,
 }
 
 abstract class WirelessNetwork {

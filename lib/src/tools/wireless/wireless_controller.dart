@@ -1,7 +1,8 @@
 import "package:flutter/foundation.dart";
 
 import "wireless_service_contract.dart"
-    show PreferredWirelessNetwork, WirelessNetwork, WirelessService;
+    show PreferredWirelessNetwork, WirelessNetwork;
+import "wireless_service.dart" show WirelessService;
 
 class WirelessController extends ChangeNotifier {
   WirelessController(this._service);

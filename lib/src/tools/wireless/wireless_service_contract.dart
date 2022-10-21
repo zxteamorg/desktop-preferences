@@ -33,24 +33,20 @@ abstract class WirelessService {
 ///
 enum WirelessLevel {
   ///
-  /// Poor signal level 0% - 25%
+  /// Poor signal level 0% - 33%
   ///
   poor,
 
   ///
-  /// Good signal level 25% - 50%
+  /// Good signal level 33% - 66%
   ///
   good,
 
   ///
-  /// Nice signal 50% - 75%
+  /// Nice signal 66% - 100%
   ///
   nice,
 
-  ///
-  /// Excellent signal level 75% - 100%
-  ///
-  excellent,
 }
 
 abstract class WirelessNetwork {

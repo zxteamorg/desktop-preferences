@@ -36,7 +36,7 @@ class WirelessServiceStub extends WirelessService {
     final List<WirelessNetwork> otherNetworks =
         List<WirelessNetwork>.unmodifiable(
       const <WirelessNetwork>[
-        WirelessNetworkStub("wi-fi 0", WirelessLevel.excellent, true),
+        WirelessNetworkStub("wi-fi 0", WirelessLevel.nice, true),
         WirelessNetworkStub("wi-fi 1", WirelessLevel.poor, true),
         WirelessNetworkStub("wi-fi 2", WirelessLevel.poor, false),
         WirelessNetworkStub("wi-fi 3", WirelessLevel.nice, false),
@@ -71,7 +71,7 @@ class WirelessServiceStub extends WirelessService {
         List<PreferredWirelessNetworkStub>.unmodifiable(const <
             PreferredWirelessNetwork>[
       PreferredWirelessNetworkStub("The beauty", WirelessLevel.good, false),
-      PreferredWirelessNetworkStub("Galaxy", WirelessLevel.excellent, false),
+      PreferredWirelessNetworkStub("Galaxy", WirelessLevel.nice, false),
     ]);
 
     final PreferredWirelessNetwork connectedNetwork = preferredNetworks[1];

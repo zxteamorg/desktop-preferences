@@ -42,15 +42,13 @@ class WirelessLevelIcon extends StatelessWidget {
   }
 
   static IconData _resolveIconData(WirelessLevel level) {
-    if (level == WirelessLevel.poor) {
-      return Icons.wifi_rounded;
+    switch (level) {
+      case WirelessLevel.poor:
+        return Icons.wifi_1_bar_rounded;
+      case WirelessLevel.good:
+        return Icons.wifi_2_bar_rounded;
+      case WirelessLevel.nice:
+        return Icons.wifi_rounded;
     }
-    if (level == WirelessLevel.good) {
-      return Icons.wifi_1_bar;
-    }
-    if (level == WirelessLevel.nice) {
-      return Icons.wifi_2_bar;
-    }
-    return Icons.wifi;
   }
 }

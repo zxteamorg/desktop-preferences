@@ -17,14 +17,14 @@ class WirelessLevelIcon extends StatelessWidget {
     final IconData wirelessLevelIconData =
         WirelessLevelIcon._resolveIconData(this.level);
 
-    Color? decorationIconColor;
+    Color? decorationColor;
     Color? iconColor;
 
     if (isConnected) {
-      decorationIconColor = Colors.blue;
+      decorationColor = Colors.blue;
       iconColor = Colors.white;
     } else {
-      decorationIconColor = Colors.grey[400];
+      decorationColor = Colors.grey[400];
       iconColor = null;
     }
 
@@ -32,7 +32,7 @@ class WirelessLevelIcon extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: decorationIconColor,
+        color: decorationColor,
       ),
       child: Icon(
         wirelessLevelIconData,

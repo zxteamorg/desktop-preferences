@@ -13,7 +13,7 @@ enum WirelessLevel {
   good,
 
   ///
-  /// Nice signal 66% - 100%
+  /// Excellent signal 66% - 100%
   ///
   excellent,
 }

@@ -103,6 +103,9 @@ class BluetoothPopup extends StatelessWidget {
     );
   }
 
+  ///
+  /// The method builds new Widget that includes a name of passed bluetooth device.
+  ///
   static Widget _deviceMapper(final BluetoothDevice device) {
     final String bluetoothDeviceName = device.name;
 

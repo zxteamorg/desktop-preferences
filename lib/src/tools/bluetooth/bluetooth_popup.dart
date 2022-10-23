@@ -87,22 +87,28 @@ class BluetoothPopup extends StatelessWidget {
   }
 
   Widget _buildMiddleScrollableSection(
-    BluetoothController controller,
+    final BluetoothController controller,
   ) {
-    final List<BluetoothDevice> bluetoothDevice = controller.devices;
-    final bluetoothDeviceName = BluetoothDevice.name;
+    final List<BluetoothDevice> bluetoothDevices = controller.devices;
+    final List<Widget> bluetoothWidgets = bluetoothDevices
+        .map(BluetoothPopup._deviceMapper)
+        .toList(growable: false);
 
     return Flexible(
       child: SingleChildScrollView(
         child: Column(
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.all(2.0),
-              child: Text(bluetoothDeviceName),
-            ),
-          ],
+          children: bluetoothWidgets,
         ),
       ),
+    );
+  }
+
+  static Widget _deviceMapper(final BluetoothDevice device) {
+    final String bluetoothDeviceName = device.name;
+
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Text(bluetoothDeviceName),
     );
   }
 

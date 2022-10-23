@@ -1,4 +1,3 @@
-import "dart:ui";
 import "package:flutter/material.dart" show Colors, Divider, Icons, Switch;
 import "package:flutter/widgets.dart"
     show
@@ -24,6 +23,7 @@ import "package:flutter/widgets.dart"
 import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
+import "bluetooth_service_contract.dart" show BluetoothDevice;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
@@ -89,18 +89,17 @@ class BluetoothPopup extends StatelessWidget {
   Widget _buildMiddleScrollableSection(
     BluetoothController controller,
   ) {
+    final List<BluetoothDevice> bluetoothDevice = controller.devices;
+    final bluetoothDeviceName = BluetoothDevice.name;
+
     return Flexible(
       child: SingleChildScrollView(
         child: Column(
           children: const <Widget>[
-            Text("Devices",
-                style: TextStyle(color: Color.fromARGB(255, 96, 96, 96))),
-            Text(""),
-            Text("Ololo1"),
-            Text("Ololo2"),
-            Text("Ololo3"),
-            Text("Ololo4"),
-            Text("Ololo5"),
+            Padding(
+              padding: EdgeInsets.all(2.0),
+              child: Text(bluetoothDeviceName),
+            ),
           ],
         ),
       ),

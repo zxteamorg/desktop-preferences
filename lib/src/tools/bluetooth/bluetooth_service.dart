@@ -1,27 +1,4 @@
-abstract class BluetoothService {
-  /// Gets whether Bluetooth adapter is turn ON.
-  bool get isEnabled;
-
-  ///
-  /// Call this method to disable Bluetooth adapter
-  ///
-  void disable();
-
-  ///
-  /// Call this method to enable Bluetooth adapter
-  ///
-  void enable();
-
-  ///
-  /// Gets list of Bluetooth devices (available on air)
-  ///
-  List<BluetoothDevice> get devices;
-}
-
-abstract class BluetoothDevice {
-  /// Name of the Bluetooth device
-  String get name;
-}
+import "bluetooth_service_contract.dart" show BluetoothService, BluetoothDevice;
 
 class BluetoothServiceStub extends BluetoothService {
   @override
@@ -51,7 +28,25 @@ class BluetoothServiceStub extends BluetoothService {
   BluetoothServiceStub()
       : this.isEnabled = true,
         // this._timer = null,
-        this.devices = List<BluetoothDevice>.unmodifiable(<BluetoothDevice>[]) {
+        this.devices =
+            List<BluetoothDevice>.unmodifiable(const <BluetoothDevice>[
+          BluetoothDeviceStub("BT1"),
+          BluetoothDeviceStub("BT2"),
+          BluetoothDeviceStub("BT3"),
+          BluetoothDeviceStub("BT4"),
+          BluetoothDeviceStub("BT5"),
+          BluetoothDeviceStub("BT6"),
+          BluetoothDeviceStub("BT7"),
+          BluetoothDeviceStub("BT8"),
+          BluetoothDeviceStub("BT9"),
+          BluetoothDeviceStub("BT10"),
+          BluetoothDeviceStub("BT11"),
+          BluetoothDeviceStub("BT12"),
+          BluetoothDeviceStub("BT13"),
+          BluetoothDeviceStub("BT14"),
+          BluetoothDeviceStub("BT15"),
+        ],
+        ) {
     // this._restartTimer();
   }
 
@@ -76,4 +71,13 @@ class BluetoothServiceStub extends BluetoothService {
   // void _onTimer() {
   //   //
   // }
+}
+
+class BluetoothDeviceStub implements BluetoothDevice {
+  @override
+  final String name;
+
+  const BluetoothDeviceStub(
+    this.name,
+  );
 }

@@ -1,6 +1,6 @@
 import "package:flutter/foundation.dart";
 
-import "bluetooth_service.dart" show BluetoothDevice, BluetoothService;
+import "bluetooth_service_contract.dart" show BluetoothDevice, BluetoothService;
 
 class BluetoothController extends ChangeNotifier {
   BluetoothController(this._service);

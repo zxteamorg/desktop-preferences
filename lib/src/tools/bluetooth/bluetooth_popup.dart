@@ -1,4 +1,5 @@
-import "package:flutter/material.dart" show Colors, Divider, Icons, Switch;
+import "package:flutter/material.dart"
+    show Colors, Divider, Icons, Switch, TextDirection;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -93,14 +94,25 @@ class BluetoothPopup extends StatelessWidget {
     final List<Widget> bluetoothWidgets = bluetoothDevices
         .map(BluetoothPopup._deviceMapper)
         .toList(growable: false);
-
-    return Flexible(
-      child: SingleChildScrollView(
-        child: Column(
-          children: bluetoothWidgets,
-        ),
-      ),
-    );
+    return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
+            child: Text("Devices", style: TextStyle(color: Colors.grey)),
+          ),
+          Row(
+            children: <Widget>[
+              Flexible(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: bluetoothWidgets,
+                  ),
+                ),
+              ),
+            ],
+          )
+        ]);
   }
 
   ///

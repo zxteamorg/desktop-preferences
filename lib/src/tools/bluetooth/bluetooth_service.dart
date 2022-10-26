@@ -1,4 +1,6 @@
-import "bluetooth_service_contract.dart" show BluetoothService, BluetoothDevice;
+import "bluetooth_service_contract.dart"
+    show BluetoothService, BluetoothDevice, BluetoothDeviceName;
+// import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothServiceStub extends BluetoothService {
   @override
@@ -28,24 +30,24 @@ class BluetoothServiceStub extends BluetoothService {
   BluetoothServiceStub()
       : this.isEnabled = true,
         // this._timer = null,
-        this.devices =
-            List<BluetoothDevice>.unmodifiable(const <BluetoothDevice>[
-          BluetoothDeviceStub("BT1"),
-          BluetoothDeviceStub("BT2"),
-          BluetoothDeviceStub("BT3"),
-          BluetoothDeviceStub("BT4"),
-          BluetoothDeviceStub("BT5"),
-          BluetoothDeviceStub("BT6"),
-          BluetoothDeviceStub("BT7"),
-          BluetoothDeviceStub("BT8"),
-          BluetoothDeviceStub("BT9"),
-          BluetoothDeviceStub("BT10"),
-          BluetoothDeviceStub("BT11"),
-          BluetoothDeviceStub("BT12"),
-          BluetoothDeviceStub("BT13"),
-          BluetoothDeviceStub("BT14"),
-          BluetoothDeviceStub("BT15"),
-        ],
+        this.devices = List<BluetoothDevice>.unmodifiable(
+          const <BluetoothDevice>[
+            BluetoothDeviceStub("BT1", BluetoothDeviceName.television),
+            BluetoothDeviceStub("BT2", BluetoothDeviceName.headphones),
+            BluetoothDeviceStub("BT3", BluetoothDeviceName.microphone),
+            BluetoothDeviceStub("BT4", BluetoothDeviceName.smartphone),
+            BluetoothDeviceStub("BT5", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT6", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT7", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT8", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT9", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT10", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT11", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT12", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT13", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT14", BluetoothDeviceName.device),
+            BluetoothDeviceStub("BT15", BluetoothDeviceName.device),
+          ],
         ) {
     // this._restartTimer();
   }
@@ -77,7 +79,11 @@ class BluetoothDeviceStub implements BluetoothDevice {
   @override
   final String name;
 
+  @override
+  final BluetoothDeviceName icon;
+
   const BluetoothDeviceStub(
     this.name,
+    this.icon,
   );
 }

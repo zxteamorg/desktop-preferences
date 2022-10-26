@@ -1,3 +1,63 @@
+///
+/// Define Bluetooth battery level
+///
+enum BluetoothBatteryLevel {
+  ///
+  /// Poor level 0% - 20%
+  ///
+  low,
+
+  ///
+  /// Good level 50% - 70%
+  ///
+  average,
+
+  ///
+  /// Hight level 70% - 90%
+  ///
+  hight,
+
+  ///
+  /// Full level 90% - 100%
+  ///
+  full,
+}
+
+///
+/// Define Bluetooth device name
+///
+enum BluetoothDeviceName {
+  ///
+  /// Device smartphone
+  /// 
+  smartphone,
+
+  ///
+  /// Device television
+  /// 
+  television,
+
+  ///
+  /// Device headphones
+  ///
+  headphones,
+
+  ///
+  /// Device microphone
+  ///
+  microphone,
+
+  ///
+  /// Device smartwatch
+  ///
+  smartwatch,
+
+  ///
+  /// Other device
+  ///
+  device,
+}
+
 abstract class BluetoothService {
   /// Gets whether Bluetooth adapter is turn ON.
   bool get isEnabled;

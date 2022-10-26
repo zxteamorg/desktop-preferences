@@ -24,7 +24,9 @@ import "package:flutter/widgets.dart"
 import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
-import "bluetooth_service_contract.dart" show BluetoothDevice;
+import "bluetooth_service_contract.dart"
+    show BluetoothDevice, BluetoothDeviceName;
+import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
@@ -92,27 +94,30 @@ class BluetoothPopup extends StatelessWidget {
   ) {
     final List<BluetoothDevice> bluetoothDevices = controller.devices;
     final List<Widget> bluetoothWidgets = bluetoothDevices
-        .map(BluetoothPopup._deviceMapper)
+        .map(BluetoothPopup
+            ._deviceMapper) //transform each bluetooth device into a widget.
         .toList(growable: false);
+
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
-            child: Text("Devices", style: TextStyle(color: Colors.grey)),
-          ),
-          Row(
-            children: <Widget>[
-              Flexible(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: bluetoothWidgets,
-                  ),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
+          child: Text("Devices", style: TextStyle(color: Colors.grey)),
+        ),
+        Row(
+          children: <Widget>[
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: bluetoothWidgets,
                 ),
               ),
-            ],
-          )
-        ]);
+            ),
+          ],
+        )
+      ],
+    );
   }
 
   ///
@@ -120,10 +125,13 @@ class BluetoothPopup extends StatelessWidget {
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
     final String bluetoothDeviceName = device.name;
+    final IconData bluetoothDeviceIconData = BluetoothDeviceIcon.icon;
 
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Text(bluetoothDeviceName),
+    return Row(
+      children: <Widget>[
+        Icon(bluetoothDeviceIconData),
+        Text(bluetoothDeviceName),
+      ],
     );
   }
 

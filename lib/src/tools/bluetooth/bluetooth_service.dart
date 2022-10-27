@@ -79,10 +79,11 @@ class BluetoothDeviceStub implements BluetoothDevice {
   @override
   final String name;
 
-  final BluetoothDeviceNameIcon nameIcon;
+  @override
+  final BluetoothDeviceNameIcon deviceType;
 
   const BluetoothDeviceStub(
     this.name,
-    this.nameIcon,
+    this.deviceType,
   );
 }

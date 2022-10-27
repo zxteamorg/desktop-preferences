@@ -81,4 +81,5 @@ abstract class BluetoothService {
 abstract class BluetoothDevice {
   /// Name of the Bluetooth device
   String get name;
+  BluetoothDeviceNameIcon get deviceType;  
 }

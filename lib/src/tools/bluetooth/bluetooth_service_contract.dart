@@ -26,7 +26,7 @@ enum BluetoothBatteryLevel {
 ///
 /// Define Bluetooth device name
 ///
-enum BluetoothDeviceName {
+enum BluetoothDeviceNameIcon {
   ///
   /// Device smartphone
   /// 

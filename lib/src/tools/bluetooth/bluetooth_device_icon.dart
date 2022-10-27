@@ -1,21 +1,21 @@
 import "package:flutter/material.dart";
 
-import "bluetooth_service_contract.dart" show BluetoothDeviceName;
+import "bluetooth_service_contract.dart" show BluetoothDeviceNameIcon;
 
 class BluetoothDeviceIcon extends StatelessWidget {
-  final BluetoothDeviceName name;
+  final BluetoothDeviceNameIcon nameIcon;
   final bool isConnected;
 
   const BluetoothDeviceIcon({
     Key? key,
-    required this.name,
+    required this.nameIcon,
     this.isConnected = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final IconData? bluetoothDeviceIconData =
-        BluetoothDeviceIcon._resolveIconData(this.name);
+        BluetoothDeviceIcon._resolveIconData(this.nameIcon);
 
     Color? decorationColor;
     Color? iconColor;
@@ -41,19 +41,19 @@ class BluetoothDeviceIcon extends StatelessWidget {
     );
   }
 
-  static IconData? _resolveIconData(BluetoothDeviceName name) {
-    switch (name) {
-      case BluetoothDeviceName.television:
+  static IconData? _resolveIconData(BluetoothDeviceNameIcon nameIcon) {
+    switch (nameIcon) {
+      case BluetoothDeviceNameIcon.television:
         return Icons.tv_rounded;
-      case BluetoothDeviceName.headphones:
+      case BluetoothDeviceNameIcon.headphones:
         return Icons.headset_rounded;
-      case BluetoothDeviceName.microphone:
+      case BluetoothDeviceNameIcon.microphone:
         return Icons.mic_rounded;
-      case BluetoothDeviceName.smartphone:
+      case BluetoothDeviceNameIcon.smartphone:
         return Icons.smartphone_rounded;
-      case BluetoothDeviceName.smartwatch:
+      case BluetoothDeviceNameIcon.smartwatch:
         return Icons.watch_rounded;
-      case BluetoothDeviceName.device:
+      case BluetoothDeviceNameIcon.device:
         return Icons.bluetooth_rounded;
     }
   }

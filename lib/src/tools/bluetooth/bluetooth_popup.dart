@@ -25,7 +25,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothDevice, BluetoothDeviceName;
+    show BluetoothDevice, BluetoothDeviceNameIcon;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothPopup extends StatelessWidget {
@@ -125,14 +125,32 @@ class BluetoothPopup extends StatelessWidget {
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
     final String bluetoothDeviceName = device.name;
-    final IconData bluetoothDeviceIconData = BluetoothDeviceIcon.icon;
+    final IconData? bluetoothDeviceNameIcon =
+        BluetoothPopup._resolveIconData(BluetoothDeviceNameIcon.
 
     return Row(
       children: <Widget>[
-        Icon(bluetoothDeviceIconData),
+        Icon(bluetoothDeviceNameIcon),
         Text(bluetoothDeviceName),
       ],
     );
+  }
+
+    static IconData? _resolveIconData(BluetoothDeviceNameIcon nameIcon) {
+    switch (nameIcon) {
+      case BluetoothDeviceNameIcon.television:
+        return Icons.tv_rounded;
+      case BluetoothDeviceNameIcon.headphones:
+        return Icons.headset_rounded;
+      case BluetoothDeviceNameIcon.microphone:
+        return Icons.mic_rounded;
+      case BluetoothDeviceNameIcon.smartphone:
+        return Icons.smartphone_rounded;
+      case BluetoothDeviceNameIcon.smartwatch:
+        return Icons.watch_rounded;
+      case BluetoothDeviceNameIcon.device:
+        return Icons.bluetooth_rounded;
+    }
   }
 
   Widget _buildFooterSection(

@@ -126,7 +126,7 @@ class BluetoothPopup extends StatelessWidget {
   static Widget _deviceMapper(final BluetoothDevice device) {
     final String bluetoothDeviceName = device.name;
     final IconData? bluetoothDeviceNameIcon =
-        BluetoothPopup._resolveIconData(BluetoothDeviceNameIcon.
+        _resolveIconData(BluetoothDeviceNameIcon.headphones);
 
     return Row(
       children: <Widget>[
@@ -136,7 +136,7 @@ class BluetoothPopup extends StatelessWidget {
     );
   }
 
-    static IconData? _resolveIconData(BluetoothDeviceNameIcon nameIcon) {
+  static IconData? _resolveIconData(BluetoothDeviceNameIcon nameIcon) {
     switch (nameIcon) {
       case BluetoothDeviceNameIcon.television:
         return Icons.tv_rounded;

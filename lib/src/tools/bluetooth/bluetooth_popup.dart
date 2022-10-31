@@ -67,7 +67,7 @@ class BluetoothPopup extends StatelessWidget {
     BluetoothController controller,
   ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Row(
         children: <Widget>[
           const Text("Bluetooth",
@@ -158,7 +158,7 @@ class BluetoothPopup extends StatelessWidget {
     BluetoothController controller,
   ) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: 0),
       child: Text(
         "Bluetooth Preferences...",
       ),

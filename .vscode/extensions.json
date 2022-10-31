@@ -1,5 +1,7 @@
 {
-  "recommendations": [
-    "streetsidesoftware.code-spell-checker"
-  ]
+	"recommendations": [
+		"streetsidesoftware.code-spell-checker",
+		"dart-code.flutter",
+		"Dart-Code.dart-code"
+	]
 }

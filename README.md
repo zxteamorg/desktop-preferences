@@ -43,3 +43,7 @@ classDiagram
 	ToolService <|-- ToolServiceStub : implements
 	ToolService <|-- ToolServiceImpl : implements
 ```
+
+## References
+
+* [Feather](https://feathericons.com/) - Simply beautiful open source icons

@@ -1,5 +1,5 @@
 import "package:flutter/material.dart"
-    show Colors, Divider, Icons, SizedBox, Switch, TextDirection;
+    show Alignment, Colors, Divider, Icons, SizedBox, Switch, TextDirection;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -25,13 +25,13 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothDevice, BluetoothDeviceNameIcon;
+    show BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
 
-  static BluetoothDeviceNameIcon? get deviceType => null;
+  static BluetoothHardwareType? get deviceType => null;
 
   @override
   Widget build(final BuildContext context) {
@@ -94,57 +94,40 @@ class BluetoothPopup extends StatelessWidget {
   Widget _buildMiddleScrollableSection(
     final BluetoothController controller,
   ) {
+    // Get a list of devices
     final List<BluetoothDevice> bluetoothDevices = controller.devices;
+    // Transform each bluetooth device into a widget.
     final List<Widget> bluetoothWidgets = bluetoothDevices
-        .map(BluetoothPopup
-            ._deviceMapper) //transform each bluetooth device into a widget.
+        .map(BluetoothPopup._deviceMapper)
         .toList(growable: false);
 
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 30,
-          child: Text("Devices", style: TextStyle(color: Colors.grey)),
-        ),
-        Flexible(
-          child: SingleChildScrollView(
-            child: Column(
-              children: bluetoothWidgets,
+    return Flexible(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Text("Devices", style: TextStyle(color: Colors.grey)),
+          Flexible(
+            child: SingleChildScrollView(
+              child: Column(
+                children: bluetoothWidgets,
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
-
-    // Column(
-    //   crossAxisAlignment: CrossAxisAlignment.start,
-    //   children: <Widget>[
-    //     const Padding(
-    //       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
-    //       child: Text("Devices", style: TextStyle(color: Colors.grey)),
-    //     ),
-    //     Row(
-    //       children: <Widget>[
-    //         Flexible(
-    //           child: SingleChildScrollView(
-    //             child: Column(
-    //               children: bluetoothWidgets,
-    //             ),
-    //           ),
-    //         ),
-    //       ],
-    //     )
-    //   ],
-    // );
   }
 
   ///
   /// The method builds new Widget that includes a name of passed bluetooth device.
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
+    // Get device name from device
     final String bluetoothDeviceName = device.name;
+    // Assign each device a corresponding icon
     final IconData bluetoothDeviceNameIcon =
-        BluetoothPopup._resolveIconData(BluetoothDeviceNameIcon.device);
+        BluetoothPopup._resolveIconData(device.deviceType);
 
     return Row(
       children: <Widget>[
@@ -154,19 +137,19 @@ class BluetoothPopup extends StatelessWidget {
     );
   }
 
-  static IconData _resolveIconData(final BluetoothDeviceNameIcon deviceType) {
+  static IconData _resolveIconData(final BluetoothHardwareType deviceType) {
     switch (deviceType) {
-      case BluetoothDeviceNameIcon.television:
+      case BluetoothHardwareType.television:
         return Icons.tv_rounded;
-      case BluetoothDeviceNameIcon.headphones:
+      case BluetoothHardwareType.headphones:
         return Icons.headset_rounded;
-      case BluetoothDeviceNameIcon.microphone:
+      case BluetoothHardwareType.microphone:
         return Icons.mic_rounded;
-      case BluetoothDeviceNameIcon.smartphone:
+      case BluetoothHardwareType.smartphone:
         return Icons.smartphone_rounded;
-      case BluetoothDeviceNameIcon.smartwatch:
+      case BluetoothHardwareType.smartwatch:
         return Icons.watch_rounded;
-      case BluetoothDeviceNameIcon.device:
+      case BluetoothHardwareType.other:
         return Icons.bluetooth_rounded;
     }
   }

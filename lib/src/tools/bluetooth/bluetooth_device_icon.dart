@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 
-import "bluetooth_service_contract.dart" show BluetoothDeviceNameIcon;
+import "bluetooth_service_contract.dart" show BluetoothHardwareType;
 
 class BluetoothDeviceIcon extends StatelessWidget {
-  final BluetoothDeviceNameIcon deviceType;
+  final BluetoothHardwareType deviceType;
   final bool isConnected;
 
   const BluetoothDeviceIcon({
@@ -41,19 +41,19 @@ class BluetoothDeviceIcon extends StatelessWidget {
     );
   }
 
-  static IconData? _resolveIconData(BluetoothDeviceNameIcon deviceType) {
+  static IconData? _resolveIconData(BluetoothHardwareType deviceType) {
     switch (deviceType) {
-      case BluetoothDeviceNameIcon.television:
+      case BluetoothHardwareType.television:
         return Icons.tv_rounded;
-      case BluetoothDeviceNameIcon.headphones:
+      case BluetoothHardwareType.headphones:
         return Icons.headset_rounded;
-      case BluetoothDeviceNameIcon.microphone:
+      case BluetoothHardwareType.microphone:
         return Icons.mic_rounded;
-      case BluetoothDeviceNameIcon.smartphone:
+      case BluetoothHardwareType.smartphone:
         return Icons.smartphone_rounded;
-      case BluetoothDeviceNameIcon.smartwatch:
+      case BluetoothHardwareType.smartwatch:
         return Icons.watch_rounded;
-      case BluetoothDeviceNameIcon.device:
+      case BluetoothHardwareType.other:
         return Icons.bluetooth_rounded;
     }
   }

@@ -24,17 +24,17 @@ enum BluetoothBatteryLevel {
 }
 
 ///
-/// Define Bluetooth device name
+/// Define Bluetooth type device
 ///
-enum BluetoothDeviceNameIcon {
+enum BluetoothHardwareType {
   ///
   /// Device smartphone
-  /// 
+  ///
   smartphone,
 
   ///
   /// Device television
-  /// 
+  ///
   television,
 
   ///
@@ -53,9 +53,9 @@ enum BluetoothDeviceNameIcon {
   smartwatch,
 
   ///
-  /// Other device
+  /// Device other
   ///
-  device,
+  other,
 }
 
 abstract class BluetoothService {
@@ -81,5 +81,5 @@ abstract class BluetoothService {
 abstract class BluetoothDevice {
   /// Name of the Bluetooth device
   String get name;
-  BluetoothDeviceNameIcon get deviceType;  
+  BluetoothHardwareType get deviceType;
 }

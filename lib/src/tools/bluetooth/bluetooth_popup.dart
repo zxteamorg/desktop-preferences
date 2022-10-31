@@ -94,7 +94,7 @@ class BluetoothPopup extends StatelessWidget {
   Widget _buildMiddleScrollableSection(
     final BluetoothController controller,
   ) {
-    // Get a list of devices
+    // Get a list of devices.
     final List<BluetoothDevice> bluetoothDevices = controller.devices;
     // Transform each bluetooth device into a widget.
     final List<Widget> bluetoothWidgets = bluetoothDevices
@@ -123,9 +123,9 @@ class BluetoothPopup extends StatelessWidget {
   /// The method builds new Widget that includes a name of passed bluetooth device.
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
-    // Get device name from device
+    // Get device name from device.
     final String bluetoothDeviceName = device.name;
-    // Assign each device a corresponding icon
+    // We get its type from the device and assign each device a corresponding icon.
     final IconData bluetoothDeviceNameIcon =
         BluetoothPopup._resolveIconData(device.deviceType);
 
@@ -136,7 +136,7 @@ class BluetoothPopup extends StatelessWidget {
       ],
     );
   }
-
+// Each type of device is assigned the corresponding icon.
   static IconData _resolveIconData(final BluetoothHardwareType deviceType) {
     switch (deviceType) {
       case BluetoothHardwareType.television:
@@ -154,6 +154,7 @@ class BluetoothPopup extends StatelessWidget {
     }
   }
 
+// Form a section Bluetooth Preferences.
   Widget _buildFooterSection(
     BluetoothController controller,
   ) {

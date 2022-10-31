@@ -1,5 +1,5 @@
 import "package:flutter/material.dart"
-    show Colors, Divider, Icons, Switch, TextDirection;
+    show Colors, Divider, Icons, SizedBox, Switch, TextDirection;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -30,6 +30,8 @@ import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
+
+  static BluetoothDeviceNameIcon? get deviceType => null;
 
   @override
   Widget build(final BuildContext context) {
@@ -99,25 +101,41 @@ class BluetoothPopup extends StatelessWidget {
         .toList(growable: false);
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
+        const SizedBox(
+          height: 30,
           child: Text("Devices", style: TextStyle(color: Colors.grey)),
         ),
-        Row(
-          children: <Widget>[
-            Flexible(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: bluetoothWidgets,
-                ),
-              ),
+        Flexible(
+          child: SingleChildScrollView(
+            child: Column(
+              children: bluetoothWidgets,
             ),
-          ],
-        )
+          ),
+        ),
       ],
     );
+
+    // Column(
+    //   crossAxisAlignment: CrossAxisAlignment.start,
+    //   children: <Widget>[
+    //     const Padding(
+    //       padding: EdgeInsets.symmetric(horizontal: 6, vertical: 5.0),
+    //       child: Text("Devices", style: TextStyle(color: Colors.grey)),
+    //     ),
+    //     Row(
+    //       children: <Widget>[
+    //         Flexible(
+    //           child: SingleChildScrollView(
+    //             child: Column(
+    //               children: bluetoothWidgets,
+    //             ),
+    //           ),
+    //         ),
+    //       ],
+    //     )
+    //   ],
+    // );
   }
 
   ///
@@ -125,8 +143,8 @@ class BluetoothPopup extends StatelessWidget {
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
     final String bluetoothDeviceName = device.name;
-    final IconData? bluetoothDeviceNameIcon =
-        BluetoothPopup._resolveIconData(BluetoothDeviceNameIcon.);
+    final IconData bluetoothDeviceNameIcon =
+        BluetoothPopup._resolveIconData(BluetoothDeviceNameIcon.device);
 
     return Row(
       children: <Widget>[
@@ -136,7 +154,7 @@ class BluetoothPopup extends StatelessWidget {
     );
   }
 
-  static IconData? _resolveIconData(BluetoothDeviceNameIcon deviceType) {
+  static IconData _resolveIconData(final BluetoothDeviceNameIcon deviceType) {
     switch (deviceType) {
       case BluetoothDeviceNameIcon.television:
         return Icons.tv_rounded;

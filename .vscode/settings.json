@@ -48,5 +48,6 @@
 	"cSpell.words": [
 		"Cupertino",
 		"switchtile"
-	]
+	],
+	"dart.flutterSdkPath": "/home/dmitry.detukov/opt/flutter/3.3.6-x64"
 }

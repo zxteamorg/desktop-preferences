@@ -25,7 +25,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothDevice, BluetoothHardwareType;
+    show BluetoothBatteryLevel, BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothPopup extends StatelessWidget {
@@ -106,7 +106,11 @@ class BluetoothPopup extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Text("Devices", style: TextStyle(color: Colors.grey)),
+          Text("Devices",
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontWeight: FontWeight.w800,
+              )),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 5.0),
           ),
@@ -132,12 +136,33 @@ class BluetoothPopup extends StatelessWidget {
     final IconData bluetoothDeviceNameIcon =
         BluetoothPopup._resolveIconData(device.deviceType);
 
+    final IconData bluetoothDeviceBatteryLevel =
+        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel);
+
     return Row(
       children: <Widget>[
         Icon(bluetoothDeviceNameIcon),
         Text(bluetoothDeviceName),
+        const Spacer(),
+        Icon(bluetoothDeviceBatteryLevel),
       ],
     );
+  }
+
+// Assigning a charge level icon to each device
+  static IconData _resolveBatteryLevelData(BluetoothBatteryLevel batteryLevel) {
+    switch (batteryLevel) {
+      case BluetoothBatteryLevel.low:
+        return Icons.battery_0_bar_rounded;
+      case BluetoothBatteryLevel.hightLow:
+        return Icons.battery_1_bar_rounded;
+      case BluetoothBatteryLevel.average:
+        return Icons.battery_2_bar_rounded;
+      case BluetoothBatteryLevel.hight:
+        return Icons.battery_3_bar_rounded;
+      case BluetoothBatteryLevel.full:
+        return Icons.battery_full_rounded;
+    }
   }
 
 // Each type of device is assigned the corresponding icon.

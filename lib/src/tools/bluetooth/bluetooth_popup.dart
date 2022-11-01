@@ -134,14 +134,20 @@ class BluetoothPopup extends StatelessWidget {
     final String bluetoothDeviceName = device.name;
     // We get its type from the device and assign each device a corresponding icon.
     final IconData bluetoothDeviceNameIcon =
-        BluetoothPopup._resolveIconData(device.deviceType);
+        BluetoothPopup._resolveIconData(device.hardwareType);
 
     final IconData bluetoothDeviceBatteryLevel =
-        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel);
+        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel!);
 
     return Row(
       children: <Widget>[
-        Icon(bluetoothDeviceNameIcon),
+        Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: BluetoothDeviceIcon(
+            hardwareType: device.hardwareType,
+          ),
+        ),
+        // Icon(bluetoothDeviceNameIcon),
         Text(bluetoothDeviceName),
         const Spacer(),
         Icon(bluetoothDeviceBatteryLevel),

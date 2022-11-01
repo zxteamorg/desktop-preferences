@@ -3,19 +3,19 @@ import "package:flutter/material.dart";
 import "bluetooth_service_contract.dart" show BluetoothHardwareType;
 
 class BluetoothDeviceIcon extends StatelessWidget {
-  final BluetoothHardwareType deviceType;
+  final BluetoothHardwareType hardwareType;
   final bool isConnected;
 
   const BluetoothDeviceIcon({
     Key? key,
-    required this.deviceType,
+    required this.hardwareType,
     this.isConnected = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final IconData? bluetoothDeviceIconData =
-        BluetoothDeviceIcon._resolveIconData(this.deviceType);
+        BluetoothDeviceIcon._resolveIconData(this.hardwareType);
 
     Color? decorationColor;
     Color? iconColor;

@@ -32,9 +32,9 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
         return Icons.battery_2_bar_rounded;
       case BluetoothBatteryLevel.average:
         return Icons.battery_3_bar_rounded;
-              case BluetoothBatteryLevel.lowHight:
+      case BluetoothBatteryLevel.lowHight:
         return Icons.battery_4_bar_rounded;
-              case BluetoothBatteryLevel.hight:
+      case BluetoothBatteryLevel.hight:
         return Icons.battery_5_bar_rounded;
       case BluetoothBatteryLevel.full:
         return Icons.battery_full_rounded;

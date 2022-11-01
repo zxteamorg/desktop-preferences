@@ -96,6 +96,6 @@ abstract class BluetoothService {
 abstract class BluetoothDevice {
   /// Name of the Bluetooth device
   String get name;
-  BluetoothHardwareType get deviceType;
-  BluetoothBatteryLevel get batteryLevel;
+  BluetoothHardwareType get hardwareType;
+  BluetoothBatteryLevel? get batteryLevel;
 }

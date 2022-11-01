@@ -99,14 +99,14 @@ class BluetoothDeviceStub implements BluetoothDevice {
   final String name;
 
   @override
-  final BluetoothHardwareType deviceType;
+  final BluetoothHardwareType hardwareType;
 
   @override
-  final BluetoothBatteryLevel batteryLevel;
+  final BluetoothBatteryLevel? batteryLevel;
 
   const BluetoothDeviceStub(
     this.name,
-    this.deviceType,
+    this.hardwareType,
     this.batteryLevel,
   );
 }

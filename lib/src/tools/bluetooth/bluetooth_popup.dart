@@ -107,6 +107,9 @@ class BluetoothPopup extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const Text("Devices", style: TextStyle(color: Colors.grey)),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 5.0),
+          ),
           Flexible(
             child: SingleChildScrollView(
               child: Column(
@@ -136,6 +139,7 @@ class BluetoothPopup extends StatelessWidget {
       ],
     );
   }
+
 // Each type of device is assigned the corresponding icon.
   static IconData _resolveIconData(final BluetoothHardwareType deviceType) {
     switch (deviceType) {

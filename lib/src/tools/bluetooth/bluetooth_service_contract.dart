@@ -8,6 +8,11 @@ enum BluetoothBatteryLevel {
   low,
 
   ///
+  /// Poor level 20% - 50%
+  ///
+  hightLow,
+
+  ///
   /// Good level 50% - 70%
   ///
   average,
@@ -18,7 +23,7 @@ enum BluetoothBatteryLevel {
   hight,
 
   ///
-  /// Full level 90% - 100%
+  /// Full level 99% - 100%
   ///
   full,
 }

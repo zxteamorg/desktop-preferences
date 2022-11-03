@@ -100,6 +100,10 @@ abstract class BluetoothDevice {
   /// Type of the Bluetooth device
   BluetoothHardwareType get hardwareType;
 
-  /// Battery level of the Bluetooth device
-  BluetoothBatteryLevel get batteryLevel;
+  ///
+  /// Battery level of the Bluetooth device.
+  ///
+  /// The `value` is `null` if Battery is not presented on the device.
+  ///
+  BluetoothBatteryLevel? get batteryLevel;
 }

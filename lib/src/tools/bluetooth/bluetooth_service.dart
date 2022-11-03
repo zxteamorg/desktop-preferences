@@ -36,36 +36,77 @@ class BluetoothServiceStub extends BluetoothService {
         // this._timer = null,
         this.devices = List<BluetoothDevice>.unmodifiable(
           const <BluetoothDevice>[
-            BluetoothDeviceStub("BT1", BluetoothHardwareType.television,
-                BluetoothBatteryLevel.low),
-            BluetoothDeviceStub("BT2", BluetoothHardwareType.headphones,
-                BluetoothBatteryLevel.poorLow),
-            BluetoothDeviceStub("BT3", BluetoothHardwareType.microphone,
-                BluetoothBatteryLevel.hight),
-            BluetoothDeviceStub("BT4", BluetoothHardwareType.smartphone,
-                BluetoothBatteryLevel.average),
             BluetoothDeviceStub(
-                "BT5", BluetoothHardwareType.other, BluetoothBatteryLevel.full),
-            BluetoothDeviceStub("BT6", BluetoothHardwareType.other,
-                BluetoothBatteryLevel.lowAverage),
-            BluetoothDeviceStub("BT7", BluetoothHardwareType.other,
-                BluetoothBatteryLevel.lowHight),
+              "BT1",
+              BluetoothHardwareType.television,
+              BluetoothBatteryLevel.low,
+            ),
             BluetoothDeviceStub(
-                "BT8", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT2",
+              BluetoothHardwareType.headphones,
+              BluetoothBatteryLevel.poorLow,
+            ),
             BluetoothDeviceStub(
-                "BT9", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT3",
+              BluetoothHardwareType.microphone,
+              BluetoothBatteryLevel.hight,
+            ),
             BluetoothDeviceStub(
-                "BT10", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT4",
+              BluetoothHardwareType.smartphone,
+              BluetoothBatteryLevel.average,
+            ),
             BluetoothDeviceStub(
-                "BT11", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT5",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.full,
+            ),
             BluetoothDeviceStub(
-                "BT12", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT6",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.lowAverage,
+            ),
             BluetoothDeviceStub(
-                "BT13", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT7",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.lowHight,
+            ),
             BluetoothDeviceStub(
-                "BT14", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT8",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.low,
+            ),
             BluetoothDeviceStub(
-                "BT15", BluetoothHardwareType.other, BluetoothBatteryLevel.low),
+              "BT9 no battery",
+              BluetoothHardwareType.other,
+            ),
+            BluetoothDeviceStub(
+              "BT10 no battery",
+              BluetoothHardwareType.other,
+            ),
+            BluetoothDeviceStub(
+              "BT11 no battery",
+              BluetoothHardwareType.other,
+            ),
+            BluetoothDeviceStub(
+              "BT12 no battery",
+              BluetoothHardwareType.other,
+            ),
+            BluetoothDeviceStub(
+              "BT13",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.low,
+            ),
+            BluetoothDeviceStub(
+              "BT14",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.low,
+            ),
+            BluetoothDeviceStub(
+              "BT15",
+              BluetoothHardwareType.other,
+              BluetoothBatteryLevel.low,
+            ),
           ],
         ) {
     // this._restartTimer();
@@ -102,11 +143,7 @@ class BluetoothDeviceStub implements BluetoothDevice {
   final BluetoothHardwareType hardwareType;
 
   @override
-  final BluetoothBatteryLevel batteryLevel;
+  final BluetoothBatteryLevel? batteryLevel;
 
-  const BluetoothDeviceStub(
-    this.name,
-    this.hardwareType,
-    this.batteryLevel,
-  );
+  const BluetoothDeviceStub(this.name, this.hardwareType, [this.batteryLevel]);
 }

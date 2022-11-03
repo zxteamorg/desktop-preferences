@@ -138,8 +138,8 @@ class BluetoothPopup extends StatelessWidget {
       children: <Widget>[
         // Set the icon for each device
         Padding(
-          padding: const EdgeInsets.only(
-            left: 2.0,
+          padding: const EdgeInsets.symmetric(
+            vertical: 5.0,
           ),
           child: BluetoothDeviceIcon(
             hardwareType: device.hardwareType,

@@ -132,9 +132,10 @@ class BluetoothPopup extends StatelessWidget {
   static Widget _deviceMapper(final BluetoothDevice device) {
     // Get device name from device.
     final String bluetoothDeviceName = device.name;
+
     // We get its type from the device and assign each device a corresponding icon.
-    final IconData bluetoothDeviceNameIcon =
-        BluetoothPopup._resolveIconData(device.hardwareType);
+    // final IconData bluetoothDeviceNameIcon =
+    //     BluetoothPopup._resolveIconData(device.hardwareType);
 
     final IconData? bluetoothDeviceBatteryLevel =
         BluetoothPopup._resolveBatteryLevelData(device.batteryLevel);
@@ -173,24 +174,6 @@ class BluetoothPopup extends StatelessWidget {
         return Icons.battery_5_bar_rounded;
       case BluetoothBatteryLevel.full:
         return Icons.battery_full_rounded;
-    }
-  }
-
-// Each type of device is assigned the corresponding icon.
-  static IconData _resolveIconData(final BluetoothHardwareType deviceType) {
-    switch (deviceType) {
-      case BluetoothHardwareType.television:
-        return Icons.tv_rounded;
-      case BluetoothHardwareType.headphones:
-        return Icons.headset_rounded;
-      case BluetoothHardwareType.microphone:
-        return Icons.mic_rounded;
-      case BluetoothHardwareType.smartphone:
-        return Icons.smartphone_rounded;
-      case BluetoothHardwareType.smartwatch:
-        return Icons.watch_rounded;
-      case BluetoothHardwareType.other:
-        return Icons.bluetooth_rounded;
     }
   }
 

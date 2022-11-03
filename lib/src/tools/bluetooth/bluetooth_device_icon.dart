@@ -41,6 +41,7 @@ class BluetoothDeviceIcon extends StatelessWidget {
     );
   }
 
+// Each type of device is assigned the corresponding icon.
   static IconData? _resolveIconData(BluetoothHardwareType deviceType) {
     switch (deviceType) {
       case BluetoothHardwareType.television:

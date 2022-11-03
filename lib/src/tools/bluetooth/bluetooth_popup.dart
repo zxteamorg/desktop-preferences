@@ -1,5 +1,5 @@
 import "package:flutter/material.dart"
-    show Alignment, Colors, Divider, Icons, SizedBox, Switch, TextDirection;
+    show Colors, Divider, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -9,8 +9,6 @@ import "package:flutter/widgets.dart"
         EdgeInsets,
         Flexible,
         FontWeight,
-        Icon,
-        IconData,
         Key,
         MainAxisSize,
         Padding,
@@ -25,7 +23,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothBatteryLevel, BluetoothDevice, BluetoothHardwareType;
+    show  BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
 

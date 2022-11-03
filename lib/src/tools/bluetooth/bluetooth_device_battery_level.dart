@@ -22,7 +22,9 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
     );
   }
 
-  static IconData? _resolveBatteryLevelData(BluetoothBatteryLevel batteryLevel) {
+// Assigning a charge level icon to each device
+  static IconData? _resolveBatteryLevelData(
+      BluetoothBatteryLevel batteryLevel) {
     switch (batteryLevel) {
       case BluetoothBatteryLevel.poorLow:
         return Icons.battery_0_bar_rounded;

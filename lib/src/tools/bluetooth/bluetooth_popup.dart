@@ -27,6 +27,7 @@ import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
     show BluetoothBatteryLevel, BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
+import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
@@ -133,48 +134,28 @@ class BluetoothPopup extends StatelessWidget {
     // Get device name from device.
     final String bluetoothDeviceName = device.name;
 
-    // We get its type from the device and assign each device a corresponding icon.
-    // final IconData bluetoothDeviceNameIcon =
-    //     BluetoothPopup._resolveIconData(device.hardwareType);
-
-    final IconData? bluetoothDeviceBatteryLevel =
-        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel);
-
     return Row(
       children: <Widget>[
+        // Set the icon for each device
         Padding(
-          padding: const EdgeInsets.all(2.0),
+          padding: const EdgeInsets.only(
+            left: 2.0,
+          ),
           child: BluetoothDeviceIcon(
             hardwareType: device.hardwareType,
           ),
         ),
-        // Icon(bluetoothDeviceNameIcon),
         Text(bluetoothDeviceName),
         const Spacer(),
-        Icon(bluetoothDeviceBatteryLevel),
+        // Set the battery icon for each device
+        Padding(
+          padding: const EdgeInsets.only(right: 2.0),
+          child: BluetoothDeviceBatteryLevel(
+            batteryLevel: device.batteryLevel,
+          ),
+        ),
       ],
     );
-  }
-
-// Assigning a charge level icon to each device
-  static IconData? _resolveBatteryLevelData(
-      BluetoothBatteryLevel batteryLevel) {
-    switch (batteryLevel) {
-      case BluetoothBatteryLevel.poorLow:
-        return Icons.battery_0_bar_rounded;
-      case BluetoothBatteryLevel.low:
-        return Icons.battery_1_bar_rounded;
-      case BluetoothBatteryLevel.lowAverage:
-        return Icons.battery_2_bar_rounded;
-      case BluetoothBatteryLevel.average:
-        return Icons.battery_3_bar_rounded;
-      case BluetoothBatteryLevel.lowHight:
-        return Icons.battery_4_bar_rounded;
-      case BluetoothBatteryLevel.hight:
-        return Icons.battery_5_bar_rounded;
-      case BluetoothBatteryLevel.full:
-        return Icons.battery_full_rounded;
-    }
   }
 
 // Form a section Bluetooth Preferences.

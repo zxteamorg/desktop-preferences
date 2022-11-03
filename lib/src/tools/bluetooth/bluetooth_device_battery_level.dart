@@ -14,7 +14,7 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IconData bluetoothDeviceBatteryLevel =
+    final IconData? bluetoothDeviceBatteryLevel =
         BluetoothDeviceBatteryLevel._resolveBatteryLevelData(batteryLevel);
 
     return Icon(
@@ -22,7 +22,7 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
     );
   }
 
-  static IconData _resolveBatteryLevelData(BluetoothBatteryLevel batteryLevel) {
+  static IconData? _resolveBatteryLevelData(BluetoothBatteryLevel batteryLevel) {
     switch (batteryLevel) {
       case BluetoothBatteryLevel.poorLow:
         return Icons.battery_0_bar_rounded;

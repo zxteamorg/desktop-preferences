@@ -136,8 +136,8 @@ class BluetoothPopup extends StatelessWidget {
     final IconData bluetoothDeviceNameIcon =
         BluetoothPopup._resolveIconData(device.hardwareType);
 
-    final IconData bluetoothDeviceBatteryLevel =
-        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel!);
+    final IconData? bluetoothDeviceBatteryLevel =
+        BluetoothPopup._resolveBatteryLevelData(device.batteryLevel);
 
     return Row(
       children: <Widget>[
@@ -156,7 +156,8 @@ class BluetoothPopup extends StatelessWidget {
   }
 
 // Assigning a charge level icon to each device
-  static IconData _resolveBatteryLevelData(BluetoothBatteryLevel batteryLevel) {
+  static IconData? _resolveBatteryLevelData(
+      BluetoothBatteryLevel batteryLevel) {
     switch (batteryLevel) {
       case BluetoothBatteryLevel.poorLow:
         return Icons.battery_0_bar_rounded;

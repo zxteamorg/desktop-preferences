@@ -101,5 +101,5 @@ abstract class BluetoothDevice {
   BluetoothHardwareType get hardwareType;
 
   /// Battery level of the Bluetooth device
-  BluetoothBatteryLevel? get batteryLevel;
+  BluetoothBatteryLevel get batteryLevel;
 }

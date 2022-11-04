@@ -1,5 +1,5 @@
 import "package:flutter/material.dart"
-    show Colors, Divider, Icon, Icons, Switch;
+    show Colors, Divider, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -9,7 +9,6 @@ import "package:flutter/widgets.dart"
         EdgeInsets,
         Flexible,
         FontWeight,
-        IconData,
         Key,
         MainAxisSize,
         Padding,
@@ -24,7 +23,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothDevice, BluetoothHardwareType;
+    show BluetoothDevice, BluetoothHardwareType, BluetoothBatteryLevel;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
 
@@ -94,9 +93,10 @@ class BluetoothPopup extends StatelessWidget {
   Widget _buildMiddleScrollableSection(
     final BluetoothController controller,
   ) {
-    // Get a list of devices.
+    /// Get a list of devices.
     final List<BluetoothDevice> bluetoothDevices = controller.devices;
-    // Transform each bluetooth device into a widget.
+
+    /// Transform each bluetooth device into a widget.
     final List<Widget> bluetoothWidgets = bluetoothDevices
         .map(BluetoothPopup._deviceMapper)
         .toList(growable: false);
@@ -130,15 +130,17 @@ class BluetoothPopup extends StatelessWidget {
   /// The method builds new Widget that includes a name of passed bluetooth device.
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
-    // Get device name from device.
+    /// Get device name from device.
     final String bluetoothDeviceName = device.name;
+    final BluetoothBatteryLevel? batteryLevel = device.batteryLevel;
 
-    final Widget? batteryLevelIcon =
-        BluetoothPopup._buildBatteryLevelIcon(device.batteryLevel);
+    final Widget? batteryLevelWidget = batteryLevel != null
+        ? BluetoothDeviceBatteryLevel(batteryLevel: batteryLevel)
+        : null;
 
     return Row(
       children: <Widget>[
-        // Set the icon for each device
+        /// Set the icon for device
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 5.0,
@@ -149,21 +151,15 @@ class BluetoothPopup extends StatelessWidget {
         ),
         Text(bluetoothDeviceName),
         const Spacer(),
-        // Set the battery icon for each device
-        if (batteryLevelIcon != null) const Spacer(),
-        if (batteryLevelIcon != null) batteryLevelIcon,
+        /// Set the battery icon for device
 
-        // Padding(
-        //   padding: const EdgeInsets.only(right: 2.0),
-        //   child: BluetoothDeviceBatteryLevel(
-        //     batteryLevel: device.batteryLevel,
-        //   ),
-        // ),
+        /// if (batteryLevelWidget != null) const Spacer(),
+        if (batteryLevelWidget != null) batteryLevelWidget,
       ],
     );
   }
 
-// Form a section Bluetooth Preferences.
+  /// Form a section Bluetooth Preferences.
   Widget _buildFooterSection(
     BluetoothController controller,
   ) {
@@ -173,23 +169,5 @@ class BluetoothPopup extends StatelessWidget {
         "Bluetooth Preferences...",
       ),
     );
-  }
-
-  static Widget? _buildBatteryLevelIcon(
-    dynamic batteryLevel,
-  ) {
-    final IconData? batteryLevelIconData =
-        batteryLevel == false ? batteryLevel : null;
-
-    final Widget? batteryLevelIcon = batteryLevelIconData != null
-        ? Padding(
-            padding: const EdgeInsets.all(2.0),
-            child: Icon(
-              batteryLevelIconData,
-            ),
-          )
-        : null;
-
-    return batteryLevelIcon;
   }
 }

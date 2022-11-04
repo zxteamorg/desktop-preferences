@@ -1,5 +1,5 @@
 import "package:flutter/material.dart"
-    show Colors, Divider, Switch;
+    show Colors, Divider, Icon, Icons, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -9,6 +9,7 @@ import "package:flutter/widgets.dart"
         EdgeInsets,
         Flexible,
         FontWeight,
+        IconData,
         Key,
         MainAxisSize,
         Padding,
@@ -23,7 +24,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show  BluetoothDevice, BluetoothHardwareType;
+    show BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
 
@@ -132,6 +133,9 @@ class BluetoothPopup extends StatelessWidget {
     // Get device name from device.
     final String bluetoothDeviceName = device.name;
 
+    final Widget? batteryLevelIcon =
+        BluetoothPopup._buildBatteryLevelIcon(device.batteryLevel);
+
     return Row(
       children: <Widget>[
         // Set the icon for each device
@@ -146,12 +150,15 @@ class BluetoothPopup extends StatelessWidget {
         Text(bluetoothDeviceName),
         const Spacer(),
         // Set the battery icon for each device
-        Padding(
-          padding: const EdgeInsets.only(right: 2.0),
-          child: BluetoothDeviceBatteryLevel(
-            batteryLevel: device.batteryLevel,
-          ),
-        ),
+        if (batteryLevelIcon != null) const Spacer(),
+        if (batteryLevelIcon != null) batteryLevelIcon,
+
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 2.0),
+        //   child: BluetoothDeviceBatteryLevel(
+        //     batteryLevel: device.batteryLevel,
+        //   ),
+        // ),
       ],
     );
   }
@@ -166,5 +173,23 @@ class BluetoothPopup extends StatelessWidget {
         "Bluetooth Preferences...",
       ),
     );
+  }
+
+  static Widget? _buildBatteryLevelIcon(
+    dynamic batteryLevel,
+  ) {
+    final IconData? batteryLevelIconData =
+        batteryLevel == false ? batteryLevel : null;
+
+    final Widget? batteryLevelIcon = batteryLevelIconData != null
+        ? Padding(
+            padding: const EdgeInsets.all(2.0),
+            child: Icon(
+              batteryLevelIconData,
+            ),
+          )
+        : null;
+
+    return batteryLevelIcon;
   }
 }

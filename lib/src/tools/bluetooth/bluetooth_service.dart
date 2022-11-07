@@ -3,8 +3,7 @@ import "bluetooth_service_contract.dart"
         BluetoothBatteryLevel,
         BluetoothDevice,
         BluetoothHardwareType,
-        BluetoothService,
-        ConnectedBluetoothDevice;
+        BluetoothService;
 // import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothServiceStub extends BluetoothService {

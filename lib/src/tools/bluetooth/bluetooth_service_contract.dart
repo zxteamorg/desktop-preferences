@@ -77,8 +77,6 @@ abstract class BluetoothService {
   /// Gets whether Bluetooth adapter is turn ON.
   bool get isEnabled;
 
-  get isConnected => null;
-
   ///
   /// Call this method to disable Bluetooth adapter
   ///

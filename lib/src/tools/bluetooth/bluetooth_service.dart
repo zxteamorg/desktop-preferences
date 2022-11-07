@@ -124,25 +124,6 @@ class BluetoothServiceStub extends BluetoothService {
             ),
           ],
         );
-
-  final List<BluetoothDeviceStub> connectedDevice =
-      List<BluetoothDeviceStub>.unmodifiable(const <BluetoothDevice>[
-    BluetoothDeviceStub(
-      "BT1",
-      BluetoothHardwareType.television,
-      true,
-      BluetoothBatteryLevel.low,
-    ),
-    BluetoothDeviceStub(
-      "BT2",
-      BluetoothHardwareType.headphones,
-      false,
-      BluetoothBatteryLevel.poorLow,
-    ),
-  ]);
-
-  final BluetoothDeviceStub isConnected = connectedDevice[0];
-
   // this._restartTimer();
 }
 

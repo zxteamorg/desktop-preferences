@@ -183,6 +183,7 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
+  /// Form a section Network Preferences.
   Widget _buildFooterSection(
     WirelessController controller,
   ) {
@@ -196,7 +197,9 @@ class WirelessPopup extends StatelessWidget {
 
   ///
   /// Build widget according to passed "true" or "false"
+  ///
   /// if passed "false" the method produce Padding widget
+  ///
   /// if passed "true" the method return null
   ///
 

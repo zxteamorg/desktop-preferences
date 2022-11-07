@@ -1,5 +1,4 @@
-import "package:flutter/material.dart"
-    show Colors, Divider, Switch;
+import "package:flutter/material.dart" show Colors, Divider, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -69,11 +68,11 @@ class BluetoothPopup extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 0),
       child: Row(
         children: <Widget>[
-          const Text("Bluetooth",
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w800)),
+          const Text(
+            "Bluetooth",
+            style: TextStyle(
+                fontSize: 16, color: Colors.black, fontWeight: FontWeight.w800),
+          ),
           const Spacer(),
           Switch(
             value: controller.isEnabled,
@@ -151,6 +150,7 @@ class BluetoothPopup extends StatelessWidget {
         ),
         Text(bluetoothDeviceName),
         const Spacer(),
+
         /// Set the battery icon for device
 
         /// if (batteryLevelWidget != null) const Spacer(),

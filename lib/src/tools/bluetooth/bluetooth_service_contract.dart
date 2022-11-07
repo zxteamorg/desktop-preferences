@@ -77,6 +77,8 @@ abstract class BluetoothService {
   /// Gets whether Bluetooth adapter is turn ON.
   bool get isEnabled;
 
+  get isConnected => null;
+
   ///
   /// Call this method to disable Bluetooth adapter
   ///
@@ -106,4 +108,14 @@ abstract class BluetoothDevice {
   /// The `value` is `null` if Battery is not presented on the device.
   ///
   BluetoothBatteryLevel? get batteryLevel;
+
+  /// isConnected this is a flag about connecting the device to bluetooth,
+  ///
+  /// if passed "true" device is connecting,
+  ///
+  /// if passed "false" device is not connecting.
+  ///
+  bool get isConnected;
 }
+
+// abstract class ConnectedBluetoothDevice extends BluetoothDevice {}

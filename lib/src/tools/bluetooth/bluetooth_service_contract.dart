@@ -1,44 +1,4 @@
 ///
-/// Define Bluetooth battery level
-///
-enum BluetoothBatteryLevel {
-  ///
-  /// Poor level 0% - 20%
-  ///
-  poorLow,
-
-  ///
-  /// Poor level 20% - 40%
-  ///
-  low,
-
-  ///
-  /// Good level 40% - 55%
-  ///
-  lowAverage,
-
-  ///
-  /// Good level 55% - 70%
-  ///
-  average,
-
-  ///
-  /// Hight level 70% - 85%
-  ///
-  lowHight,
-
-  ///
-  /// Hight level 85% - 99%
-  ///
-  hight,
-
-  ///
-  /// Full level - 100%
-  ///
-  full,
-}
-
-///
 /// Define Bluetooth type device
 ///
 enum BluetoothHardwareType {
@@ -101,11 +61,20 @@ abstract class BluetoothDevice {
   BluetoothHardwareType get hardwareType;
 
   ///
-  /// Battery level of the Bluetooth device.
+  /// Battery charge level of the Bluetooth device.
   ///
-  /// The `value` is `null` if Battery is not presented on the device.
+  /// The value in range [0..1] inclusively.
   ///
-  BluetoothBatteryLevel? get batteryLevel;
+  /// The `value` is `null` if device does not have Battery capability.
+  ///
+  /// For example values:
+  /// - `0.0` means 0% charge level
+  /// - `0.22` means 22% charge level
+  /// - `0.7725` means 77.25% charge level
+  /// - `1.0` means 100% charge level
+  /// - `null` means No Battery at all
+  ///
+  double? get batteryLevel;
 
   ///
   /// Indicates whether the device is connected to current workstation.

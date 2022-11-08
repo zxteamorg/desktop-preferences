@@ -108,7 +108,7 @@ abstract class BluetoothDevice {
   BluetoothBatteryLevel? get batteryLevel;
 
   ///
-  /// Indicates wether the device is connected to current workstation.
+  /// Indicates whether the device is connected to current workstation.
   ///
   bool get isConnected;
 }

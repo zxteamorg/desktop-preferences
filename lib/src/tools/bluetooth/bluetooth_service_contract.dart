@@ -112,5 +112,3 @@ abstract class BluetoothDevice {
   ///
   bool get isConnected;
 }
-
-// abstract class ConnectedBluetoothDevice extends BluetoothDevice {}

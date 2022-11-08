@@ -4,7 +4,6 @@ import "bluetooth_service_contract.dart"
         BluetoothDevice,
         BluetoothHardwareType,
         BluetoothService;
-// import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 
 class BluetoothServiceStub extends BluetoothService {
   @override

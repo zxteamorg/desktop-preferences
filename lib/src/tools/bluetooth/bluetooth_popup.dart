@@ -95,7 +95,7 @@ class BluetoothPopup extends StatelessWidget {
     /// Get a list of devices.
     final List<BluetoothDevice> bluetoothDevices = controller.devices;
 
-    /// Transform each bluetooth device into a widget.
+    /// Transform bluetooth device into a widget.
     final List<Widget> bluetoothWidgets = bluetoothDevices
         .map(BluetoothPopup._deviceMapper)
         .toList(growable: false);
@@ -126,7 +126,7 @@ class BluetoothPopup extends StatelessWidget {
   }
 
   ///
-  /// The method builds new Widget that includes a name of passed bluetooth device.
+  /// The method creates a new widget that includes the name, battery level and connection status of the passed device.
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
     /// Get device name from device.
@@ -137,23 +137,24 @@ class BluetoothPopup extends StatelessWidget {
         ? BluetoothDeviceBatteryLevel(batteryLevel: batteryLevel)
         : null;
 
+    final bool isConnected = device.isConnected;
+
     return Row(
       children: <Widget>[
-        /// Set the icon for device
+        /// Set the icon for device.
         Padding(
           padding: const EdgeInsets.symmetric(
             vertical: 5.0,
           ),
+          /// Set the type of device and connection status.
           child: BluetoothDeviceIcon(
             hardwareType: device.hardwareType,
+            isConnected: isConnected,
           ),
         ),
         Text(bluetoothDeviceName),
         const Spacer(),
-
-        /// Set the battery icon for device
-
-        /// if (batteryLevelWidget != null) const Spacer(),
+        /// Set the battery icon for device.
         if (batteryLevelWidget != null) batteryLevelWidget,
       ],
     );

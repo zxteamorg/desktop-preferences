@@ -108,11 +108,7 @@ abstract class BluetoothDevice {
   BluetoothBatteryLevel? get batteryLevel;
 
   ///
-  /// isConnected this is a flag about connecting the device to bluetooth,
-  ///
-  /// if "true" device is connected
-  ///
-  /// if "false" device is not connected
+  /// Indicates wether the device is connected to current workstation.
   ///
   bool get isConnected;
 }

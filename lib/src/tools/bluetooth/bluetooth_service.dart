@@ -146,7 +146,7 @@ class BluetoothServiceStub extends BluetoothService {
 // }
 
 // void _onTimer() {
-//   //
+//
 // }
 
 class BluetoothDeviceStub implements BluetoothDevice {

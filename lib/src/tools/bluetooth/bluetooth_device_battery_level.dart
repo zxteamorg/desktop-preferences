@@ -41,14 +41,13 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
 
   static String _translateBatteryLevel(double batteryLevel) {
     // todo implement it
-    for (int level = 0; level < 100; level++) {
-      if (level == 0) {
-        return "0%";
-      }
-      final double doubleLevel = level / 100;
+    
+    if (batteryLevel == 0) {
+      return "0%";
+    } else if (batteryLevel > 0 && batteryLevel < 0.99) {
+      final double doubleLevel = batteryLevel / 100;
       final double intermediateDoubleLevel = doubleLevel * 1000;
       final String stringLevel = intermediateDoubleLevel.toStringAsFixed(0);
-
       return "$stringLevel%";
     }
     return "100 %";

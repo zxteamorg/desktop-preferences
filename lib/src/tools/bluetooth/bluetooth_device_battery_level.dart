@@ -1,9 +1,5 @@
 import "package:flutter/material.dart";
 
-import "bluetooth_service_contract.dart" show BluetoothDevice;
-
-// import 'bluetooth_service_contract.dart' show BluetoothDevice;
-
 class BluetoothDeviceBatteryLevel extends StatelessWidget {
   final double batteryLevel;
   final bool isConnected;
@@ -18,6 +14,9 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
   Widget build(BuildContext context) {
     final IconData? bluetoothDeviceBatteryLevel =
         BluetoothDeviceBatteryLevel._resolveBatteryLevelData(batteryLevel);
+
+    final String bluetoothTranslateBatteryLevel =
+        BluetoothDeviceBatteryLevel._translateBatteryLevel(batteryLevel);
 
     return Icon(
       bluetoothDeviceBatteryLevel,
@@ -41,8 +40,17 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
   }
 
   static String _translateBatteryLevel(double batteryLevel) {
-    // TODO implement it
+    // todo implement it
+    for (int level = 0; level < 100; level++) {
+      if (level == 0) {
+        return "0%";
+      }
+      final double doubleLevel = level / 100;
+      final double intermediateDoubleLevel = doubleLevel * 1000;
+      final String stringLevel = intermediateDoubleLevel.toStringAsFixed(0);
 
-    return "xxx %";
+      return "$stringLevel%";
+    }
+    return "100 %";
   }
 }

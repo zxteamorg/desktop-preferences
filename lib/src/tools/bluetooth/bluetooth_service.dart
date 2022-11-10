@@ -1,13 +1,11 @@
 import "bluetooth_service_contract.dart"
-    show
-        BluetoothBatteryLevel,
-        BluetoothDevice,
-        BluetoothHardwareType,
-        BluetoothService;
+    show BluetoothDevice, BluetoothHardwareType, BluetoothService;
 
 class BluetoothServiceStub extends BluetoothService {
   @override
   final List<BluetoothDevice> devices;
+
+  static double? batteryLevel;
 
   @override
   void disable() {
@@ -34,54 +32,54 @@ class BluetoothServiceStub extends BluetoothService {
       : this.isEnabled = true,
         // this._timer = null,
         this.devices = List<BluetoothDevice>.unmodifiable(
-          const <BluetoothDevice>[
+          <BluetoothDevice>[
             BluetoothDeviceStub(
               "BT1",
               BluetoothHardwareType.television,
               true,
-              BluetoothBatteryLevel.low,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT2",
               BluetoothHardwareType.headphones,
               false,
-              BluetoothBatteryLevel.poorLow,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT3",
               BluetoothHardwareType.microphone,
               false,
-              BluetoothBatteryLevel.hight,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT4",
               BluetoothHardwareType.smartphone,
               false,
-              BluetoothBatteryLevel.average,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT5",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.full,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT6",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.lowAverage,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT7",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.lowHight,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT8",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.low,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT9 no battery",
@@ -107,19 +105,19 @@ class BluetoothServiceStub extends BluetoothService {
               "BT13",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.low,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT14",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.low,
+              batteryLevel,
             ),
             BluetoothDeviceStub(
               "BT15",
               BluetoothHardwareType.other,
               false,
-              BluetoothBatteryLevel.low,
+              batteryLevel,
             ),
           ],
         );
@@ -156,7 +154,7 @@ class BluetoothDeviceStub implements BluetoothDevice {
   final BluetoothHardwareType hardwareType;
 
   @override
-  final BluetoothBatteryLevel? batteryLevel;
+  final double? batteryLevel;
 
   @override
   final bool isConnected;

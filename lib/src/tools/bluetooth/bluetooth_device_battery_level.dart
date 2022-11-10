@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 
-import "bluetooth_service_contract.dart" show BluetoothBatteryLevel;
+import "bluetooth_service_contract.dart" show BluetoothDevice;
+
+// import 'bluetooth_service_contract.dart' show BluetoothDevice;
 
 class BluetoothDeviceBatteryLevel extends StatelessWidget {
-  final BluetoothBatteryLevel batteryLevel;
+  final double batteryLevel;
   final bool isConnected;
 
   const BluetoothDeviceBatteryLevel({
@@ -23,23 +25,24 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
   }
 
 // Assigning a charge level icon to each device
-  static IconData? _resolveBatteryLevelData(
-      BluetoothBatteryLevel batteryLevel) {
-    switch (batteryLevel) {
-      case BluetoothBatteryLevel.poorLow:
-        return Icons.battery_0_bar_rounded;
-      case BluetoothBatteryLevel.low:
-        return Icons.battery_1_bar_rounded;
-      case BluetoothBatteryLevel.lowAverage:
-        return Icons.battery_2_bar_rounded;
-      case BluetoothBatteryLevel.average:
-        return Icons.battery_3_bar_rounded;
-      case BluetoothBatteryLevel.lowHight:
-        return Icons.battery_4_bar_rounded;
-      case BluetoothBatteryLevel.hight:
-        return Icons.battery_5_bar_rounded;
-      case BluetoothBatteryLevel.full:
-        return Icons.battery_full_rounded;
+  static IconData? _resolveBatteryLevelData(double batteryLevel) {
+    if (batteryLevel >= 0 && batteryLevel < 0.2) {
+      return Icons.battery_0_bar_rounded;
+    } else if (batteryLevel >= 0.2 && batteryLevel < 0.4) {
+      return Icons.battery_1_bar_rounded;
+    } else if (batteryLevel >= 0.4 && batteryLevel < 0.6) {
+      return Icons.battery_2_bar_rounded;
+    } else if (batteryLevel >= 0.6 && batteryLevel < 0.8) {
+      return Icons.battery_3_bar_rounded;
+    } else if (batteryLevel >= 0.8 && batteryLevel < 1) {
+      return Icons.battery_4_bar_rounded;
     }
+    return Icons.battery_full_rounded;
+  }
+
+  static String _translateBatteryLevel(double batteryLevel) {
+    // TODO implement it
+
+    return "xxx %";
   }
 }

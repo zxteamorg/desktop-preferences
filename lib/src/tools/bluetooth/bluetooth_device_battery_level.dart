@@ -50,9 +50,8 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
     if (batteryLevel == 0) {
       return "0%";
     } else if (batteryLevel > 0 && batteryLevel <= 0.99) {
-      final double doubleLevel = batteryLevel / 100;
-      final double intermediateDoubleLevel = doubleLevel * 10000;
-      final String stringLevel = intermediateDoubleLevel.toStringAsFixed(0);
+      final double level = batteryLevel * 100;
+      final String stringLevel = level.toStringAsFixed(0);
       return "$stringLevel%";
     }
     return "100 %";

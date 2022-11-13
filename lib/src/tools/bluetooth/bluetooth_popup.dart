@@ -106,11 +106,18 @@ class BluetoothPopup extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("Devices",
+          const Padding(
+            padding: EdgeInsets.only(
+              left: 10.0,
+            ),
+            child: Text(
+              "Devices",
               style: TextStyle(
                 color: Colors.grey[600],
                 fontWeight: FontWeight.w800,
-              )),
+              ),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 10.0,

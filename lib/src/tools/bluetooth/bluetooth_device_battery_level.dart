@@ -15,16 +15,8 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
     final IconData? bluetoothDeviceBatteryLevel =
         BluetoothDeviceBatteryLevel._resolveBatteryLevelData(batteryLevel);
 
-    final String bluetoothTranslateBatteryLevel =
-        BluetoothDeviceBatteryLevel._translateBatteryLevel(batteryLevel);
-
-    return Row(
-      children: <Widget>[
-        Text(bluetoothTranslateBatteryLevel),
-        Icon(
-          bluetoothDeviceBatteryLevel,
-        ),
-      ],
+    return Icon(
+      bluetoothDeviceBatteryLevel,
     );
   }
 
@@ -42,18 +34,5 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
       return Icons.battery_4_bar_rounded;
     }
     return Icons.battery_full_rounded;
-  }
-
-  static String _translateBatteryLevel(double batteryLevel) {
-    // todo implement it
-
-    if (batteryLevel == 0) {
-      return "0%";
-    } else if (batteryLevel > 0 && batteryLevel <= 0.99) {
-      final double level = batteryLevel * 100;
-      final String stringLevel = level.toStringAsFixed(0);
-      return "$stringLevel%";
-    }
-    return "100 %";
   }
 }

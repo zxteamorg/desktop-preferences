@@ -22,7 +22,7 @@ import "package:provider/provider.dart" show Consumer;
 
 import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
-    show BluetoothDevice, BluetoothHardwareType, BluetoothBatteryLevel;
+    show BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
 import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
 
@@ -132,11 +132,12 @@ class BluetoothPopup extends StatelessWidget {
     /// Get device name from device.
     final String bluetoothDeviceName = device.name;
     final double? batteryLevel = device.batteryLevel;
-
     final Widget? batteryLevelWidget = batteryLevel != null
         ? BluetoothDeviceBatteryLevel(batteryLevel: batteryLevel)
         : null;
-
+    final String? bluetoothTranslateBatteryLevel = batteryLevel != null
+        ? BluetoothPopup._translateBatteryLevel(batteryLevel)
+        : null;
     final bool isConnected = device.isConnected;
 
     return Row(
@@ -156,10 +157,30 @@ class BluetoothPopup extends StatelessWidget {
         Text(bluetoothDeviceName),
         const Spacer(),
 
+        /// Set battery percentage.
+        if (bluetoothTranslateBatteryLevel != null)
+          Text(
+            bluetoothTranslateBatteryLevel,
+          ),
+
         /// Set the battery icon for device.
         if (batteryLevelWidget != null) batteryLevelWidget,
       ],
     );
+  }
+
+  ///
+  /// The class converts the received number to a string.
+  ///
+  static String _translateBatteryLevel(double batteryLevel) {
+    if (batteryLevel == 0) {
+      return "0%";
+    } else if (batteryLevel > 0 && batteryLevel <= 0.99) {
+      final double level = batteryLevel * 100;
+      final String stringLevel = level.toStringAsFixed(0);
+      return "$stringLevel%";
+    }
+    return "100 %";
   }
 
   /// Form a section Bluetooth Preferences.

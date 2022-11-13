@@ -5,8 +5,6 @@ class BluetoothServiceStub extends BluetoothService {
   @override
   final List<BluetoothDevice> devices;
 
-  static double? batteryLevel;
-
   @override
   void disable() {
     this.isEnabled = false;
@@ -154,10 +152,10 @@ class BluetoothDeviceStub implements BluetoothDevice {
   final BluetoothHardwareType hardwareType;
 
   @override
-  final double? batteryLevel;
+  final bool isConnected;
 
   @override
-  final bool isConnected;
+  final double? batteryLevel;
 
   const BluetoothDeviceStub(this.name, this.hardwareType, this.isConnected,
       [this.batteryLevel]);

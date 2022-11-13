@@ -65,7 +65,7 @@ class BluetoothPopup extends StatelessWidget {
     BluetoothController controller,
   ) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: <Widget>[
           const Text(
@@ -180,7 +180,7 @@ class BluetoothPopup extends StatelessWidget {
       final String stringLevel = level.toStringAsFixed(0);
       return "$stringLevel%";
     }
-    return "100 %";
+    return "100%";
   }
 
   /// Form a section Bluetooth Preferences.

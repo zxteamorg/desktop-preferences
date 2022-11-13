@@ -15,8 +15,11 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
     final IconData? bluetoothDeviceBatteryLevel =
         BluetoothDeviceBatteryLevel._resolveBatteryLevelData(batteryLevel);
 
-    return Icon(
-      bluetoothDeviceBatteryLevel,
+    return RotatedBox(
+      quarterTurns: 1,
+      child: Icon(
+        bluetoothDeviceBatteryLevel,
+      ),
     );
   }
 

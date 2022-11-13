@@ -113,7 +113,7 @@ class BluetoothPopup extends StatelessWidget {
             child: Text(
               "Devices",
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.black54,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -173,7 +173,7 @@ class BluetoothPopup extends StatelessWidget {
         if (bluetoothTranslateBatteryLevel != null)
           Text(
             bluetoothTranslateBatteryLevel,
-            // style: const TextStyle(color: Colors.grey),
+            style: const TextStyle(color: Colors.black54),
           ),
 
         /// Set the battery icon for device.

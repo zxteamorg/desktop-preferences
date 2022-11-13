@@ -19,7 +19,7 @@ class BluetoothDeviceBatteryLevel extends StatelessWidget {
       quarterTurns: 1,
       child: Icon(
         bluetoothDeviceBatteryLevel,
-        color: Colors.grey,
+        color: Colors.black38,
       ),
     );
   }

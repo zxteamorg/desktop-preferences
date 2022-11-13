@@ -1,4 +1,5 @@
 import "package:flutter/material.dart" show Colors, Divider, Switch;
+
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -111,7 +112,9 @@ class BluetoothPopup extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               )),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 5.0),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.0,
+            ),
           ),
           Flexible(
             child: SingleChildScrollView(
@@ -144,8 +147,10 @@ class BluetoothPopup extends StatelessWidget {
       children: <Widget>[
         /// Set the icon for device.
         Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 5.0,
+          padding: const EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
           ),
 
           /// Set the type of device and connection status.
@@ -188,7 +193,7 @@ class BluetoothPopup extends StatelessWidget {
     BluetoothController controller,
   ) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 0),
+      padding: EdgeInsets.symmetric(horizontal: 10),
       child: Text(
         "Bluetooth Preferences...",
       ),

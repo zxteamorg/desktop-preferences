@@ -61,7 +61,7 @@ class BluetoothServiceStub extends BluetoothService {
               "BT5",
               BluetoothHardwareType.other,
               false,
-              1,
+              0.45,
             ),
             const BluetoothDeviceStub(
               "BT6",

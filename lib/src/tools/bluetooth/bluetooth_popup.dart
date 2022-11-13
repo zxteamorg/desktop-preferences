@@ -113,7 +113,7 @@ class BluetoothPopup extends StatelessWidget {
             child: Text(
               "Devices",
               style: TextStyle(
-                color: Colors.grey[600],
+                color: Colors.grey,
                 fontWeight: FontWeight.w800,
               ),
             ),

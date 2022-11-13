@@ -33,91 +33,91 @@ class BluetoothServiceStub extends BluetoothService {
         // this._timer = null,
         this.devices = List<BluetoothDevice>.unmodifiable(
           <BluetoothDevice>[
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT1",
               BluetoothHardwareType.television,
               true,
-              batteryLevel,
+              0.2,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT2",
               BluetoothHardwareType.headphones,
               false,
-              batteryLevel,
+              0.6,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT3",
               BluetoothHardwareType.microphone,
               false,
-              batteryLevel,
+              0.8,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT4",
               BluetoothHardwareType.smartphone,
               false,
-              batteryLevel,
+              0,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT5",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT6",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT7",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT8",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT9 no battery",
               BluetoothHardwareType.other,
               false,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT10 no battery",
               BluetoothHardwareType.other,
               false,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT11 no battery",
               BluetoothHardwareType.other,
               false,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT12 no battery",
               BluetoothHardwareType.other,
               false,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT13",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT14",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
-            BluetoothDeviceStub(
+            const BluetoothDeviceStub(
               "BT15",
               BluetoothHardwareType.other,
               false,
-              batteryLevel,
+              1,
             ),
           ],
         );

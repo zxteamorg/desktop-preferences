@@ -13,7 +13,7 @@ enum WirelessLevel {
   good,
 
   ///
-  /// Nice signal 66% - 100%
+  /// Excellent signal 66% - 100%
   ///
   excellent,
 }
@@ -30,7 +30,10 @@ abstract class WirelessNetwork {
   WirelessLevel get level;
 
   ///
-  ///Add isPublic or not isPublic
+  /// This flag determines whether is a wirelessNetwork public network or security.
+  /// A public network is a type of network wherein anyone, namely the general public, 
+  /// has access and through it can connect to other networks or the Internet. 
+  /// You can connect to a public wirelessNetwork without entering any password 
   ///
   bool get isPublic;
 }

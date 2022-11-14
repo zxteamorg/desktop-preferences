@@ -53,7 +53,8 @@ class WirelessPopup extends StatelessWidget {
       children: <Widget>[
         this._buildHeaderSection(controller),
         const Divider(),
-        if (controller.isEnabled) this._buildMiddleScrollableSection(controller),
+        if (controller.isEnabled)
+          this._buildMiddleScrollableSection(controller),
         if (controller.isEnabled) const Divider(),
         this._buildFooterSection(controller),
       ],
@@ -110,7 +111,7 @@ class WirelessPopup extends StatelessWidget {
       (PreferredWirelessNetwork wirelessNetwork) {
         final bool isConnected = wirelessNetwork == controller.connectedNetwork;
         final Widget? isPublicIcon =
-            WirelessPopup._buildIsPublicIcon(wirelessNetwork.isPublic);
+            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPublic);
 
         return Row(
           children: <Widget>[
@@ -151,7 +152,7 @@ class WirelessPopup extends StatelessWidget {
     final List<Widget> otherNetworkRows = controller.otherNetworks.map(
       (WirelessNetwork wirelessNetwork) {
         final Widget? isPublicIcon =
-            WirelessPopup._buildIsPublicIcon(wirelessNetwork.isPublic);
+            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPublic);
 
         return Row(
           children: <Widget>[
@@ -182,6 +183,7 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
+  /// Form a section Network Preferences.
   Widget _buildFooterSection(
     WirelessController controller,
   ) {
@@ -193,8 +195,17 @@ class WirelessPopup extends StatelessWidget {
     );
   }
 
-  static Widget? _buildIsPublicIcon(bool isPublic) {
-    final IconData? isPublicIconData = isPublic == false ? Icons.lock : null;
+  ///
+  /// Build widget according to passed "true" or "false"
+  ///
+  /// if passed "false" the method produce Padding widget
+  ///
+  /// if passed "true" the method return null
+  ///
+
+  static Widget? _buildWirelessLockIcon(bool isPublicWirelessNetwork) {
+    final IconData? isPublicIconData =
+        isPublicWirelessNetwork == false ? Icons.lock : null;
 
     final Widget? isPublicIcon = isPublicIconData != null
         ? Padding(

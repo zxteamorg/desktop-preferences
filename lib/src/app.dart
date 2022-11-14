@@ -87,9 +87,16 @@ class App extends StatelessWidget {
     Widget homeWidget;
     switch (appArguments.appTool) {
       case AppTool.BLUETOOTH_POPUP:
-        homeWidget = InheritedProvider<BluetoothController>(
-          create: (_) => BluetoothController(BluetoothServiceStub()),
-          child: const BluetoothPopup(),
+        homeWidget = ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 260,
+            maxWidth: 260,
+            maxHeight: 460,
+          ),
+          child: ChangeNotifierProvider<BluetoothController>(
+            create: (_) => BluetoothController(BluetoothServiceStub()),
+            child: const BluetoothPopup(),
+          ),
         );
         break;
       case AppTool.DISPLAY_POPUP:

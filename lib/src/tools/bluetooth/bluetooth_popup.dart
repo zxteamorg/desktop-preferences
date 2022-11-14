@@ -167,9 +167,10 @@ class BluetoothPopup extends StatelessWidget {
           ),
         ),
         Text(bluetoothDeviceName),
-        const Spacer(),
+        // const Spacer(),
 
         /// Set battery percentage.
+        if (bluetoothTranslateBatteryLevel != null) const Spacer(),
         if (bluetoothTranslateBatteryLevel != null)
           Text(
             bluetoothTranslateBatteryLevel,

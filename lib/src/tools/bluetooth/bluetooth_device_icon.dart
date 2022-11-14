@@ -29,7 +29,8 @@ class BluetoothDeviceIcon extends StatelessWidget {
     }
 
     return Container(
-      padding: const EdgeInsets.all(5),
+      margin: const EdgeInsets.symmetric(vertical: 2),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: decorationColor,
@@ -37,6 +38,7 @@ class BluetoothDeviceIcon extends StatelessWidget {
       child: Icon(
         bluetoothDeviceIconData,
         color: iconColor,
+        size: 16,
       ),
     );
   }

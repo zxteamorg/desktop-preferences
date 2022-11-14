@@ -1,19 +1,17 @@
 import "package:flutter/material.dart";
 
-class BluetoothDeviceBatteryLevel extends StatelessWidget {
+class BluetoothDeviceBatteryLevelIcon extends StatelessWidget {
   final double batteryLevel;
-  final bool isConnected;
 
-  const BluetoothDeviceBatteryLevel({
+  const BluetoothDeviceBatteryLevelIcon(
+    this.batteryLevel, {
     Key? key,
-    required this.batteryLevel,
-    this.isConnected = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final IconData? bluetoothDeviceBatteryLevel =
-        BluetoothDeviceBatteryLevel._resolveBatteryLevelData(batteryLevel);
+        BluetoothDeviceBatteryLevelIcon._resolveBatteryLevelData(batteryLevel);
 
     return RotatedBox(
       quarterTurns: 1,

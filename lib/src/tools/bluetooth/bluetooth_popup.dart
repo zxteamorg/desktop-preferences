@@ -25,7 +25,8 @@ import "bluetooth_controller.dart" show BluetoothController;
 import "bluetooth_service_contract.dart"
     show BluetoothDevice, BluetoothHardwareType;
 import "bluetooth_device_icon.dart" show BluetoothDeviceIcon;
-import "bluetooth_device_battery_level.dart" show BluetoothDeviceBatteryLevel;
+import "bluetooth_device_battery_level_icon.dart"
+    show BluetoothDeviceBatteryLevelIcon;
 
 class BluetoothPopup extends StatelessWidget {
   const BluetoothPopup({Key? key}) : super(key: key);
@@ -139,59 +140,53 @@ class BluetoothPopup extends StatelessWidget {
   /// The method creates a new widget that includes the name, battery level and connection status of the passed device.
   ///
   static Widget _deviceMapper(final BluetoothDevice device) {
-    /// Get device name from device.
-    final String bluetoothDeviceName = device.name;
-    final double? batteryLevel = device.batteryLevel;
-    final Widget? batteryLevelWidget = batteryLevel != null
-        ? BluetoothDeviceBatteryLevel(batteryLevel: batteryLevel)
-        : null;
-    final String? bluetoothTranslateBatteryLevel = batteryLevel != null
-        ? BluetoothPopup._translateBatteryLevel(batteryLevel)
-        : null;
-    final bool isConnected = device.isConnected;
+    final String deviceName = device.name;
+    final double? deviceBatteryLevel = device.batteryLevel;
+    final bool isDeviceConnected = device.isConnected;
 
     return Row(
       children: <Widget>[
         /// Set the icon for device.
         Padding(
-          padding: const EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
           ),
-
-          /// Set the type of device and connection status.
+          // Device type icon with connection (blue/grey) status.
           child: BluetoothDeviceIcon(
             hardwareType: device.hardwareType,
-            isConnected: isConnected,
+            isConnected: isDeviceConnected,
           ),
         ),
-        Text(bluetoothDeviceName),
-        // const Spacer(),
-
-        /// Set battery percentage.
-        if (bluetoothTranslateBatteryLevel != null) const Spacer(),
-        if (bluetoothTranslateBatteryLevel != null)
+        Text(deviceName),
+        if (deviceBatteryLevel != null) ...<Widget>[
+          const Spacer(),
+          // Battery percentage as text. Like 100%
           Text(
-            bluetoothTranslateBatteryLevel,
+            BluetoothPopup._translateBatteryLevel(deviceBatteryLevel),
             style: const TextStyle(color: Colors.black54),
           ),
-
-        /// Set the battery icon for device.
-        if (batteryLevelWidget != null) batteryLevelWidget,
+          // Battery percentage icon
+          BluetoothDeviceBatteryLevelIcon(deviceBatteryLevel),
+        ],
       ],
     );
   }
 
   ///
-  /// The class converts the received number to a string.
+  /// The method converts the batteryLevel value to a string representation.
+  ///
+  /// Examples:
+  /// * 0.0  -> "0%"
+  /// * 0.22 -> "22%"
+  /// * 1.0  -> "100%"
   ///
   static String _translateBatteryLevel(double batteryLevel) {
-    if (batteryLevel == 0) {
+    if (batteryLevel <= 0) {
       return "0%";
     } else if (batteryLevel > 0 && batteryLevel <= 0.99) {
-      final double level = batteryLevel * 100;
-      final String stringLevel = level.toStringAsFixed(0);
+      // Convert decimal to percent representation
+      final double percentBatteryLevel = batteryLevel * 100;
+      final String stringLevel = percentBatteryLevel.toStringAsFixed(0);
       return "$stringLevel%";
     }
     return "100%";

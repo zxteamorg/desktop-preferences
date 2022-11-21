@@ -25,7 +25,7 @@ class DisplayPopup extends StatelessWidget {
     //
     return TextButton(
       onPressed: () {
-        controller.setBrightness(controller.brightness + 5);
+        // controller.setBrightness(controller.brightness + 5);
       },
       child: const Text("DisplayPopup"),
     );

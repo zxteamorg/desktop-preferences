@@ -1,0 +1,40 @@
+#
+# Copied from https://github.com/zxteamorg/.github/blob/master/workflow-templates/flutter-snapshot.yml
+#
+
+name: Flutter application (Snapshot)
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install toolchain
+      run: sudo apt-get install -y clang ninja-build libgtk-3-dev
+
+    - name: Setup Flutter SDK
+      uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '3.3.6'
+
+    - name: Check Flutter installation
+      run: flutter doctor
+
+    - name: Get packages
+      run: flutter pub get
+
+    # - name: Run tests
+    #   run: flutter test
+
+    - name: Build application for Linux
+      run: flutter build linux --debug

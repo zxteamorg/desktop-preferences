@@ -12,16 +12,12 @@ abstract class DisplayService {
   ///
   /// Call this method to disable Display Dark Mode.
   ///
-  void disableDarkMode() {
-    this.isDarkModeEnabled = false;
-  }
+  void disableDarkMode();
 
   ///
   /// Call this method to enable Display Dark Mode.
   ///
-  void enableDarkMode() {
-    this.isDarkModeEnabled = true;
-  }
+  void enableDarkMode();
 
   ///
   /// Gets whether Display Night Mode is turn ON.
@@ -31,16 +27,12 @@ abstract class DisplayService {
   ///
   /// Call this method to disable Display Night Mode.
   ///
-  void disableNightMode() {
-    this.isNightModeEnabled = false;
-  }
+  void disableNightMode();
 
   ///
   /// Call this method to enable Display Night Mode.
   ///
-  void enableNightMode() {
-    this.isNightModeEnabled = true;
-  }
+  void enableNightMode();
 
   ///
   /// Gets list of Display devices.

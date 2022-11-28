@@ -29,13 +29,13 @@ class _BrightnessSliderState extends State<BrightnessSliderWidget> {
       thumbColor: Colors.blue,
       activeColor: Colors.white,
       onChanged: (double? currentBrightness) {
-        if (this.widget.isDisabled) {
-          currentBrightness = null;
-        } else {
-          setState(() {
+        setState(() {
+          if (this.widget.isDisabled) {
+            currentBrightness = null;
+          } else {
             currentBrightness = currentBrightness;
-          });
-        }
+          }
+        });
       },
     );
   }

@@ -1,29 +1,35 @@
 import "package:flutter/material.dart";
 
-class DisplayBrightnessSlider extends StatefulWidget {
-  const DisplayBrightnessSlider({super.key});
+class BrightnessSliderWidget extends StatefulWidget {
+  final bool isDisabled;
+  const BrightnessSliderWidget(this.isDisabled, {
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<DisplayBrightnessSlider> createState() =>
-      _DisplayBrightnessSliderState();
+  State<BrightnessSliderWidget> createState() => _BrightnessSliderState();
 }
 
-class _DisplayBrightnessSliderState extends State<DisplayBrightnessSlider> {
-  double _currentBrightness = 50;
+class _BrightnessSliderState extends State<BrightnessSliderWidget> {
+  double currentBrightness = 50;
+  late bool isDisabled;
 
   @override
   Widget build(BuildContext context) {
     return Slider(
-      value: _currentBrightness,
+      value: currentBrightness,
       min: 0,
       max: 100,
       thumbColor: Colors.blue,
       activeColor: Colors.white,
-      // divisions: 5,
       onChanged: (double value) {
-        setState(() {
-          _currentBrightness = value;
-        });
+        if (isDisabled) {
+          currentBrightness = null;
+        } else {
+          setState(() {
+            currentBrightness = value;
+          });
+        }
       },
     );
   }

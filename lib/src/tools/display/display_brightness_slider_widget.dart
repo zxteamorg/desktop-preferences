@@ -15,6 +15,7 @@ class _BrightnessSliderState extends State<BrightnessSliderWidget> {
   @override
   Widget build(BuildContext context) {
     double? currentBrightness = 50;
+
     return Slider(
       value: currentBrightness,
       min: 0,

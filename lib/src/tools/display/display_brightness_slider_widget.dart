@@ -15,6 +15,7 @@ class BrightnessSliderWidget extends StatefulWidget {
 }
 
 class _BrightnessSliderState extends State<BrightnessSliderWidget> {
+
   ///
   /// The method creates a slider to set brightness display
   ///

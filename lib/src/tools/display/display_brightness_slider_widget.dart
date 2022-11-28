@@ -1,5 +1,8 @@
 import "package:flutter/material.dart";
 
+///
+/// Create a BrightnessSliderWidget class with a StatefulWidget extension
+///
 class BrightnessSliderWidget extends StatefulWidget {
   final bool isDisabled;
   const BrightnessSliderWidget(
@@ -12,6 +15,9 @@ class BrightnessSliderWidget extends StatefulWidget {
 }
 
 class _BrightnessSliderState extends State<BrightnessSliderWidget> {
+  ///
+  /// The method creates a slider to set brightness display
+  ///
   @override
   Widget build(BuildContext context) {
     double? currentBrightness = 50;

@@ -26,20 +26,20 @@ class DisplayPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
-    double? currentBrightness;
+    // double? currentBrightness;
     // ignore: prefer_const_literals_to_create_immutables
     return Column(children: <Widget>[
       BrightnessSliderWidget(
         false,
-        currentBrightness = null, /* TODO */
+        null, /* TODO */
       ),
       BrightnessSliderWidget(
         true,
-        currentBrightness = 0.15, /* TODO pass 15% */
+        0.15, /* TODO pass 15% */
       ),
       BrightnessSliderWidget(
         true,
-        currentBrightness = 0.75, /* TODO pass 75% */
+        0.75, /* TODO pass 75% */
       ),
     ]);
   }

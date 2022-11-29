@@ -5,8 +5,11 @@ import "package:flutter/material.dart";
 ///
 class BrightnessSliderWidget extends StatefulWidget {
   final bool isDisabled;
+  final double? currentBrightness;
+
   const BrightnessSliderWidget(
-    this.isDisabled, {
+    this.isDisabled,
+    this.currentBrightness, {
     Key? key,
   }) : super(key: key);
 

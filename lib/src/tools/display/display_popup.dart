@@ -26,7 +26,7 @@ class DisplayPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
-    // double? currentBrightness;
+    
     // ignore: prefer_const_literals_to_create_immutables
     return Column(children: <Widget>[
       BrightnessSliderWidget(

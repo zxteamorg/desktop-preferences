@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
 
+import "display_brightness_slider_widget.dart";
 import "display_controller.dart";
 
 class DisplayPopup extends StatelessWidget {
@@ -23,50 +26,18 @@ class DisplayPopup extends StatelessWidget {
     //
     // TO DO something with controller
     //
-    double? currentSliderValue;
+
+    // ignore: prefer_const_literals_to_create_immutables
     return Column(children: <Widget>[
-      Slider(
-        value: currentSliderValue = 0,
-        min: 0,
-        max: 1,
-        thumbColor: Colors.grey,
-        activeColor: Colors.grey,
-        inactiveColor: Colors.grey,
-        // divisions: 5,
-        onChanged: (double value) {
-          setState(
-            () {
-              currentSliderValue ??= 0;
-            },
-          );
-        },
+      BrightnessSliderWidget(
+        false, /* TODO */
       ),
-      Slider(
-          value: currentSliderValue = 0.15,
-          min: 0,
-          max: 1,
-          thumbColor: Colors.blue,
-          activeColor: Colors.white,
-          // divisions: 5,
-          onChanged: (double value) {
-            setState(() {
-              currentSliderValue = value;
-            });
-          }),
-      Slider(
-          value: currentSliderValue = 0.75,
-          min: 0,
-          max: 1,
-          thumbColor: Colors.blue,
-          activeColor: Colors.white,
-          // divisions: 5,
-          onChanged: (double value) {
-            setState(() {
-              currentSliderValue = value;
-            });
-          })
+      BrightnessSliderWidget(
+        true, /* TODO pass 15% */
+      ),
+      BrightnessSliderWidget(
+        true, /* TODO pass 75% */
+      ),
     ]);
   }
-
-  void setState(Null Function() param0) {}
 }

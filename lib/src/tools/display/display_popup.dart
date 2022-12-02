@@ -34,14 +34,14 @@ class DisplayPopup extends StatelessWidget {
           false,
           null, /* TODO */
         ),
-        //   BrightnessSliderWidget(
-        //     true,
-        //     0.15, /* TODO pass 15% */
-        //   ),
-        //   BrightnessSliderWidget(
-        //     true,
-        //     0.75, /* TODO pass 75% */
-        //   ),
+          BrightnessSliderWidget(
+            true,
+            0.15, /* TODO pass 15% */
+          ),
+          BrightnessSliderWidget(
+            true,
+            0.75, /* TODO pass 75% */
+          ),
       ],
     );
   }

@@ -31,17 +31,14 @@ class DisplayPopup extends StatelessWidget {
     return Column(
       children: const <Widget>[
         BrightnessSliderWidget(
-          false,
           null, /* TODO */
         ),
-          BrightnessSliderWidget(
-            true,
-            0.15, /* TODO pass 15% */
-          ),
-          BrightnessSliderWidget(
-            true,
-            0.75, /* TODO pass 75% */
-          ),
+        BrightnessSliderWidget(
+          0.15, /* TODO pass 15% */
+        ),
+        BrightnessSliderWidget(
+          0.75, /* TODO pass 75% */
+        ),
       ],
     );
   }

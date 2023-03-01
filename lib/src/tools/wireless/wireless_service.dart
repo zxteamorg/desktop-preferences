@@ -1,8 +1,13 @@
+import "../../platform/linux/wpa_supplicant_linux.dart"
+    show WirelessBssHandle, WirelessDeviceHandle, WirelessDeviceHandleFactory;
+
 import "wireless_service_contract.dart";
 
 abstract class WirelessService {
   /// Gets whether Wireless adapter is turn ON.
   bool get isEnabled;
+
+  Future<void> init();
 
   ///
   /// Call this method to disable Wireless adapter
@@ -122,6 +127,11 @@ class WirelessServiceStub extends WirelessService {
     this.connectedNetwork,
     this.isEnabled,
   );
+
+  @override
+  Future<void> init() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
+  }
 }
 
 class WirelessNetworkStub implements WirelessNetwork {
@@ -148,4 +158,86 @@ class PreferredWirelessNetworkStub extends WirelessNetworkStub
     super.level,
     super.isPublic,
   );
+}
+
+class WirelessServiceImpl extends WirelessService {
+  final String _wirelessDevice;
+
+  List<PreferredWirelessNetwork> _preferredNetworks;
+  List<WirelessNetwork> _otherNetworks;
+
+  ///
+  /// [wirelessDevice] - name of network adapter, like "wlan0"
+  ///
+  factory WirelessServiceImpl(final String wirelessDevice) {
+    return WirelessServiceImpl._(wirelessDevice);
+  }
+
+  WirelessServiceImpl._(this._wirelessDevice)
+      : _preferredNetworks = <PreferredWirelessNetwork>[],
+        _otherNetworks = <WirelessNetwork>[];
+
+  @override
+  Future<void> init() async {
+    final WirelessDeviceHandleFactory factory = WirelessDeviceHandleFactory();
+    try {
+      final WirelessDeviceHandle device =
+          await factory.create(this._wirelessDevice);
+
+      try {
+        await device.scan();
+
+        final Iterable<WirelessBssHandle> bsses = await device.getBSSs();
+
+        final List<WirelessNetwork> networks = <WirelessNetwork>[];
+        for (final WirelessBssHandle bss in bsses) {
+          final String macAddress = await bss.getBSSESID();
+          final String networkName = await bss.getSSESID();
+
+          networks.add(WirelessNetworkImpl("$networkName  ($macAddress)"));
+        }
+        this._otherNetworks = networks;
+      } finally {
+        await device.close();
+      }
+    } finally {
+      await factory.close();
+    }
+  }
+
+  @override
+  PreferredWirelessNetwork? get connectedNetwork => null;
+
+  @override
+  void disable() {
+    throw Exception("Not implemented yet.");
+  }
+
+  @override
+  void enable() {
+    throw Exception("Not implemented yet.");
+  }
+
+  @override
+  bool get isEnabled => true;
+
+  @override
+  List<WirelessNetwork> get otherNetworks => this._otherNetworks;
+
+  @override
+  List<PreferredWirelessNetwork> get preferredNetworks =>
+      this._preferredNetworks;
+}
+
+class WirelessNetworkImpl implements WirelessNetwork {
+  @override
+  final String name;
+
+  @override
+  final WirelessLevel level = WirelessLevel.good;
+
+  @override
+  final bool isPublic = false;
+
+  WirelessNetworkImpl(this.name);
 }

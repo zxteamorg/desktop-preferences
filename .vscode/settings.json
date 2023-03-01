@@ -47,7 +47,11 @@
 	"html.format.wrapLineLength": 0,
 	"cSpell.words": [
 		"Cupertino",
+		"dbus",
 		"orgzxteam",
-		"switchtile"
+		"softwareupdate",
+		"switchtile",
+		"xcodebuild",
+		"zxteamorg"
 	]
 }

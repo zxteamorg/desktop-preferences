@@ -5,7 +5,17 @@ import "wireless_service_contract.dart"
 import "wireless_service.dart" show WirelessService;
 
 class WirelessController extends ChangeNotifier {
-  WirelessController(this._service);
+  bool _isInitialized;
+
+  WirelessController(this._service) : _isInitialized = false {
+    this
+        ._service
+        .init()
+        .whenComplete(this._onInitCompleted)
+        .catchError(this._onInitFailure);
+  }
+
+  bool get isInitialized => this._isInitialized;
 
   bool get isEnabled => this._service.isEnabled;
 
@@ -26,6 +36,16 @@ class WirelessController extends ChangeNotifier {
 
   List<PreferredWirelessNetwork> get preferredNetworks =>
       this._service.preferredNetworks;
+
+  void _onInitCompleted() {
+    this._isInitialized = true;
+    this.notifyListeners();
+  }
+
+  void _onInitFailure(final Object error) {
+    this._isInitialized = true;
+    this.notifyListeners();
+  }
 
   final WirelessService _service;
 }

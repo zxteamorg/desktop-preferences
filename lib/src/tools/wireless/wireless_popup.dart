@@ -33,14 +33,17 @@ class WirelessPopup extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    return Consumer<WirelessController>(
-      builder: (
-        BuildContext context,
-        WirelessController controller,
-        Widget? child,
-      ) =>
-          this._buildContent(context, controller),
-    );
+    return Consumer<WirelessController>(builder: (
+      BuildContext context,
+      WirelessController controller,
+      Widget? child,
+    ) {
+      if (controller.isInitialized) {
+        return this._buildContent(context, controller);
+      } else {
+        return const Text("Initializing...");
+      }
+    });
   }
 
   Widget _buildContent(

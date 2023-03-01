@@ -113,7 +113,10 @@ class App extends StatelessWidget {
             maxHeight: 460,
           ),
           child: ChangeNotifierProvider<WirelessController>(
-            create: (_) => WirelessController(WirelessServiceStub()),
+            create: (_) => WirelessController(
+              WirelessServiceStub(),
+              // WirelessServiceImpl("wlan0"),
+            ),
             child: const WirelessPopup(),
           ),
         );

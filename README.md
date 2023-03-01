@@ -8,6 +8,11 @@ GUI tools written in Flutter to manage desktop preferences like WiFi, Bluetooth,
 git clone --single-branch --branch master git@github.com:zxteamorg/desktop-preferences.git
 cd desktop-preferences
 ~/opt/flutter/3.3.6-x64/bin/flutter pub get
+
+~/opt/flutter/3.3.6-x64/bin/flutter build linux --target=bin/main.dart
+~/opt/flutter/3.3.6-x64/bin/flutter build macos --target=bin/main.dart
+~/opt/flutter/3.3.6-x64/bin/flutter build windows --target=bin/main.dart
+
 ~/opt/flutter/3.3.6-x64/bin/flutter run --target=bin/main.dart --dart-entrypoint-args --tool=bluetooth-popup
 ~/opt/flutter/3.3.6-x64/bin/flutter run --target=bin/main.dart --dart-entrypoint-args --tool=display-popup
 ~/opt/flutter/3.3.6-x64/bin/flutter run --target=bin/main.dart --dart-entrypoint-args --tool=wireless-popup

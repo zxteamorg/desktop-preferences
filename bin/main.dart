@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "src/app.dart";
+import "package:orgzxteam_desktop_preferences/src/app.dart";
 
 void main(final List<String> args) async {
   final AppArguments appArgs = AppArguments(args);

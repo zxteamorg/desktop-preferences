@@ -8,7 +8,7 @@
 			"name": "Desktop Preferences (bluetooth-popup)",
 			"type": "dart",
 			"request": "launch",
-			"program": "lib/main.dart",
+			"program": "bin/main.dart",
 			"args": [
 				"--dart-entrypoint-args",
 				"--tool=bluetooth-popup"
@@ -18,7 +18,7 @@
 			"name": "Desktop Preferences (display-popup)",
 			"type": "dart",
 			"request": "launch",
-			"program": "lib/main.dart",
+			"program": "bin/main.dart",
 			"args": [
 				"--dart-entrypoint-args",
 				"--tool=display-popup"
@@ -28,7 +28,7 @@
 			"name": "Desktop Preferences (wireless-popup)",
 			"type": "dart",
 			"request": "launch",
-			"program": "lib/main.dart",
+			"program": "bin/main.dart",
 			"args": [
 				"--dart-entrypoint-args",
 				"--tool=wireless-popup"

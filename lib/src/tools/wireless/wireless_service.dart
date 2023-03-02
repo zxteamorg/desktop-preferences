@@ -74,7 +74,7 @@ class WirelessServiceStub extends WirelessService {
         WirelessNetworkStub("wi-fi 0", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 1", WirelessLevel.poor, true),
         WirelessNetworkStub("wi-fi 2", WirelessLevel.poor, false),
-        WirelessNetworkStub("wi-fi 3", WirelessLevel.excellent, false),
+        WirelessNetworkStub("wi-fi 3333333333333333333333333333333", WirelessLevel.excellent, false),
         WirelessNetworkStub("wi-fi 4", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 5", WirelessLevel.good, false),
         WirelessNetworkStub("wi-fi 6", WirelessLevel.good, false),

@@ -145,4 +145,16 @@ class WirelessBssHandle {
 
     return networkName;
   }
+
+  Future<int> getLevelSignal() async {
+    final int levelSignal = await this._dbusWpaSupplicantBSS.getSignal();
+
+    return levelSignal;
+  }
+
+  Future<bool> getIsPrivate() async {
+    final bool isPrivate = await this._dbusWpaSupplicantBSS.getPrivacy();
+
+    return isPrivate;
+  }
 }

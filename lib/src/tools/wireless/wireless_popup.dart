@@ -1,4 +1,5 @@
-import "package:flutter/material.dart" show Colors, Divider, Icons, Switch;
+import "package:flutter/material.dart"
+    show Colors, Divider, Icons, Switch;
 import "package:flutter/widgets.dart"
     show
         BuildContext,
@@ -19,6 +20,7 @@ import "package:flutter/widgets.dart"
         StatelessWidget,
         Text,
         TextStyle,
+        TextOverflow,
         Widget;
 import "package:provider/provider.dart" show Consumer;
 
@@ -114,7 +116,7 @@ class WirelessPopup extends StatelessWidget {
       (PreferredWirelessNetwork wirelessNetwork) {
         final bool isConnected = wirelessNetwork == controller.connectedNetwork;
         final Widget? isPublicIcon =
-            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPublic);
+            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPrivate);
 
         return Row(
           children: <Widget>[
@@ -127,6 +129,8 @@ class WirelessPopup extends StatelessWidget {
             ),
             Text(
               wirelessNetwork.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
             if (isPublicIcon != null) const Spacer(),
             if (isPublicIcon != null) isPublicIcon,
@@ -155,7 +159,7 @@ class WirelessPopup extends StatelessWidget {
     final List<Widget> otherNetworkRows = controller.otherNetworks.map(
       (WirelessNetwork wirelessNetwork) {
         final Widget? isPublicIcon =
-            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPublic);
+            WirelessPopup._buildWirelessLockIcon(wirelessNetwork.isPrivate);
 
         return Row(
           children: <Widget>[

@@ -11,6 +11,12 @@
 			"program": "bin/test_dbus.dart"
 		},
 		{
+			"name": "Test Display brightness",
+			"type": "dart",
+			"request": "launch",
+			"program": "bin/test_display_brightness.dart"
+		},
+		{
 			"name": "Desktop Preferences (bluetooth-popup)",
 			"type": "dart",
 			"request": "launch",
@@ -35,8 +41,7 @@
 			"args": [
 				"--dart-entrypoint-args",
 				"--tool=wireless-popup"
-			],
-			"console": "terminal"
+			]
 		},
 	]
 }

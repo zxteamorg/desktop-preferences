@@ -46,11 +46,16 @@
 	"html.format.endWithNewline": false,
 	"html.format.wrapLineLength": 0,
 	"cSpell.words": [
+		"bsses",
+		"BSSESID",
 		"Cupertino",
 		"dbus",
 		"orgzxteam",
 		"softwareupdate",
+		"SSESID",
+		"ssid",
 		"switchtile",
+		"wlan",
 		"xcodebuild",
 		"zxteamorg"
 	]

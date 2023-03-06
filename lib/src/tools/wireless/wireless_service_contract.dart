@@ -31,11 +31,11 @@ abstract class WirelessNetwork {
 
   ///
   /// This flag determines whether is a wirelessNetwork public network or security.
-  /// A public network is a type of network wherein anyone, namely the general public, 
-  /// has access and through it can connect to other networks or the Internet. 
-  /// You can connect to a public wirelessNetwork without entering any password 
+  /// A public network is a type of network wherein anyone, namely the general public,
+  /// has access and through it can connect to other networks or the Internet.
+  /// You can connect to a public wirelessNetwork without entering any password
   ///
-  bool get isPublic;
+  bool get isPrivate;
 }
 
 abstract class PreferredWirelessNetwork extends WirelessNetwork {}

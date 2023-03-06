@@ -21,6 +21,8 @@ Future<void> main() async {
       for (final WirelessBssHandle bss in bsses) {
         print(await bss.getBSSESID());
         print(await bss.getSSESID());
+        print(await bss.getLevelSignal());
+        print(await bss.getIsPrivate());
         print("#########################");
       }
     } finally {

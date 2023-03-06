@@ -74,7 +74,8 @@ class WirelessServiceStub extends WirelessService {
         WirelessNetworkStub("wi-fi 0", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 1", WirelessLevel.poor, true),
         WirelessNetworkStub("wi-fi 2", WirelessLevel.poor, false),
-        WirelessNetworkStub("wi-fi 3333333333333333333333333333333", WirelessLevel.excellent, false),
+        WirelessNetworkStub("wi-fi 3333333333333333333333333333333",
+        WirelessLevel.excellent, false),
         WirelessNetworkStub("wi-fi 4", WirelessLevel.excellent, true),
         WirelessNetworkStub("wi-fi 5", WirelessLevel.good, false),
         WirelessNetworkStub("wi-fi 6", WirelessLevel.good, false),
@@ -142,12 +143,12 @@ class WirelessNetworkStub implements WirelessNetwork {
   final String name;
 
   @override
-  final bool isPublic;
+  final bool isPrivate;
 
   const WirelessNetworkStub(
     this.name,
     this.level,
-    this.isPublic,
+    this.isPrivate,
   );
 }
 
@@ -191,10 +192,19 @@ class WirelessServiceImpl extends WirelessService {
 
         final List<WirelessNetwork> networks = <WirelessNetwork>[];
         for (final WirelessBssHandle bss in bsses) {
+          // ignore: unused_local_variable
           final String macAddress = await bss.getBSSESID();
           final String networkName = await bss.getSSESID();
+          final int levelSignal = await bss.getLevelSignal();
+          final WirelessLevel level = translateWirelessLevel(levelSignal);
+          final bool isPrivate = await bss.getIsPrivate();
 
-          networks.add(WirelessNetworkImpl("$networkName  ($macAddress)"));
+          networks.add(WirelessNetworkImpl(
+            // ignore: unnecessary_string_interpolations
+            "$networkName",
+            level,
+            !isPrivate,
+          ));
         }
         this._otherNetworks = networks;
       } finally {
@@ -203,6 +213,21 @@ class WirelessServiceImpl extends WirelessService {
     } finally {
       await factory.close();
     }
+  }
+
+  ///
+  /// Signal strength dBm references:
+  /// https://www.metageek.com/training/resources/wifi-signal-strength-basics/
+  /// https://github.com/digsrc/wpa_supplicant/search?q=Signal+strength+of+the+BSS
+  ///
+  static WirelessLevel translateWirelessLevel(int levelSignal) {
+    if (levelSignal > -100 && levelSignal < -66) {
+      return WirelessLevel.poor;
+    }
+    if (levelSignal > -66 && levelSignal < -33) {
+      return WirelessLevel.good;
+    }
+    return WirelessLevel.excellent;
   }
 
   @override
@@ -234,10 +259,13 @@ class WirelessNetworkImpl implements WirelessNetwork {
   final String name;
 
   @override
-  final WirelessLevel level = WirelessLevel.good;
-
+  final WirelessLevel level;
   @override
-  final bool isPublic = false;
+  final bool isPrivate;
 
-  WirelessNetworkImpl(this.name);
+  WirelessNetworkImpl(
+    this.name,
+    this.level,
+    this.isPrivate,
+  );
 }

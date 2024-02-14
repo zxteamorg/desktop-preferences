@@ -20,7 +20,7 @@ abstract class DisplayService {
   void enableDarkMode();
 
   ///
-  /// Gets whether Display Night Mode is turn ON.
+  /// Gets whether Display Night Mode is turn ON. Nidght mode reduces screen brightness.
   ///
   bool get isNightModeEnabled;
 

@@ -1,3 +1,5 @@
+import "package:flutter/material.dart";
+
 import "display_service_contract.dart" show DisplayService, DisplayDevice;
 
 class DisplayServiceStub extends DisplayService {
@@ -43,10 +45,17 @@ class DisplayServiceStub extends DisplayService {
   /// Call this method to set the brightness display.
   ///
   @override
-  void setBrightness(DisplayDevice display, double brightness) {
-    if (brightness < 0 || brightness > 100) {
+  void setBrightness(final DisplayDevice display, double brightness) {
+    // ignore: avoid_print
+    print("Brightness is: $brightness");
+    if (brightness < 0 || brightness > 1) {
       throw ArgumentError.value(brightness);
     }
+    if (display is! _DisplayDevice) {
+      throw ArgumentError.value(display, "Wrong display instance");
+    }
+
+    display.brightness = brightness;
   }
 
   ///
@@ -57,9 +66,9 @@ class DisplayServiceStub extends DisplayService {
         this.isNightModeEnabled = false,
         this.displays = List<DisplayDevice>.unmodifiable(
           <DisplayDevice>[
-            const DisplayDeviceStub("Display_1", 30),
-            const DisplayDeviceStub("Display_2", 40),
-            const DisplayDeviceStub("Display_3", 50),
+            _DisplayDevice("Display_1", 0.3),
+            _DisplayDevice("Display_2", 0.4),
+            _DisplayDevice("Display_3", 0.5),
           ],
         );
 }
@@ -67,18 +76,18 @@ class DisplayServiceStub extends DisplayService {
 ///
 /// Properties of the Display device.
 ///
-class DisplayDeviceStub implements DisplayDevice {
+class _DisplayDevice implements DisplayDevice {
   ///
   /// Name of the Display device
   ///
   @override
-  final String name;
+  String name;
 
   ///
   /// Brightness of the Display device
   ///
   @override
-  final double brightness;
+  double brightness;
 
-  const DisplayDeviceStub(this.name, this.brightness);
+  _DisplayDevice(this.name, this.brightness);
 }

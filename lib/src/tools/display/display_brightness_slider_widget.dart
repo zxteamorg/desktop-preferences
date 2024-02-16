@@ -1,12 +1,18 @@
 import "package:flutter/material.dart";
+import "display_controller.dart";
+import "display_service_contract.dart";
 
 ///
 /// Create a BrightnessSliderWidget class with a StatefulWidget extension
 ///
 class BrightnessSliderWidget extends StatefulWidget {
   final double? currentBrightness;
+  final DisplayController controller;
+  final DisplayDevice display;
 
   const BrightnessSliderWidget(
+    this.controller,
+    this.display,
     this.currentBrightness, {
     Key? key,
   }) : super(key: key);
@@ -39,6 +45,8 @@ class _BrightnessSliderState extends State<BrightnessSliderWidget> {
         value: localCurrentBrightness,
         min: 0,
         max: 1,
+        divisions: 100,
+        // label: localCurrentBrightness.round().toString(),
         thumbColor: Colors.white,
         activeColor: Colors.white,
         inactiveColor: Colors.grey,
@@ -46,6 +54,8 @@ class _BrightnessSliderState extends State<BrightnessSliderWidget> {
           setState(
             () {
               this.currentBrightness = value;
+              this.widget.controller.setBrightness(this.widget.display, value);
+              ;
             },
           );
         },

@@ -10,6 +10,8 @@ class DisplayController extends ChangeNotifier {
     this.notifyListeners();
   }
 
+  // void speaker(){}
+
   void disableDarkMode() {
     this._service.disableDarkMode();
     this.notifyListeners();

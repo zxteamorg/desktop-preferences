@@ -1,4 +1,5 @@
-import "package:flutter/material.dart";
+// import "package:flutter/material.dart";
+import 'dart:io';
 
 import "display_service_contract.dart" show DisplayService, DisplayDevice;
 
@@ -71,6 +72,18 @@ class DisplayServiceStub extends DisplayService {
             _DisplayDevice("Display_3", 0.5),
           ],
         );
+
+  // void speaker() {
+  //   print("Enter your brightness value:");
+  //   String? brightness = stdin.readLineSync();
+
+  //   // int? brightness = int.parse(stdin.readLineSync()!);
+  //   final int? newBrightness;
+  //   if (brightness != null) {
+  //     newBrightness = int.parse(brightness);
+  //     print("Brightness set to: $newBrightness");
+  //   }
+  // }
 }
 
 ///

@@ -1,4 +1,6 @@
 // import "package:flutter/material.dart";
+import "dart:async";
+import "dart:convert";
 import 'dart:io';
 
 import "display_service_contract.dart" show DisplayService, DisplayDevice;
@@ -46,7 +48,7 @@ class DisplayServiceStub extends DisplayService {
   /// Call this method to set the brightness display.
   ///
   @override
-  void setBrightness(final DisplayDevice display, double brightness) {
+  void setBrightness(final DisplayDevice display, final double brightness) {
     // ignore: avoid_print
     print("Brightness is: $brightness");
     if (brightness < 0 || brightness > 1) {
@@ -71,19 +73,30 @@ class DisplayServiceStub extends DisplayService {
             _DisplayDevice("Display_2", 0.4),
             _DisplayDevice("Display_3", 0.5),
           ],
-        );
+        ) {
+    this.speaker();
+  }
 
-  // void speaker() {
-  //   print("Enter your brightness value:");
-  //   String? brightness = stdin.readLineSync();
+  Future<void> speaker() async {
+    while (true) {
+      print("Enter your brightness value from 0 to 100:");
+      final String brightnessStr = await readLine();
 
-  //   // int? brightness = int.parse(stdin.readLineSync()!);
-  //   final int? newBrightness;
-  //   if (brightness != null) {
-  //     newBrightness = int.parse(brightness);
-  //     print("Brightness set to: $newBrightness");
-  //   }
-  // }
+      if (!RegExp(r"^[0-9]+$").hasMatch(brightnessStr)) {
+        continue;
+      }
+
+      final double brightness = double.parse(brightnessStr) / 100;
+      print("Brightness set to: $brightness");
+
+      if (brightness < 0 || brightness > 1) {
+        continue;
+      }
+
+      final _DisplayDevice display = this.displays.first as _DisplayDevice;
+      display.brightness = brightness;
+    }
+  }
 }
 
 ///
@@ -103,4 +116,19 @@ class _DisplayDevice implements DisplayDevice {
   double brightness;
 
   _DisplayDevice(this.name, this.brightness);
+}
+
+/// Reads a single line from [stdin] asynchronously.
+Future<String> readLine() async {
+  final Completer<String> completer = Completer<String>(); // completer
+  final StreamSubscription<String> stream = stdin // stdin
+      .transform(utf8.decoder) // decode
+      .transform(const LineSplitter()) // split line
+      .asBroadcastStream() // make it stream
+      .listen((String line) =>
+          !completer.isCompleted ? completer.complete(line) : 0); // listen
+
+  final String output = await completer.future; // get output from future
+  stream.cancel(); // cancel stream after future is completed
+  return output;
 }

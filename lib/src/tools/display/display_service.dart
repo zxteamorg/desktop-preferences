@@ -2,12 +2,13 @@
 // import "dart:convert";
 import "dart:async" show Future;
 import "dart:io" show InternetAddress, HttpServer;
-
+import "dart:ui";
 import "package:shelf/shelf.dart"
     show MiddlewareExtensions, Request, Response, logRequests;
-
 import "display_service_contract.dart" show DisplayService, DisplayDevice;
 import "package:shelf/shelf_io.dart" as shelf_io;
+
+import "display_brightness_slider_widget.dart";
 
 class DisplayServiceStub extends DisplayService {
   ///
@@ -67,12 +68,16 @@ class DisplayServiceStub extends DisplayService {
     display.brightness = brightness;
   }
 
+  String dataInput;
+
   ///
   /// Create the list of connected fake displays.
   ///
   DisplayServiceStub()
       : this.isDarkModeEnabled = false,
         this.isNightModeEnabled = false,
+        this.dataInput =
+            '<html><body style="Set your brightness: <input type = "text" id = "brightness"></body></html>',
         this.displays = List<DisplayDevice>.unmodifiable(
           <DisplayDevice>[
             _DisplayDevice("Display_1", 0.3),
@@ -103,10 +108,10 @@ class DisplayServiceStub extends DisplayService {
     print(request.method);
     if (request.method == "GET") {
       return Response.ok(
-        "Hello world!",
+        dataInput,
         headers: {
           // "Content-Type": contentType.toString(),
-          // "Cache-Control": "no-cache"
+          "Cache-Control": "no-cache"
         },
       );
     }

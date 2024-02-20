@@ -68,7 +68,7 @@ class DisplayServiceStub extends DisplayService {
     display.brightness = brightness;
   }
 
-  String dataInput;
+  // String dataInput;
 
   ///
   /// Create the list of connected fake displays.
@@ -76,8 +76,6 @@ class DisplayServiceStub extends DisplayService {
   DisplayServiceStub()
       : this.isDarkModeEnabled = false,
         this.isNightModeEnabled = false,
-        this.dataInput =
-            '<html><body style="Set your brightness: <input type = "text" id = "brightness"></body></html>',
         this.displays = List<DisplayDevice>.unmodifiable(
           <DisplayDevice>[
             _DisplayDevice("Display_1", 0.3),
@@ -105,6 +103,8 @@ class DisplayServiceStub extends DisplayService {
   }
 
   Future<Response> _handler(final Request request) async {
+    const String dataInput =
+        '<html><body style="Set your brightness value: <input type = "number" id = "brightness"></body></html>';
     print(request.method);
     if (request.method == "GET") {
       return Response.ok(

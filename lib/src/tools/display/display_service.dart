@@ -100,11 +100,10 @@ class DisplayServiceStub extends DisplayService {
   }
 
   Future<Response> _handler(final Request request) async {
-    //
     print(request.method);
     if (request.method == "GET") {
       return Response.ok(
-        "Hello",
+        "Hello world!",
         headers: {
           // "Content-Type": contentType.toString(),
           // "Cache-Control": "no-cache"
@@ -113,27 +112,6 @@ class DisplayServiceStub extends DisplayService {
     }
     throw Exception("Go to widget");
   }
-
-  // Future<void> speaker() async {
-  //   while (true) {
-  //     print("Enter your brightness value from 0 to 100:");
-  //     final String brightnessStr = await readLine();
-
-  //     if (!RegExp(r"^[0-9]+$").hasMatch(brightnessStr)) {
-  //       continue;
-  //     }
-
-  //     final double brightness = double.parse(brightnessStr) / 100;
-  //     print("Brightness set to: $brightness");
-
-  //     if (brightness < 0 || brightness > 1) {
-  //       continue;
-  //     }
-
-  //     final _DisplayDevice display = this.displays.first as _DisplayDevice;
-  //     display.brightness = brightness;
-  //   }
-  // }
 }
 
 ///
@@ -154,18 +132,3 @@ class _DisplayDevice implements DisplayDevice {
 
   _DisplayDevice(this.name, this.brightness);
 }
-
-// /// Reads a single line from [stdin] asynchronously.
-// Future<String> readLine() async {
-//   final Completer<String> completer = Completer<String>(); // completer
-//   final StreamSubscription<String> stream = stdin // stdin
-//       .transform(utf8.decoder) // decode
-//       .transform(const LineSplitter()) // split line
-//       .asBroadcastStream() // make it stream
-//       .listen((String line) =>
-//           !completer.isCompleted ? completer.complete(line) : 0); // listen
-
-//   final String output = await completer.future; // get output from future
-//   stream.cancel(); // cancel stream after future is completed
-//   return output;
-// }

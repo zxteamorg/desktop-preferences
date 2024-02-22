@@ -16,7 +16,7 @@
 	"editor.wordWrapColumn": 1024,
 	"diffEditor.ignoreTrimWhitespace": false,
 	"files.autoSave": "afterDelay",
-	"files.autoSaveDelay": 30000,
+	"files.autoSaveDelay": 1000,
 	"files.encoding": "utf8",
 	"files.eol": "\n",
 	"files.exclude": {

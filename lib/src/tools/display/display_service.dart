@@ -1,14 +1,11 @@
-// import "package:flutter/material.dart";
-// import "dart:convert";
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import "dart:async" show Future;
 import "dart:io" show InternetAddress, HttpServer;
-import "dart:ui";
 import "package:shelf/shelf.dart"
     show MiddlewareExtensions, Request, Response, logRequests;
 import "display_service_contract.dart" show DisplayService, DisplayDevice;
 import "package:shelf/shelf_io.dart" as shelf_io;
-
-import "display_brightness_slider_widget.dart";
 
 class DisplayServiceStub extends DisplayService {
   ///
@@ -104,7 +101,17 @@ class DisplayServiceStub extends DisplayService {
 
   Future<Response> _handler(final Request request) async {
     const String dataInput =
-        '<html><body style="Set your brightness value: <input type = "number" id = "brightness"></body></html>';
+    "<!DOCTYPE html>"
+    "<html>"
+    "<body>"
+        "<h1>Desktop Preferences</h1>"
+        "<form action='displaypopup'>"
+            "<label for='brightness'>Set brightness:</label>"
+            "<input type='text' id='brightness' name='brightness'><br><br>"
+            "<input type='submit' value='Submit'>"
+        "</form>"
+    "</body>"
+    "</html>";
     print(request.method);
     if (request.method == "GET") {
       return Response.ok(

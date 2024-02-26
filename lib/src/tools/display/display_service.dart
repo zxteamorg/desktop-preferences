@@ -108,7 +108,7 @@ class DisplayServiceStub extends DisplayService {
                           <h1>Desktop Preferences</h1>
                           <form method="post">
                               <label for="display">Select display:</label>
-                              <select name="change monitor">
+                              <select name="change monitor" required>
                                   <option value=""></option>
                                   <option value="1">Display #1</option>
                                   <option value="2">Display #2</option>

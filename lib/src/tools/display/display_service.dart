@@ -65,8 +65,6 @@ class DisplayServiceStub extends DisplayService {
     display.brightness = brightness;
   }
 
-  // String dataInput;
-
   ///
   /// Create the list of connected fake displays.
   ///
@@ -100,29 +98,38 @@ class DisplayServiceStub extends DisplayService {
   }
 
   Future<Response> _handler(final Request request) async {
-    const String dataInput =
-    "<!DOCTYPE html>"
-    "<html>"
-    "<body>"
-        "<h1>Desktop Preferences</h1>"
-        "<form action='displaypopup'>"
-            "<label for='brightness'>Set brightness:</label>"
-            "<input type='text' id='brightness' name='brightness'><br><br>"
-            "<input type='submit' value='Submit'>"
-        "</form>"
-    "</body>"
-    "</html>";
     print(request.method);
+    // If GET request return html form.
     if (request.method == "GET") {
       return Response.ok(
-        dataInput,
-        headers: {
-          // "Content-Type": contentType.toString(),
-          "Cache-Control": "no-cache"
+        """<!DOCTYPE html>
+                       <html>
+                       <body>
+                          <h1>Desktop Preferences</h1>
+                          <form method="post">
+                              <label for="display">Select display:</label>
+                              <input type="text" id="display" name="display"><br><br>
+
+                              <label for="brightness">Set brightness from 0 to 100:</label>
+                              <input type="text" id="brightness" name="brightness"><br><br>
+
+                              <input type="submit" value="Submit">
+                          </form>
+                       </body>
+                       </html>""",
+        headers: <String, Object>{
+          "Content-Type": "text/html",
+          "Cache-Control": "no-cache",
         },
       );
+    } else if (request.method == "POST") {
+      // parsing data POST request extract key/value pairs of information from the query string.
+      final String content = await request.readAsString();
+      Map<String, String> data = Uri(query: content).queryParameters;
+
+      print(data["brightness"]);
     }
-    throw Exception("Go to widget");
+    throw Exception("Incorrect request data");
   }
 }
 

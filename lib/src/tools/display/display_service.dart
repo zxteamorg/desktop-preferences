@@ -108,13 +108,7 @@ class DisplayServiceStub extends DisplayService {
                           <h1>Desktop Preferences</h1>
                           <form method="post">
                               <label for="display">Select display:</label>
-                              <select name="change monitor" required>
-                                  <option value=""></option>
-                                  <option value="1">Display #1</option>
-                                  <option value="2">Display #2</option>
-                                  <option value="3">Display #3</option>
-                              </select><br><br>
-                              <!-- <input type="text" id="display" name="display"><br><br> -->
+                              <input type="text" id="display" name="display" required><br><br>
 
                               <label for="brightness">Set brightness from 0 to 100:</label>
                               <input type="text" id="brightness" name="brightness"><br><br>
@@ -131,11 +125,61 @@ class DisplayServiceStub extends DisplayService {
     } else if (request.method == "POST") {
       // parsing data POST request extract key/value pairs of information from the query string.
       final String content = await request.readAsString();
-      Map<String, String> data = Uri(query: content).queryParameters;
+      final Map<String, String> data = Uri(query: content).queryParameters;
+      final String? queryParametersDisplay = data["display"];
+      final String? queryParametersBrightness = data["brightness"];
 
-      print(data["brightness"]);
+      int displayIndex;
+      double brightness;
+
+      if (queryParametersDisplay == null) {
+        return Response.badRequest(
+            body: "Display is not selected. Please select the display.");
+      }
+
+      final int? queryParametersDisplayInt =
+          int.tryParse(queryParametersDisplay);
+      if (queryParametersDisplayInt == null) {
+        return Response.badRequest(
+            body:
+                "Unable to read entered data. Please, set the correct display name.");
+      }
+
+      if (queryParametersDisplayInt < 0 ||
+          queryParametersDisplayInt > this.displays.length) {
+        return Response.badRequest(
+            body:
+                "Display is not in the specified range. Please, set in the correct range.");
+      }
+
+      if (queryParametersBrightness == null) {
+        return Response.badRequest(
+            body: "Brightness is not set. Please, set the brightness.");
+      }
+
+      final double? queryParametersBrightnessDouble =
+          double.tryParse(queryParametersBrightness);
+      if (queryParametersBrightnessDouble == null) {
+        return Response.badRequest(
+            body:
+                "Unable to read entered data. Please, set the correct display brightness.");
+      }
+
+      if (queryParametersBrightnessDouble < 0 ||
+          queryParametersBrightnessDouble > 100) {
+        return Response.badRequest(
+            body:
+                "Brightness is not in the specified range. Please, set in the correct range.");
+      }
+
+      displayIndex = queryParametersDisplayInt;
+      brightness = queryParametersBrightnessDouble;
+
+      final _DisplayDevice display =
+          this.displays[displayIndex] as _DisplayDevice;
+      display.brightness = brightness;
     }
-    throw Exception("Incorrect request data");
+    throw Exception("Unknow request method. Send GET or POST request.");
   }
 }
 

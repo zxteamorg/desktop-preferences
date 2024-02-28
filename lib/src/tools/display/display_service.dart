@@ -100,6 +100,17 @@ class DisplayServiceStub extends DisplayService {
   Future<Response> _handler(final Request request) async {
     print(request.method);
     // If GET request return html form.
+    final int listDisplaysLength = this.displays.length;
+    // final List<DisplayDevice> displays = this.displays;
+    // String? listDisplays;
+    String htmlOptionDisplay = '<option value=""></option>';
+    int count = 0;
+    for (final DisplayDevice display in this.displays) {
+      final String displayName = display.name;
+      count += 1;
+      htmlOptionDisplay = '$htmlOptionDisplay<option value="$count">$displayName</option>';
+    }
+
     if (request.method == "GET") {
       return Response.ok(
         """<!DOCTYPE html>
@@ -107,15 +118,17 @@ class DisplayServiceStub extends DisplayService {
                        <body>
                           <h1>Desktop Preferences</h1>
                           <form method="post">
-                              <label for="display">Select display:</label>
-                              <input type="text" id="display" name="display" required><br><br>
+                              <label for="current brightness">If you want change a brightness please :</label><br><br>
+                              <label for="display">1. Select display:</label>
+                              <select name="display" required>
+                                  $htmlOptionDisplay
+                              </select><br><br>
+                              <!-- <input type="text" id="display" name="display"><br><br> -->
 
-                              <label for="brightness">Set brightness from 0 to 100:</label>
-                              <input type="text" id="brightness" name="brightness"><br><br>
+                              <label for="brightness">2. Set brightness from 0 to 100:</label>
+                              <input type="text" id="brightness" name="brightness" required><br><br>
 
                               <input type="submit" value="Submit">
-                          </form>
-                       </body>
                        </html>""",
         headers: <String, Object>{
           "Content-Type": "text/html",
@@ -146,7 +159,7 @@ class DisplayServiceStub extends DisplayService {
       }
 
       if (queryParametersDisplayInt < 0 ||
-          queryParametersDisplayInt > this.displays.length) {
+          queryParametersDisplayInt > listDisplaysLength) {
         return Response.badRequest(
             body:
                 "Display is not in the specified range. Please, set in the correct range.");

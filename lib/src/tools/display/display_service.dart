@@ -99,6 +99,7 @@ class DisplayServiceStub extends DisplayService {
 
   Future<Response> _handler(final Request request) async {
     print(request.method);
+
     /// If GET request return html form.
     final int listDisplaysLength = this.displays.length;
     String htmlOptionDisplay = '<option value=""></option>';
@@ -110,10 +111,7 @@ class DisplayServiceStub extends DisplayService {
           '$htmlOptionDisplay<option value="$count">$displayName</option>';
     }
 
-    String? htmlFormGet;
-    if (request.method == "GET") {
-      return Response.ok(
-        htmlFormGet = """<!DOCTYPE html>
+    String? htmlFormGet = """<!DOCTYPE html>
                        <html>
                        <body>
                           <h1>Desktop Preferences</h1>
@@ -130,14 +128,19 @@ class DisplayServiceStub extends DisplayService {
 
                               <h4>Dark mode</h4>
                                   <label for="darkmode">Set the 0 to disable or 1 to enable dark mode:</label>
-                                  <input type="text" id="darkmode" name="darkmode"><br><br>
+                                  <input type="text" id="darkmode" name="darkmode" required><br><br>
 
                               <h4>Night mode</h4>
                                   <label for="nightmode">Set the 0 to disable or 1 to enable night mode:</label>
-                                  <input type="text" id="nightmode" name="nightmode"><br><br><br>
+                                  <input type="text" id="nightmode" name="nightmode" required><br><br><br>
 
                               <input type="submit" value="Submit">
-                       </html>""",
+                       </body>
+                       </html>""";
+
+    if (request.method == "GET") {
+      return Response.ok(
+        htmlFormGet,
         headers: <String, Object>{
           "Content-Type": "text/html",
           "Cache-Control": "no-cache",
@@ -149,15 +152,18 @@ class DisplayServiceStub extends DisplayService {
       final Map<String, String> data = Uri(query: content).queryParameters;
       final String? queryParametersDisplay = data["display"];
       final String? queryParametersBrightness = data["brightness"];
+      final String? queryParametersDarkmode = data["darkmode"];
+      final String? queryParametersNightmode = data["nightmode"];
 
-      // double brightness;
-
+      ///
+      /// Check queryParameters of display
+      ///
       if (queryParametersDisplay == null) {
         return Response.badRequest(
             body: "Display is not selected. Please select the display.");
       }
 
-      int? displayIndex = int.tryParse(queryParametersDisplay);
+      final int? displayIndex = int.tryParse(queryParametersDisplay);
       if (displayIndex == null) {
         return Response.badRequest(
             body:
@@ -170,6 +176,9 @@ class DisplayServiceStub extends DisplayService {
                 "Display is not in the specified range. Please, set in the correct range.");
       }
 
+      ///
+      /// Check queryParameters of brightness
+      ///
       if (queryParametersBrightness == null) {
         return Response.badRequest(
             body: "Brightness is not set. Please, set the brightness.");
@@ -190,12 +199,69 @@ class DisplayServiceStub extends DisplayService {
                 "Brightness is not in the specified range. Please, set in the correct range.");
       }
 
-      // brightness = queryParametersBrightnessDouble;
+      ///
+      /// Check queryParameters of Darkmode
+      ///
+      if (queryParametersDarkmode == null) {
+        return Response.badRequest(
+            body: "Dark mode is not set on this device.");
+      }
 
+      final int? queryParametersDarkmodeInt =
+          int.tryParse(queryParametersDarkmode);
+      if (queryParametersDarkmodeInt == null) {
+        return Response.badRequest(
+            body:
+                "Unable to read entered data. Please, set the number. 0 - off, 1 - on.");
+      }
+
+      if (queryParametersDarkmodeInt < 0 || queryParametersDarkmodeInt > 1) {
+        return Response.badRequest(
+            body: "Please, set the correct Darkmode range. 0 - off, 1 - on.");
+      }
+
+      if (queryParametersDarkmodeInt == 0) {
+        this.disableDarkMode();
+      } else if (queryParametersDarkmodeInt == 1) {
+        this.enableDarkMode();
+      }
+
+      ///
+      /// Check queryParameters of Nightmode
+      ///
+      if (queryParametersNightmode == null) {
+        return Response.badRequest(
+            body: "Dark mode is not set on this device.");
+      }
+
+      final int? queryParametersNightmodeInt =
+          int.tryParse(queryParametersNightmode);
+      if (queryParametersNightmodeInt == null) {
+        return Response.badRequest(
+            body:
+                "Unable to read entered data. Please, set the number. 0 - off, 1 - on.");
+      }
+
+      if (queryParametersNightmodeInt < 0 || queryParametersNightmodeInt > 1) {
+        return Response.badRequest(
+            body: "Please, set the correct Darkmode range. 0 - off, 1 - on.");
+      }
+
+      if (queryParametersNightmodeInt == 0) {
+        this.disableNightMode();
+      } else if (queryParametersNightmodeInt == 1) {
+        this.enableNightMode();
+      }
+
+      ///
+      /// On indicate display set brightness.
+      ///
       final _DisplayDevice display =
           this.displays[displayIndex] as _DisplayDevice;
       display.brightness = queryParametersBrightnessDouble;
-      this._brightnessChangedStreamController.add(queryParametersBrightnessDouble);
+      this
+          ._brightnessChangedStreamController
+          .add(queryParametersBrightnessDouble);
       return Response.ok(htmlFormGet);
     }
 
@@ -204,7 +270,7 @@ class DisplayServiceStub extends DisplayService {
   }
 
   ///
-  /// Create stream controller and getter where the data goes.
+  /// Create stream controller for brightness changing and getter where the data goes.
   ///
   final StreamController<double> _brightnessChangedStreamController =
       StreamController<double>();

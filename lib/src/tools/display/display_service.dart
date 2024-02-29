@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_interpolation_to_compose_strings
+// ignore_for_file: prefer_interpolation_to_compose_strings, avoid_print
 
 import "dart:async" show Future, StreamController;
 import "dart:io" show InternetAddress, HttpServer;
@@ -90,13 +90,15 @@ class DisplayServiceStub extends DisplayService {
         this._server = value;
       },
     ).catchError(
-      (err) {
-        //
+      (dynamic err) {
         print(err);
       },
     );
   }
 
+///
+/// Server request handler
+///
   Future<Response> _handler(final Request request) async {
     print(request.method);
 
@@ -138,13 +140,15 @@ class DisplayServiceStub extends DisplayService {
                        </body>
                        </html>""";
 
+    final Map<String, Object> headers = <String, Object>{
+      "Content-Type": "text/html",
+      "Cache-Control": "no-cache",
+    };
+
     if (request.method == "GET") {
       return Response.ok(
         htmlFormGet,
-        headers: <String, Object>{
-          "Content-Type": "text/html",
-          "Cache-Control": "no-cache",
-        },
+        headers: headers,
       );
     } else if (request.method == "POST") {
       /// parsing data POST request extract key/value pairs of information from the query string.
@@ -262,7 +266,10 @@ class DisplayServiceStub extends DisplayService {
       this
           ._brightnessChangedStreamController
           .add(queryParametersBrightnessDouble);
-      return Response.ok(htmlFormGet);
+      return Response.ok(
+        htmlFormGet,
+        headers: headers,
+      );
     }
 
     return Response.badRequest(

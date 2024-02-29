@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_interpolation_to_compose_strings
 
-import "dart:async" show Future;
+import "dart:async" show Future, StreamController;
 import "dart:io" show InternetAddress, HttpServer;
 import "package:shelf/shelf.dart"
     show MiddlewareExtensions, Request, Response, logRequests;
@@ -95,6 +95,10 @@ class DisplayServiceStub extends DisplayService {
         print(err);
       },
     );
+    // double brightness;
+    // Timer.periodic(const Duration(seconds: 1), (timer) {
+    //   _controller.sink.add(brightness);
+    // });
   }
 
   Future<Response> _handler(final Request request) async {
@@ -108,7 +112,8 @@ class DisplayServiceStub extends DisplayService {
     for (final DisplayDevice display in this.displays) {
       final String displayName = display.name;
       count += 1;
-      htmlOptionDisplay = '$htmlOptionDisplay<option value="$count">$displayName</option>';
+      htmlOptionDisplay =
+          '$htmlOptionDisplay<option value="$count">$displayName</option>';
     }
 
     if (request.method == "GET") {
@@ -142,7 +147,6 @@ class DisplayServiceStub extends DisplayService {
       final String? queryParametersDisplay = data["display"];
       final String? queryParametersBrightness = data["brightness"];
 
-      int displayIndex;
       double brightness;
 
       if (queryParametersDisplay == null) {
@@ -150,16 +154,14 @@ class DisplayServiceStub extends DisplayService {
             body: "Display is not selected. Please select the display.");
       }
 
-      final int? queryParametersDisplayInt =
-          int.tryParse(queryParametersDisplay);
-      if (queryParametersDisplayInt == null) {
+      int? displayIndex = int.tryParse(queryParametersDisplay);
+      if (displayIndex == null) {
         return Response.badRequest(
             body:
                 "Unable to read entered data. Please, set the correct display name.");
       }
 
-      if (queryParametersDisplayInt < 0 ||
-          queryParametersDisplayInt > listDisplaysLength) {
+      if (displayIndex < 0 || displayIndex >= listDisplaysLength) {
         return Response.badRequest(
             body:
                 "Display is not in the specified range. Please, set in the correct range.");
@@ -185,15 +187,24 @@ class DisplayServiceStub extends DisplayService {
                 "Brightness is not in the specified range. Please, set in the correct range.");
       }
 
-      displayIndex = queryParametersDisplayInt;
       brightness = queryParametersBrightnessDouble;
 
       final _DisplayDevice display =
           this.displays[displayIndex] as _DisplayDevice;
       display.brightness = brightness;
+      this._brightnessChangedStreamController.add(brightness);
+      return Response.ok(null);
     }
-    throw Exception("Unknow request method. Send GET or POST request.");
+
+    return Response.badRequest(
+        body: "Unknow request method. Send GET or POST request.");
   }
+
+  //
+  // Create stream controller and getter where the data goes.
+  //
+  final StreamController<double> _brightnessChangedStreamController = StreamController<double>();
+  Stream<double> get brightnessChanged => _brightnessChangedStreamController.stream;
 }
 
 ///

@@ -116,9 +116,10 @@ class DisplayServiceStub extends DisplayService {
           '$htmlOptionDisplay<option value="$count">$displayName</option>';
     }
 
+    String? htmlFormGet;
     if (request.method == "GET") {
       return Response.ok(
-        """<!DOCTYPE html>
+         htmlFormGet = """<!DOCTYPE html>
                        <html>
                        <body>
                           <h1>Desktop Preferences</h1>
@@ -161,7 +162,7 @@ class DisplayServiceStub extends DisplayService {
                 "Unable to read entered data. Please, set the correct display name.");
       }
 
-      if (displayIndex < 0 || displayIndex >= listDisplaysLength) {
+      if (displayIndex < 0 || displayIndex > listDisplaysLength) {
         return Response.badRequest(
             body:
                 "Display is not in the specified range. Please, set in the correct range.");
@@ -193,7 +194,7 @@ class DisplayServiceStub extends DisplayService {
           this.displays[displayIndex] as _DisplayDevice;
       display.brightness = brightness;
       this._brightnessChangedStreamController.add(brightness);
-      return Response.ok(null);
+      return Response.ok(htmlFormGet);
     }
 
     return Response.badRequest(

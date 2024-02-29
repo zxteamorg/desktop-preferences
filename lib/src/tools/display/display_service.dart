@@ -53,7 +53,7 @@ class DisplayServiceStub extends DisplayService {
   ///
   @override
   void setBrightness(final DisplayDevice display, final double brightness) {
-    // ignore: avoid_print
+    /// ignore: avoid_print
     print("Brightness is: $brightness");
     if (brightness < 0 || brightness > 1) {
       throw ArgumentError.value(brightness);
@@ -78,7 +78,7 @@ class DisplayServiceStub extends DisplayService {
             _DisplayDevice("Display_3", 0.5),
           ],
         ) {
-    // See https://pub.dev/documentation/shelf/latest/shelf_io/serve.html
+    /// See https://pub.dev/documentation/shelf/latest/shelf_io/serve.html
     shelf_io
         .serve(
       logRequests().addHandler(this._handler),
@@ -99,10 +99,8 @@ class DisplayServiceStub extends DisplayService {
 
   Future<Response> _handler(final Request request) async {
     print(request.method);
-    // If GET request return html form.
+    /// If GET request return html form.
     final int listDisplaysLength = this.displays.length;
-    // final List<DisplayDevice> displays = this.displays;
-    // String? listDisplays;
     String htmlOptionDisplay = '<option value=""></option>';
     int count = 0;
     for (final DisplayDevice display in this.displays) {
@@ -115,7 +113,7 @@ class DisplayServiceStub extends DisplayService {
     String? htmlFormGet;
     if (request.method == "GET") {
       return Response.ok(
-         htmlFormGet = """<!DOCTYPE html>
+        htmlFormGet = """<!DOCTYPE html>
                        <html>
                        <body>
                           <h1>Desktop Preferences</h1>
@@ -130,6 +128,14 @@ class DisplayServiceStub extends DisplayService {
                               <label for="brightness">2. Set brightness from 0 to 100:</label>
                               <input type="text" id="brightness" name="brightness" required><br><br>
 
+                              <h4>Dark mode</h4>
+                                  <label for="darkmode">Set the 0 to disable or 1 to enable dark mode:</label>
+                                  <input type="text" id="darkmode" name="darkmode"><br><br>
+
+                              <h4>Night mode</h4>
+                                  <label for="nightmode">Set the 0 to disable or 1 to enable night mode:</label>
+                                  <input type="text" id="nightmode" name="nightmode"><br><br><br>
+
                               <input type="submit" value="Submit">
                        </html>""",
         headers: <String, Object>{
@@ -138,13 +144,13 @@ class DisplayServiceStub extends DisplayService {
         },
       );
     } else if (request.method == "POST") {
-      // parsing data POST request extract key/value pairs of information from the query string.
+      /// parsing data POST request extract key/value pairs of information from the query string.
       final String content = await request.readAsString();
       final Map<String, String> data = Uri(query: content).queryParameters;
       final String? queryParametersDisplay = data["display"];
       final String? queryParametersBrightness = data["brightness"];
 
-      double brightness;
+      // double brightness;
 
       if (queryParametersDisplay == null) {
         return Response.badRequest(
@@ -184,12 +190,12 @@ class DisplayServiceStub extends DisplayService {
                 "Brightness is not in the specified range. Please, set in the correct range.");
       }
 
-      brightness = queryParametersBrightnessDouble;
+      // brightness = queryParametersBrightnessDouble;
 
       final _DisplayDevice display =
           this.displays[displayIndex] as _DisplayDevice;
-      display.brightness = brightness;
-      this._brightnessChangedStreamController.add(brightness);
+      display.brightness = queryParametersBrightnessDouble;
+      this._brightnessChangedStreamController.add(queryParametersBrightnessDouble);
       return Response.ok(htmlFormGet);
     }
 
@@ -197,11 +203,14 @@ class DisplayServiceStub extends DisplayService {
         body: "Unknow request method. Send GET or POST request.");
   }
 
-  //
-  // Create stream controller and getter where the data goes.
-  //
-  final StreamController<double> _brightnessChangedStreamController = StreamController<double>();
-  Stream<double> get brightnessChanged => _brightnessChangedStreamController.stream;
+  ///
+  /// Create stream controller and getter where the data goes.
+  ///
+  final StreamController<double> _brightnessChangedStreamController =
+      StreamController<double>();
+  @override
+  Stream<double> get brightnessChanged =>
+      _brightnessChangedStreamController.stream;
 }
 
 ///

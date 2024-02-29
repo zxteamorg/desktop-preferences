@@ -95,10 +95,6 @@ class DisplayServiceStub extends DisplayService {
         print(err);
       },
     );
-    // double brightness;
-    // Timer.periodic(const Duration(seconds: 1), (timer) {
-    //   _controller.sink.add(brightness);
-    // });
   }
 
   Future<Response> _handler(final Request request) async {

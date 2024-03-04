@@ -95,17 +95,18 @@ class DisplayServiceStub extends DisplayService {
     );
   }
 
-  final String htmlFormResponse = '''<!DOCTYPE html>
-            <html>
-            <body>
-              <h1>Desktop Preferences</h1>
-              <form method="post">
-                <label for="current brightness">Thanks for using our application ...</label><br><br>
-                <div class="loader"></div>
-                <meta http-equiv="Refresh" content="7; URL=/">
-              </form>
-            </body>
-            </html>''';
+  final String htmlFormResponse =
+  '''<!DOCTYPE html>
+          <html>
+          <body>
+            <h1>Desktop Preferences</h1>
+            <form method="post">
+              <label for="current brightness">Thanks for using our application ...</label><br><br>
+              <div class="loader"></div>
+              <meta http-equiv="Refresh" content="7; URL=/">
+            </form>
+          </body>
+          </html>''';
   final Map<String, Object> headers = <String, Object>{
     "Content-Type": "text/html",
     "Cache-Control": "no-cache",
@@ -118,39 +119,42 @@ class DisplayServiceStub extends DisplayService {
     print(request.method);
 
     /// If GET request return generated html for displays forms.
-    String htmlOptionDisplay = '<div value=""></div>';
+    String htmlGetForm = '<div value=""></div>';
     for (final DisplayDevice display in this.displays) {
       final String displayName = display.name;
       final double displayBrightness = display.brightness;
-      htmlOptionDisplay =
-          '''$htmlOptionDisplay <form method="post" action="monitor">
-                                      <dl>
-                                      <dt>$displayName
-                                      <input type="text" id="brightness" name="brightness" value="$displayBrightness"><br>
-                                      <input type="submit" value="Submit"><br><br><br></dt>
-                                </form>''';
+      htmlGetForm =
+          '''$htmlGetForm <form method="post" action="monitor">
+                              <dl>
+                              <dt>$displayName
+                              <input type="text" id="brightness" name="brightness" value="$displayBrightness"><br>
+                              <input type="submit" value="Submit"><br><br><br>
+                              </dt>
+                              </dl>
+                          </form>''';
     }
 
     if (request.method == "GET") {
       return Response.ok(
         """<!DOCTYPE html>
-                       <html>
-                       <body>
-                          <h1>Desktop Preferences</h1>
-                              $htmlOptionDisplay
-                          <form method="post" action="night">
-                              <label for="nightmode">Set Night Mode:</label>
-                              <input type="checkbox" id="nightmode" name="nightmode" value="on"/><br>
-                              <input type="submit" value="Submit"><br><br><br><br>
-                          </form>
+                <html>
+                <body>
+                  <h1>Desktop Preferences</h1>
+                      $htmlGetForm
 
-                          <form method="post" action="dark">
-                              <label for="darkmode">Set Dark Mode:</label>
-                              <input type="checkbox" id="darkmode" name="darkmode" value="on"/><br>
-                              <input type="submit" value="Submit">
-                          </form>
-                       </body>
-                       </html>""",
+                  <form method="post" action="night">
+                      <label for="nightmode">Set Night Mode:</label>
+                      <input type="checkbox" id="nightmode" name="nightmode" value="on"/><br>
+                      <input type="submit" value="Submit"><br><br><br><br>
+                  </form>
+
+                  <form method="post" action="dark">
+                      <label for="darkmode">Set Dark Mode:</label>
+                      <input type="checkbox" id="darkmode" name="darkmode" value="on"/><br>
+                      <input type="submit" value="Submit">
+                  </form>
+                </body>
+                </html>""",
         headers: <String, Object>{
           "Content-Type": "text/html",
           "Cache-Control": "no-cache",

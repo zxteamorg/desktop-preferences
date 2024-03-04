@@ -1,4 +1,5 @@
 abstract class DisplayService {
+
   ///
   /// Call this method to set brightness for one display.
   ///
@@ -38,6 +39,12 @@ abstract class DisplayService {
   /// Gets list of Display devices.
   ///
   List<DisplayDevice> get displays;
+  /// TODO
+  Stream<double> get brightnessChanged;
+
+  Stream<bool> get darkModeChanged;
+
+  Stream<bool> get nightModeChanged;
 }
 
 abstract class DisplayDevice {

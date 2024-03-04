@@ -5,8 +5,23 @@ import "display_service_contract.dart" show DisplayService, DisplayDevice;
 
 class DisplayController extends ChangeNotifier {
   DisplayController(this._service) {
-    this._subscription =
+    this._subscriptionBrightness =
         this._service.brightnessChanged.listen(this._onBrightnessChanged);
+
+    this._subscriptionDarkMode =
+        this._service.darkModeChanged.listen(this._onDarkModeChanged);
+
+    this._subscriptionNightMode =
+        this._service.nightModeChanged.listen(this._onNightModeChanged);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    unawaited(this._subscriptionBrightness.cancel());
+    unawaited(this._subscriptionDarkMode.cancel());
+    unawaited(this._subscriptionNightMode.cancel());
   }
 
   void setBrightness(DisplayDevice display, double brightness) {
@@ -38,10 +53,24 @@ class DisplayController extends ChangeNotifier {
 
   final DisplayService _service;
 
-  late final StreamSubscription<double> _subscription;
+  late final StreamSubscription<double> _subscriptionBrightness;
+  late final StreamSubscription<bool> _subscriptionDarkMode;
+  late final StreamSubscription<bool> _subscriptionNightMode;
 
   void _onBrightnessChanged(double event) {
     print("_onBrightnessChanged $event");
+    this.notifyListeners();
+  }
+
+
+  void _onDarkModeChanged(bool event) {
+    print("_onDarkModeChanged $event");
+    this.notifyListeners();
+  }
+
+
+  void _onNightModeChanged(bool event) {
+    print("_onNightModeChanged $event");
     this.notifyListeners();
   }
 }

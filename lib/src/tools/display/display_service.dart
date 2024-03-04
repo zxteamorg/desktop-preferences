@@ -53,7 +53,6 @@ class DisplayServiceStub extends DisplayService {
   ///
   @override
   void setBrightness(final DisplayDevice display, final double brightness) {
-    /// ignore: avoid_print
     print("Brightness is: $brightness");
     if (brightness < 0 || brightness > 1) {
       throw ArgumentError.value(brightness);
@@ -96,184 +95,144 @@ class DisplayServiceStub extends DisplayService {
     );
   }
 
-///
-/// Server request handler
-///
+  final String htmlFormResponse = '''<!DOCTYPE html>
+            <html>
+            <body>
+              <h1>Desktop Preferences</h1>
+              <form method="post">
+                <label for="current brightness">Thanks for using our application ...</label><br><br>
+                <div class="loader"></div>
+                <meta http-equiv="Refresh" content="7; URL=/">
+              </form>
+            </body>
+            </html>''';
+  final Map<String, Object> headers = <String, Object>{
+    "Content-Type": "text/html",
+    "Cache-Control": "no-cache",
+  };
+
+  ///
+  /// Server request handler
+  ///
   Future<Response> _handler(final Request request) async {
     print(request.method);
 
-    /// If GET request return html form.
-    final int listDisplaysLength = this.displays.length;
-    String htmlOptionDisplay = '<option value=""></option>';
-    int count = 0;
+    /// If GET request return generated html for displays forms.
+    String htmlOptionDisplay = '<div value=""></div>';
     for (final DisplayDevice display in this.displays) {
       final String displayName = display.name;
-      count += 1;
+      final double displayBrightness = display.brightness;
       htmlOptionDisplay =
-          '$htmlOptionDisplay<option value="$count">$displayName</option>';
+          '''$htmlOptionDisplay <form method="post" action="monitor">
+                                      <dl>
+                                      <dt>$displayName
+                                      <input type="text" id="brightness" name="brightness" value="$displayBrightness"><br>
+                                      <input type="submit" value="Submit"><br><br><br></dt>
+                                </form>''';
     }
-
-    String? htmlFormGet = """<!DOCTYPE html>
-                       <html>
-                       <body>
-                          <h1>Desktop Preferences</h1>
-                          <form method="post">
-                              <label for="current brightness">If you want change a brightness please :</label><br><br>
-                              <label for="display">1. Select display:</label>
-                              <select name="display" required>
-                                  $htmlOptionDisplay
-                              </select><br><br>
-                              <!-- <input type="text" id="display" name="display"><br><br> -->
-
-                              <label for="brightness">2. Set brightness from 0 to 100:</label>
-                              <input type="text" id="brightness" name="brightness" required><br><br>
-
-                              <h4>Dark mode</h4>
-                                  <label for="darkmode">Set the 0 to disable or 1 to enable dark mode:</label>
-                                  <input type="text" id="darkmode" name="darkmode" required><br><br>
-
-                              <h4>Night mode</h4>
-                                  <label for="nightmode">Set the 0 to disable or 1 to enable night mode:</label>
-                                  <input type="text" id="nightmode" name="nightmode" required><br><br><br>
-
-                              <input type="submit" value="Submit">
-                       </body>
-                       </html>""";
-
-    final Map<String, Object> headers = <String, Object>{
-      "Content-Type": "text/html",
-      "Cache-Control": "no-cache",
-    };
 
     if (request.method == "GET") {
       return Response.ok(
-        htmlFormGet,
-        headers: headers,
+        """<!DOCTYPE html>
+                       <html>
+                       <body>
+                          <h1>Desktop Preferences</h1>
+                              $htmlOptionDisplay
+                          <form method="post" action="night">
+                              <label for="nightmode">Set Night Mode:</label>
+                              <input type="checkbox" id="nightmode" name="nightmode" value="on"/><br>
+                              <input type="submit" value="Submit"><br><br><br><br>
+                          </form>
+
+                          <form method="post" action="dark">
+                              <label for="darkmode">Set Dark Mode:</label>
+                              <input type="checkbox" id="darkmode" name="darkmode" value="on"/><br>
+                              <input type="submit" value="Submit">
+                          </form>
+                       </body>
+                       </html>""",
+        headers: <String, Object>{
+          "Content-Type": "text/html",
+          "Cache-Control": "no-cache",
+        },
       );
     } else if (request.method == "POST") {
       /// parsing data POST request extract key/value pairs of information from the query string.
       final String content = await request.readAsString();
       final Map<String, String> data = Uri(query: content).queryParameters;
-      final String? queryParametersDisplay = data["display"];
-      final String? queryParametersBrightness = data["brightness"];
-      final String? queryParametersDarkmode = data["darkmode"];
-      final String? queryParametersNightmode = data["nightmode"];
 
-      ///
-      /// Check queryParameters of display
-      ///
-      if (queryParametersDisplay == null) {
-        return Response.badRequest(
-            body: "Display is not selected. Please select the display.");
+      if (request.handlerPath == "/monitor") {
+        return this._handlerBrightness(data["display"], data["brightness"]);
+      } else if (request.handlerPath == "/dark") {
+        return this._handlerDarkMode(data["darkmode"]);
+      } else if (request.handlerPath == "/night") {
+        return this._handlerNightMode(data["nightmode"]);
+      } else {
+        return Response.badRequest(body: "Bad request from _handler");
       }
-
-      final int? displayIndex = int.tryParse(queryParametersDisplay);
-      if (displayIndex == null) {
-        return Response.badRequest(
-            body:
-                "Unable to read entered data. Please, set the correct display name.");
-      }
-
-      if (displayIndex < 0 || displayIndex > listDisplaysLength) {
-        return Response.badRequest(
-            body:
-                "Display is not in the specified range. Please, set in the correct range.");
-      }
-
-      ///
-      /// Check queryParameters of brightness
-      ///
-      if (queryParametersBrightness == null) {
-        return Response.badRequest(
-            body: "Brightness is not set. Please, set the brightness.");
-      }
-
-      final double? queryParametersBrightnessDouble =
-          double.tryParse(queryParametersBrightness);
-      if (queryParametersBrightnessDouble == null) {
-        return Response.badRequest(
-            body:
-                "Unable to read entered data. Please, set the correct display brightness.");
-      }
-
-      if (queryParametersBrightnessDouble < 0 ||
-          queryParametersBrightnessDouble > 100) {
-        return Response.badRequest(
-            body:
-                "Brightness is not in the specified range. Please, set in the correct range.");
-      }
-
-      ///
-      /// Check queryParameters of Darkmode
-      ///
-      if (queryParametersDarkmode == null) {
-        return Response.badRequest(
-            body: "Dark mode is not set on this device.");
-      }
-
-      final int? queryParametersDarkmodeInt =
-          int.tryParse(queryParametersDarkmode);
-      if (queryParametersDarkmodeInt == null) {
-        return Response.badRequest(
-            body:
-                "Unable to read entered data. Please, set the number. 0 - off, 1 - on.");
-      }
-
-      if (queryParametersDarkmodeInt < 0 || queryParametersDarkmodeInt > 1) {
-        return Response.badRequest(
-            body: "Please, set the correct Darkmode range. 0 - off, 1 - on.");
-      }
-
-      if (queryParametersDarkmodeInt == 0) {
-        this.disableDarkMode();
-      } else if (queryParametersDarkmodeInt == 1) {
-        this.enableDarkMode();
-      }
-
-      ///
-      /// Check queryParameters of Nightmode
-      ///
-      if (queryParametersNightmode == null) {
-        return Response.badRequest(
-            body: "Dark mode is not set on this device.");
-      }
-
-      final int? queryParametersNightmodeInt =
-          int.tryParse(queryParametersNightmode);
-      if (queryParametersNightmodeInt == null) {
-        return Response.badRequest(
-            body:
-                "Unable to read entered data. Please, set the number. 0 - off, 1 - on.");
-      }
-
-      if (queryParametersNightmodeInt < 0 || queryParametersNightmodeInt > 1) {
-        return Response.badRequest(
-            body: "Please, set the correct Darkmode range. 0 - off, 1 - on.");
-      }
-
-      if (queryParametersNightmodeInt == 0) {
-        this.disableNightMode();
-      } else if (queryParametersNightmodeInt == 1) {
-        this.enableNightMode();
-      }
-
-      ///
-      /// On indicate display set brightness.
-      ///
-      final _DisplayDevice display =
-          this.displays[displayIndex] as _DisplayDevice;
-      display.brightness = queryParametersBrightnessDouble;
-      this
-          ._brightnessChangedStreamController
-          .add(queryParametersBrightnessDouble);
-      return Response.ok(
-        htmlFormGet,
-        headers: headers,
-      );
     }
 
     return Response.badRequest(
         body: "Unknow request method. Send GET or POST request.");
+  }
+
+  ///
+  /// Create function _handlerBrightness for check queryParameters of brightness
+  ///
+  Response _handlerBrightness(
+    final String? queryParametersDisplay,
+    final String? queryParametersBrightness,
+  ) {
+    if (queryParametersDisplay == null) {
+      return Response.badRequest(
+          body: "Display is not selected. Please select the display.");
+    }
+
+    if (queryParametersBrightness == null) {
+      return Response.badRequest(
+          body: "Brightness is out. Please, set up the brightness.");
+    }
+
+    final int? displayIndex = int.tryParse(queryParametersDisplay);
+    if (displayIndex == null) {
+      return Response.badRequest(
+          body:
+              "Unable to read entered data. Please, set the correct display name.");
+    }
+
+    final double? queryParametersBrightnessDouble =
+        double.tryParse(queryParametersBrightness);
+    if (queryParametersBrightnessDouble == null) {
+      return Response.badRequest(
+          body:
+              "Unable to read entered data. Please, set the correct display brightness.");
+    }
+
+    if (displayIndex < 0 || displayIndex > this.displays.length) {
+      return Response.badRequest(
+          body:
+              "Display is not in the specified range. Please, set in the correct range.");
+    }
+
+    if (queryParametersBrightnessDouble < 0 ||
+        queryParametersBrightnessDouble > 100) {
+      return Response.badRequest(
+          body:
+              "Brightness is not in the specified range. Please, set in the correct range.");
+    }
+
+    final _DisplayDevice display =
+        this.displays[displayIndex] as _DisplayDevice;
+    display.brightness = queryParametersBrightnessDouble;
+
+    this
+        ._brightnessChangedStreamController
+        .add(queryParametersBrightnessDouble);
+
+    return Response.ok(
+      htmlFormResponse,
+      headers: headers,
+    );
   }
 
   ///
@@ -284,6 +243,58 @@ class DisplayServiceStub extends DisplayService {
   @override
   Stream<double> get brightnessChanged =>
       _brightnessChangedStreamController.stream;
+
+  ///
+  /// Create function _handlerNightMode for check queryParameters of Night mode
+  ///
+  Response _handlerNightMode(
+    final String? queryParametersNightMode,
+  ) {
+    if (queryParametersNightMode == "on") {
+      this.isNightModeEnabled = true;
+    } else if (queryParametersNightMode == null) {
+      this.isNightModeEnabled = false;
+    }
+    this._nightModeChangedStreamController.add(this.isNightModeEnabled);
+    return Response.ok(
+      htmlFormResponse,
+      headers: headers,
+    );
+  }
+
+  ///
+  /// Create stream controller for Nightmode changing and getter where the data goes.
+  ///
+  final StreamController<bool> _nightModeChangedStreamController =
+      StreamController<bool>();
+  @override
+  Stream<bool> get nightModeChanged => _nightModeChangedStreamController.stream;
+
+  ///
+  /// Create function _handlerDarkMode for check queryParameters of Dark mode
+  ///
+  Response _handlerDarkMode(
+    final String? queryParametersDarkMode,
+  ) {
+    if (queryParametersDarkMode == "on") {
+      this.isDarkModeEnabled = true;
+    } else if (queryParametersDarkMode == null) {
+      this.isDarkModeEnabled = false;
+    }
+    this._darkModeChangedStreamController.add(this.isDarkModeEnabled);
+    return Response.ok(
+      htmlFormResponse,
+      headers: headers,
+    );
+  }
+
+  ///
+  /// Create stream controller for Darkmode changing and getter where the data goes.
+  ///
+  final StreamController<bool> _darkModeChangedStreamController =
+      StreamController<bool>();
+  @override
+  Stream<bool> get darkModeChanged => _darkModeChangedStreamController.stream;
 }
 
 ///
